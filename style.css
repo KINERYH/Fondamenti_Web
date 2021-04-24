@@ -1,9 +1,16 @@
 body{
-background:antiquewhite;
+    background:antiquewhite;
+    margin:0px;
 }
 .header{
-background-image: url("images/coffee-beans-with-props-making-coffee_1220-4536.jpg");
-height: 100%;
-width: 100%;
-
+    margin:0px;
+    background-image: url("images/coffee-beans-with-props-making-coffee_1220-4536.jpg");
+    height: 100vh;
+    width: 100%;
+    background-size: cover;
+}
+.header_content{
+    width:50%;
+    height: 100vh;
+    border: 1px solid yellow;
 }
