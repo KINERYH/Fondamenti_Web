@@ -6,6 +6,7 @@
 * {box-sizing: border-box;}
 a{
     text-decoration: none;
+    font-family: 'Rubik', sans-serif;
 }
 body{
     background:antiquewhite;
@@ -20,11 +21,24 @@ h1{
 }
 form{
     display: inline;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+form *{
+    font-family: 'Rubik', sans-serif;
+}
+.header a{
+    color: black;
+    padding: 10px;
+   
+}
+
+#SignUp{
+    color:#e73c7e;
 }
 .header{
     width: 100%;
-    
-    background-color: #0e141f;
+    background-color: #ffffff;
     overflow: hidden;
     position: fixed;
     z-index:10;
@@ -36,18 +50,22 @@ form{
 }
 
 .header input[type=text]{
-    border-radius: 5px;
+    border-radius: 3px;
     font-size:14px;
     padding: 11px;
     border: none;  
+    width: 350px;
+    background-color: #eff3f6;
+    
 }
 
 
 
 .header button{
     padding:11px;
-    border-radius: 5px;
+    border-radius: 3px;
     border: none;
+    background-color: #4ad295;
 }
 
 .sub_title{
