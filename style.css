@@ -1,3 +1,12 @@
+*:focus{
+    border:none;
+    outline-offset: 0px;
+    outline: none;
+}
+* {box-sizing: border-box;}
+a{
+    text-decoration: none;
+}
 body{
     background:antiquewhite;
     margin:0px;
@@ -9,7 +18,9 @@ h1{
     font-family: 'Righteous';
     font-size: 40px;
 }
-
+form{
+    display: inline;
+}
 .header{
     width: 100%;
     
@@ -21,28 +32,21 @@ h1{
 
 .header .search-container{
     float:right;
+    margin: 10px 50px;
 }
 
-.header input{
+.header input[type=text]{
     border-radius: 5px;
-    font-size:17px;
-    padding: 7px;
-    border: none;   
-    margin: 10px;
-    margin-right: 0px;
+    font-size:14px;
+    padding: 11px;
+    border: none;  
 }
 
-.header:focus{
-    border:none;
-    outline-offset: 0px;
-    outline: none;
-}
+
 
 .header button{
-    padding:10px;
+    padding:11px;
     border-radius: 5px;
-    margin: 10px;
-    margin-left: 0px;
     border: none;
 }
 
