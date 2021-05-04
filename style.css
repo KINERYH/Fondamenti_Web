@@ -69,6 +69,7 @@ header button{
     border: none;
     background-color: #4ad295;
 }
+
 /* ! ============= MAIN ============= */
 .main{
     margin:0px;
@@ -92,28 +93,8 @@ header button{
     font-size:24px;
     margin-top:10px;
 }
-#prova{
-    height: 400px;
-    width: 100%;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
 
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
-
-<<<<<<< HEAD
-    /* ! ============= SLIDER ============= */
+/* ! ============= SLIDER ============= */
 .slider{margin: 1em 2em}
 .slider .sub_title{margin-left: .5em}
 .main-carousel{padding: .5em 0;}
@@ -130,13 +111,6 @@ header button{
     font-size: 1.2em;
     color: white;
 } 
-=======
-
-
-
-
-
-
 
 
 
@@ -215,4 +189,3 @@ header button{
 .dropdown:hover .dropBtn {
     background-color: #3e8e41;
   }
->>>>>>> 990689522648a0aacc4ffcd303e553f27109d56d
