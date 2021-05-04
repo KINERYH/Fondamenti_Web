@@ -30,6 +30,9 @@ header{
     background-color: #ffffff;
     overflow: hidden;
     position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     z-index:10;
     box-shadow: 0px 0px 16px 0px rgb(0,0,0,1);
 }
@@ -109,6 +112,7 @@ header button{
         }
     }
 
+<<<<<<< HEAD
     /* ! ============= SLIDER ============= */
 .slider{margin: 1em 2em}
 .slider .sub_title{margin-left: .5em}
@@ -126,3 +130,89 @@ header button{
     font-size: 1.2em;
     color: white;
 } 
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.dropBtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    margin: 0px 50px;
+    overflow: hidden;
+}
+
+.dropdown_content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 11;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  }
+
+.dropdown_content a {
+    float : none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+.dropdown_content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown_content {
+    display: block;
+  }
+
+.dropdown:hover .dropBtn {
+    background-color: #3e8e41;
+  }
+>>>>>>> 990689522648a0aacc4ffcd303e553f27109d56d
