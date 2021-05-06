@@ -19,7 +19,7 @@ body{
     text-decoration: none;
 }
 h1,h2{font-family: 'Righteous';}
-form{
+header form{
     display: flex;
     box-sizing: border-box;
 }
@@ -38,9 +38,9 @@ header{
 }
 .profile li {display: inline;}
 .profile{
-    margin-left:30px;
     display:flex;
 }
+.logo{margin: 10px 4em;}
 header a{
     color: black;
     padding: 5px; 
@@ -49,8 +49,7 @@ header a{
     color:#e73c7e;
 }
 header .search-container{
-    float: right;
-    margin: 10px 2em;
+    margin: .5em 0em;
     display:flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -63,11 +62,64 @@ header input[type=text]{
     width: 25em;
     background-color: #eff3f6;  
 }
-header button{
-    padding:11px;
+header ul{
+    margin: 10px 2em;
+}
+header button[type=submit]{
+    padding:1em;
     border-radius: 3px;
     border: none;
     background-color: #4ad295;
+}
+
+/* ! ============= DROPDOWN ============= */
+
+.dropBtn {
+    background-color: #4CAF50;
+    border-radius: 3px;
+    color: white;
+    padding: .9em;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative; 
+    margin: 0em .5em;
+    overflow: hidden;
+}
+
+.dropdown_content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 11;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: .3em;
+}
+
+.dropdown_content a {
+    float : none;
+    color: black;
+    z-index: 1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: .3em;
+}
+  
+.dropdown_content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown_content {
+    display: block;
+}
+
+.dropdown:hover .dropBtn {
+    background-color: #3e8e41;
 }
 
 /* ! ============= MAIN ============= */
@@ -93,7 +145,6 @@ header button{
     font-size:24px;
     margin-top:10px;
 }
-<<<<<<< Updated upstream
 
 /* ! ============= SLIDER ============= */
 .slider{margin: 1em 2em}
@@ -112,167 +163,8 @@ header button{
     font-size: 1.2em;
     color: white;
 } 
-=======
-#prova{
-    height: 400px;
-    width: 100%;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
-}
 
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<<<<<<< Updated upstream
-.dropBtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 1em;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-}
-
-.dropdown {
-    position: relative;
-    margin: 0px 50px;
-    overflow: hidden;
-}
-
-.dropdown_content {
-    display: none;
-    position: fixed;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 11;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: .3em;
-  }
-
-.dropdown_content a {
-    float : none;
-    color: black;
-    z-index: 1;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-radius: .3em;
-  }
-  
-.dropdown_content a:hover {
-    background-color: #f1f1f1
-}
-
-.dropdown:hover .dropdown_content {
-    display: block;
-  }
-
-.dropdown:hover .dropBtn {
-    background-color: #3e8e41;
-  }
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* LOGIN */
+/* ============= LOGIN ============= */
 
 .onda{
     position: fixed;
@@ -409,7 +301,6 @@ form h2{
     color: #555;
 }
 
-/* Vedere come cambiare fare questo senza cambirae il link "Login" */
 .login-form a{
     display: block;
     text-align: center;
@@ -444,80 +335,4 @@ form h2{
     background-position: right;
 }
 
-/* FINE LOGIN*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-    .box{
-        padding: 5em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        background: #191919;
-        text-align: center;
-    }
-    .box h1{
-        color: white;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 2em;
-    }
-    .box .login {
-        border: 0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border: 2px solid #3498db;
-        padding: 14px 10px;
-        width: 200px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-    }
-    
-    .box input[type = "email"]:focus,.box input[type = "password"]:focus{
-        transform: scale(1.2, 1.1);
-        border-color: #2ecc71;
-    }
-    .box input[type= "submit"]{
-        border:0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border: 2px solid #2ecc71;
-        padding: 14px 40px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        cursor: pointer;
-    }
-    .box input[type = "submit"]:hover{
-        background: #2ecc71;
-    }
-*/
-
-
-
-
-
-
->>>>>>> Stashed changes
+/* FINE LOGIN* /
