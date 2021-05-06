@@ -38,9 +38,9 @@ header{
 }
 .profile li {display: inline;}
 .profile{
-    margin-left:30px;
     display:flex;
 }
+.logo{margin: 10px 4em;}
 header a{
     color: black;
     padding: 5px; 
@@ -49,8 +49,7 @@ header a{
     color:#e73c7e;
 }
 header .search-container{
-    float: right;
-    margin: 10px 2em;
+    margin: .5em 0em;
     display:flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -63,11 +62,64 @@ header input[type=text]{
     width: 25em;
     background-color: #eff3f6;  
 }
-header button{
-    padding:11px;
+header ul{
+    margin: 10px 2em;
+}
+header button[type=submit]{
+    padding:1em;
     border-radius: 3px;
     border: none;
     background-color: #4ad295;
+}
+
+/* ! ============= DROPDOWN ============= */
+
+.dropBtn {
+    background-color: #4CAF50;
+    border-radius: 3px;
+    color: white;
+    padding: .9em;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative; 
+    margin: 0em .5em;
+    overflow: hidden;
+}
+
+.dropdown_content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 11;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: .3em;
+}
+
+.dropdown_content a {
+    float : none;
+    color: black;
+    z-index: 1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: .3em;
+}
+  
+.dropdown_content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown_content {
+    display: block;
+}
+
+.dropdown:hover .dropBtn {
+    background-color: #3e8e41;
 }
 
 /* ! ============= MAIN ============= */
@@ -111,6 +163,7 @@ header button{
     font-size: 1.2em;
     color: white;
 } 
+<<<<<<< HEAD
 
 
 
@@ -216,34 +269,10 @@ header button{
 
 
 
+=======
+>>>>>>> 8552738c7af8096ed5b1487616581c51d17ad793
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* LOGIN */
+/* ============= LOGIN ============= */
 
 .onda{
     position: fixed;
@@ -414,6 +443,7 @@ form h2{
     background-position: right;
 }
 
+<<<<<<< HEAD
 /* FINE LOGIN*/
 
 
@@ -490,3 +520,6 @@ form h2{
 
 
 
+=======
+/* FINE LOGIN* /
+>>>>>>> 8552738c7af8096ed5b1487616581c51d17ad793
