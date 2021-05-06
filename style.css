@@ -19,7 +19,7 @@ body{
     text-decoration: none;
 }
 h1,h2{font-family: 'Righteous';}
-form{
+header form{
     display: flex;
     box-sizing: border-box;
 }
@@ -93,7 +93,6 @@ header button{
     font-size:24px;
     margin-top:10px;
 }
-<<<<<<< Updated upstream
 
 /* ! ============= SLIDER ============= */
 .slider{margin: 1em 2em}
@@ -112,27 +111,6 @@ header button{
     font-size: 1.2em;
     color: white;
 } 
-=======
-#prova{
-    height: 400px;
-    width: 100%;
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
-}
-
-    @keyframes gradient {
-        0% {
-            background-position: 0% 50%;
-        }
-        50% {
-            background-position: 100% 50%;
-        }
-        100% {
-            background-position: 0% 50%;
-        }
-    }
->>>>>>> Stashed changes
 
 
 
@@ -170,7 +148,6 @@ header button{
 
 
 
-<<<<<<< Updated upstream
 .dropBtn {
     background-color: #4CAF50;
     color: white;
@@ -212,7 +189,6 @@ header button{
 .dropdown:hover .dropBtn {
     background-color: #3e8e41;
   }
-=======
 
 
 
@@ -404,7 +380,6 @@ form h2{
     color: #555;
 }
 
-/* Vedere come cambiare fare questo senza cambirae il link "Login" */
 .login-form a{
     display: block;
     text-align: center;
@@ -515,4 +490,3 @@ form h2{
 
 
 
->>>>>>> Stashed changes
