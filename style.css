@@ -40,7 +40,9 @@ header{
 .profile{
     display:flex;
 }
-.logo{margin: 10px 4em;}
+header .logo img{
+    margin: 10px 4em;
+}
 header a{
     color: black;
     padding: 5px; 
@@ -71,6 +73,8 @@ header button[type=submit]{
     border: none;
     background-color: #4ad295;
 }
+
+
 
 /* ! ============= DROPDOWN ============= */
 
@@ -163,7 +167,6 @@ header button[type=submit]{
     font-size: 1.2em;
     color: white;
 } 
-<<<<<<< HEAD
 
 
 
@@ -200,48 +203,55 @@ header button[type=submit]{
 
 
 
-
+/* ! ============= DROPDOWN ============= */
+ 
 .dropBtn {
     background-color: #4CAF50;
+    border-radius: 3px;
     color: white;
-    padding: 10px 0px;
+    padding: .9em;
     font-size: 14px;
     border: none;
     cursor: pointer;
 }
-
+ 
 .dropdown {
-    position: relative;
-    margin: 0px 50px;
+    position: relative; 
+    margin: 0em .5em;
     overflow: hidden;
 }
-
+ 
 .dropdown_content {
     display: none;
-    position: absolute;
+    position: fixed;
     background-color: #f9f9f9;
     min-width: 160px;
     z-index: 11;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  }
-
+    border-radius: .3em;
+}
+ 
 .dropdown_content a {
     float : none;
     color: black;
+    z-index: 1;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-.dropdown_content a:hover {background-color: #f1f1f1}
-
+    border-radius: .3em;
+}
+ 
+.dropdown_content a:hover {
+    background-color: #f1f1f1
+}
+ 
 .dropdown:hover .dropdown_content {
     display: block;
-  }
-
+}
+ 
 .dropdown:hover .dropBtn {
     background-color: #3e8e41;
-  }
+}
 
 
 
@@ -268,9 +278,6 @@ header button[type=submit]{
 
 
 
-
-=======
->>>>>>> 8552738c7af8096ed5b1487616581c51d17ad793
 
 /* ============= LOGIN ============= */
 
@@ -443,83 +450,66 @@ form h2{
     background-position: right;
 }
 
-<<<<<<< HEAD
-/* FINE LOGIN*/
 
 
+/* === SIGNUP === */
+
+.signup-form{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.signup-form a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #999;
+    font-size: 0.9rem;
+    transition: .3s;
+}
+
+.signup-form a:hover{
+    color: #38d39f;
+}
 
 
+/* === RESPONSIVE === */
 
+@media screen and (max-width: 1050px){
+  .container{
+      grid-gap: 5rem;
+  }  
+}
 
+@media screen and (max-width: 1000px){
+    form h2{
+      font-size: 2.4rem;
+      margin: 8px 0;
+  }  
+  .img img{
+      width: 400px;
+  }
+}
 
-
-
-
-
-
-
-
-
-
-/*
-    .box{
-        padding: 5em;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        background: #191919;
-        text-align: center;
+@media screen and (max-width: 900px){
+    .img{
+        display: none;
     }
-    .box h1{
-        color: white;
-        text-transform: uppercase;
-        font-weight: 500;
-        font-size: 2em;
+    .container{
+        grid-template-columns: 1fr;
     }
-    .box .login {
-        border: 0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border: 2px solid #3498db;
-        padding: 14px 10px;
-        width: 200px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
+    .onda{
+        display: none;
     }
-    
-    .box input[type = "email"]:focus,.box input[type = "password"]:focus{
-        transform: scale(1.2, 1.1);
-        border-color: #2ecc71;
+    .login-form{
+        justify-content: center;
     }
-    .box input[type= "submit"]{
-        border:0;
-        background: none;
-        display: block;
-        margin: 20px auto;
-        text-align: center;
-        border: 2px solid #2ecc71;
-        padding: 14px 40px;
-        outline: none;
-        color: white;
-        border-radius: 24px;
-        transition: 0.25s;
-        cursor: pointer;
+    .signup-form{
+        justify-content: center;
     }
-    .box input[type = "submit"]:hover{
-        background: #2ecc71;
-    }
-*/
+}
 
 
 
-
-
-
-=======
 /* FINE LOGIN* /
->>>>>>> 8552738c7af8096ed5b1487616581c51d17ad793
