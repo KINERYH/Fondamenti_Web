@@ -36,9 +36,26 @@ header{
     z-index:10;
     box-shadow: 0px 0px 16px 0px rgb(0,0,0,1);
 }
+
+
+.profile button{
+    border: none;
+    outline: none;
+    margin: 0px .2em;
+    border-radius: .4em;
+}
+.profile li:nth-of-type(3) button{
+    padding: 1em;
+    background-color: #005aff;
+}
+.profile li:nth-of-type(4) button{
+    padding: 1em 1.5em;
+    background-image: linear-gradient(to left, #f8a000, #ffa500);
+}
 .profile li {display: inline;}
 .profile{
     display:flex;
+    align-items: center;
 }
 header .logo img{
     margin: 10px 4em;
@@ -79,7 +96,7 @@ header button[type=submit]{
 /* ! ============= DROPDOWN ============= */
 
 .dropBtn {
-    background-color: #4CAF50;
+    background-color: #4ad295;
     border-radius: 3px;
     color: white;
     padding: .9em;
@@ -123,7 +140,7 @@ header button[type=submit]{
 }
 
 .dropdown:hover .dropBtn {
-    background-color: #3e8e41;
+    background-color: #4ad279;
 }
 
 /* ! ============= MAIN ============= */
@@ -167,116 +184,6 @@ header button[type=submit]{
     font-size: 1.2em;
     color: white;
 } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ! ============= DROPDOWN ============= */
- 
-.dropBtn {
-    background-color: #4CAF50;
-    border-radius: 3px;
-    color: white;
-    padding: .9em;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-}
- 
-.dropdown {
-    position: relative; 
-    margin: 0em .5em;
-    overflow: hidden;
-}
- 
-.dropdown_content {
-    display: none;
-    position: fixed;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 11;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: .3em;
-}
- 
-.dropdown_content a {
-    float : none;
-    color: black;
-    z-index: 1;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-radius: .3em;
-}
- 
-.dropdown_content a:hover {
-    background-color: #f1f1f1
-}
- 
-.dropdown:hover .dropdown_content {
-    display: block;
-}
- 
-.dropdown:hover .dropBtn {
-    background-color: #3e8e41;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* ============= LOGIN ============= */
