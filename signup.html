@@ -66,28 +66,86 @@
 			<form action="signup.html">
 				<img class="avatar" src="images/avatar.svg">
 				<h2 class="title">Registrati!</h2>
-           		<div class="input-div email">
+
+                <div class="input-div nome">
+                    <!-- i = icone -->
+                   <div class="i">
+                           <i class="fas fa-user"></i>
+                   </div>
+                   <div class="div">
+                           <h5>Nome</h5>
+                           <input type="text" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required class="input">
+                   </div>
+                </div>
+
+                <div class="input-div cognome">
+                    <!-- i = icone -->
+                   <div class="i">
+                           <i class="fas fa-user"></i>
+                   </div>
+                   <div class="div">
+                           <h5>Cognome</h5>
+                           <input type="text" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required  class="input">
+                   </div>
+                </div>
+           		
+                <div class="input-div email">
                        <!-- i = icone -->
            		   <div class="i">
-           		   		<i class="fas fa-user"></i>
+           		   		<i class="fas fa-envelope"></i>
            		   </div>
            		   <div class="div">
            		   		<h5>Email</h5>
-           		   		<input type="email" class="input">
+           		   		<input type="email" required class="input">
            		   </div>
            		</div>
-           		<div class="input-div password">
+           		
+                   <div class="input-div password">
            		   <div class="i"> 
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" class="input">
+           		    	<input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="password" class="input">
             	   </div>
             	</div>
+             
+                <div class="input-div ripeti-password">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Conferma Password</h5>
+           		    	<input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="conferma_password" class="input">
+            	   </div>
+            	</div>
+                
+                <div class="input-div data-nascita">
+           		   <div class="i"> 
+           		    	<i class="fas fa-calendar-alt"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<input type="date" required class="input">
+            	   </div>
+            	</div>
+                
+                <div class="genere">
+
+                    <h6>Seleziona il tuo genere</h6>
+
+                    <input type="radio" id="uomo" name="gen"
+                     checked="checked">
+                    <label for="uomo">Uomo</label><br>
+                    
+                    <input type="radio" id="donna" name="gen">
+                    <label for="donna">Donna</label><br>
+                    
+                    <input type="radio" id="neutro" name="gen">
+                    <label for="neutro">Preferisco non rispondere</label><br>
+            	</div>
+                
                 <input type="submit" class="btn" value="SignUp">
             	<a href="login.html">Hai già un account? Fai il login!</a>
-            	
             </form>
         </div>
     </div>
