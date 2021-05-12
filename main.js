@@ -1,3 +1,5 @@
+// Focus - Blur nel login e signup
+
 const inputs = document.querySelectorAll('.input');
 
 function focusFunc(){
@@ -17,3 +19,22 @@ inputs.forEach(input => {
     input.addEventListener('focus', focusFunc);
     input.addEventListener('blur', blurFunc);
 });
+
+
+// Conferma Password
+
+var password = document.getElementById("password"), conferma_password = document.getElementById("conferma_password");
+
+function convalidaPassword(){
+    if(password.value != conferma_password.value){
+        conferma_password.setCustomValidity("Le password non corrispondono");
+    }else{
+        conferma_password.setCustomValidity('');
+    }
+}
+
+password.onchange = convalidaPassword;
+conferma_password.onkeyup = convalidaPassword;
+
+
+

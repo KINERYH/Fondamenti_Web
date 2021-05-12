@@ -36,9 +36,26 @@ header{
     z-index:10;
     box-shadow: 0px 0px 16px 0px rgb(0,0,0,1);
 }
+
+
+.profile button{
+    border: none;
+    outline: none;
+    margin: 0px .2em;
+    border-radius: .4em;
+}
+.profile li:nth-of-type(3) button{
+    padding: 1em;
+    background-color: #005aff;
+}
+.profile li:nth-of-type(4) button{
+    padding: 1em 1.5em;
+    background-image: linear-gradient(to left, #f8a000, #ffa500);
+}
 .profile li {display: inline;}
 .profile{
     display:flex;
+    align-items: center;
 }
 header .logo{
     margin: 10px 4em;
@@ -190,32 +207,6 @@ header button[type=submit]:hover{
 } 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ============= LOGIN ============= */
 
 .onda{
@@ -310,7 +301,7 @@ form h2{
 }
 
 .input-div.password{
-    margin-bottom   : 4px;
+    margin-bottom: 4px;
 }
 
 .i{
@@ -387,6 +378,12 @@ form h2{
     background-position: right;
 }
 
+/* === FINE LOGIN === */
+
+
+
+
+
 
 
 /* === SIGNUP === */
@@ -398,6 +395,7 @@ form h2{
 }
 
 .signup-form a{
+    margin-bottom: 25px;
     display: block;
     text-align: center;
     text-decoration: none;
@@ -409,6 +407,62 @@ form h2{
 .signup-form a:hover{
     color: #38d39f;
 }
+
+form h6{
+    font-size: 20px;
+    margin: 15px 0;
+    color: #999;
+    text-align: left;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+.genere{
+    color: #999;
+}
+
+label{
+   border: 2px solid #38d39f;
+   position: relative;
+   border-radius: 5px;
+   padding: 5px 5px;
+   padding: 10px 50px;
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+}
+
+label:before{
+    content: "";
+    height: 25px;
+    width: 25px;
+    border: 3px solid #38d39f;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+input[type="radio"]:checked + label{
+    background-color: #38d39f;
+    color: white;
+}
+
+input[type="radio"]:checked + label:before{
+    height: 16px;
+    width: 16px;
+    border: 10px solid white;
+    background-color: #38d39f;
+}
+
+
+
+
+
+
+
+
+
 
 
 /* === RESPONSIVE === */
@@ -446,7 +500,3 @@ form h2{
         justify-content: center;
     }
 }
-
-
-
-/* FINE LOGIN* /
