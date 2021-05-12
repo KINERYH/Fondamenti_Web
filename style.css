@@ -40,12 +40,25 @@ header{
 .profile{
     display:flex;
 }
-header .logo img{
+header .logo{
     margin: 10px 4em;
+    background-color: #38d39f;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: .5em;
 }
-header a{
+header .logo a{
+    color: white;
+}
+header ul a{
     color: black;
-    padding: 5px; 
+    padding: 5px;
+}
+header ul li{
+    transition: .3s;
+}
+header ul li:hover{
+    transform: scale(1.05);
 }
 #SignUp{
     color:#e73c7e;
@@ -68,10 +81,16 @@ header ul{
     margin: 10px 2em;
 }
 header button[type=submit]{
+    margin-left:.3em;
     padding:1em;
     border-radius: 3px;
     border: none;
     background-color: #4ad295;
+    cursor: pointer;
+    transition: .5s;
+}
+header button[type=submit]:hover{
+    background-color: #24b372;
 }
 
 
@@ -79,19 +98,21 @@ header button[type=submit]{
 /* ! ============= DROPDOWN ============= */
 
 .dropBtn {
-    background-color: #4CAF50;
+    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);;
     border-radius: 3px;
-    color: white;
+    color: black;
     padding: .9em;
     font-size: 14px;
     border: none;
     cursor: pointer;
+    transition: .5s;
+    background-size: 200%;
 }
 
 .dropdown {
     position: relative; 
     margin: 0em .5em;
-    overflow: hidden;
+    overflow: hidden;   
 }
 
 .dropdown_content {
@@ -123,7 +144,7 @@ header button[type=submit]{
 }
 
 .dropdown:hover .dropBtn {
-    background-color: #3e8e41;
+    background-position: right;
 }
 
 /* ! ============= MAIN ============= */
@@ -168,90 +189,6 @@ header button[type=submit]{
     color: white;
 } 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ! ============= DROPDOWN ============= */
- 
-.dropBtn {
-    background-color: #4CAF50;
-    border-radius: 3px;
-    color: white;
-    padding: .9em;
-    font-size: 14px;
-    border: none;
-    cursor: pointer;
-}
- 
-.dropdown {
-    position: relative; 
-    margin: 0em .5em;
-    overflow: hidden;
-}
- 
-.dropdown_content {
-    display: none;
-    position: fixed;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    z-index: 11;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: .3em;
-}
- 
-.dropdown_content a {
-    float : none;
-    color: black;
-    z-index: 1;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-radius: .3em;
-}
- 
-.dropdown_content a:hover {
-    background-color: #f1f1f1
-}
- 
-.dropdown:hover .dropdown_content {
-    display: block;
-}
- 
-.dropdown:hover .dropBtn {
-    background-color: #3e8e41;
-}
 
 
 
