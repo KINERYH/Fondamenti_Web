@@ -108,9 +108,11 @@ function deleteAccountAlert(){
                 input: 'password',
                 confirmButtonText: 'Conferma',
                 confirmButtonColor: 'red',
+                allowOutsideClick: false,
+                allowEscapeClick: false,
                 showDenyButton: true,
                 denyButtonText: 'Annulla',
-                denyButtonColor: 'orange',
+                denyButtonColor: 'gray',
                 preConfirm: (password) => {
                     // Confronto a caso con password123 --> refactorizzare per eseguire il confronto con la pw nel db
                     if(password != 'password123'){
