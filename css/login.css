@@ -9,7 +9,7 @@
     z-index: -1;
 }
 
-.container{
+#body-login .container{
     width: 100vw;
     height: 100vh;
     /* metto il contenuto in 2 colonne */
@@ -170,3 +170,6 @@ form h2{
 }
 
 /* === FINE LOGIN === */
+
+
+

@@ -76,19 +76,12 @@ function changePasswordAlert() {
             title: 'Password Modificata Correttamente',
             icon: 'success',
         });
-        }else{
-            Swal.fire({
-                title: 'La modifica della password non è andata a buon fine',
-                icon: 'error',
-                customClass: {
-                  container: 'position-absolute'
-                },
-                toast: true,
-              })
         }
        
     })
 }
+
+var cancel = document.getElementById("profile-dx_cancel");
 
 // Alert per conferma eliminazione account
 function deleteAccountAlert(){
@@ -100,6 +93,7 @@ function deleteAccountAlert(){
         showDenyButton: true,
         allowOutsideClick: false,
         allowEscapeClick: false,
+        position:'center-end'
     }).then((result) => {
         if(result.isConfirmed){
             Swal.fire({
@@ -128,10 +122,61 @@ function deleteAccountAlert(){
                     });
                 }
             }))
+        } else if(result.isDenied){
+            window.location.reload()
         }
     })
 }
 
+// Funzioni per slide delle freccie e cambio div in PROFILE
+function arrowActive(arrowId) {    
+    var arrow = document.getElementsByClassName("fas fa-arrow-right");  
+    var h3 = document.getElementById("profile-sx").getElementsByTagName("h3");
+    for (var i=0;i<arrow.length;i++){
+        console.log(arrowId.id);
+        console.log(arrow[i]);
+        console.log(document.getElementById("profile-sx").getElementsByClassName("h3hover"));
+        if (arrow[i].id==arrowId.id){   // elemento cliccato
+            arrow[i].classList.add("active");
+            h3[i].classList.remove("h3hover");
+            switch (arrowId) {
+                case arrow[0]:
+                    document.getElementById("profile-dx_img").style.display="none";
+                    document.getElementById("profile-dx_info").style.display="flex";
+                    document.getElementById("profile-dx_orders").style.display="none";
+                    break;
+                case arrow[1]:
+                    document.getElementById("profile-dx_img").style.display="none";
+                    document.getElementById("profile-dx_info").style.display="none";
+                    document.getElementById("profile-dx_orders").style.display="flex";
+                    break;
+                case arrow[2]:
+                    document.getElementById("profile-dx_img").style.display="none";
+                    document.getElementById("profile-dx_info").style.display="none";
+                    document.getElementById("profile-dx_orders").style.display="none";
+                default:
+                    break;
+            }
+        } else{     // elementi non cliccati
+            arrow[i].classList.remove("active");
+            h3[i].classList.add("h3hover");
+        }
+    }
+}
+
+
+
+
+// Slide MENU Carrello
+
+function openSlideMenu(){
+    document.getElementById('menu').style.width = '400px';
+    document.getElementById('slcontent').style.marginRight = '400px';
+}
+function closeSlideMenu(){
+    document.getElementById('menu').style.width = '0';
+    document.getElementById('slcontent').style.marginRight = '0';
+}
 
 
 
