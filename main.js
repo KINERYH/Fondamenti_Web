@@ -81,6 +81,8 @@ function changePasswordAlert() {
     })
 }
 
+var cancel = document.getElementById("profile-dx_cancel");
+
 // Alert per conferma eliminazione account
 function deleteAccountAlert(){
     Swal.fire({
@@ -91,7 +93,7 @@ function deleteAccountAlert(){
         showDenyButton: true,
         allowOutsideClick: false,
         allowEscapeClick: false,
-        position: 'center-end',
+        position:'center-end'
     }).then((result) => {
         if(result.isConfirmed){
             Swal.fire({
