@@ -38,3 +38,16 @@ conferma_password.onkeyup = convalidaPassword;
 
 
 
+// Slide MENU Carrello
+
+function openSlideMenu(){
+    document.getElementById('menu').style.width = '400px';
+    document.getElementById('slcontent').style.marginRight = '400px';
+}
+function closeSlideMenu(){
+    document.getElementById('menu').style.width = '0';
+    document.getElementById('slcontent').style.marginRight = '0';
+}
+
+
+

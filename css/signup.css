@@ -1,5 +1,14 @@
 /* === SIGNUP === */
 
+#body-signup .container{
+    width: 100vw;
+    /* metto il contenuto in 2 colonne */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7rem;
+    padding: 5% 2%;
+}
+
 .signup-form{
     display: flex;
     align-items: center;

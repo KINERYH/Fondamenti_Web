@@ -187,7 +187,7 @@ header button[type=submit]:hover{
 }
 
 /* ! ============= SLIDER ============= */
-.slider{margin: 1em 2em}
+.slider{margin: 2.5em 2em}
 .slider .sub_title{margin-left: .5em}
 .main-carousel{padding: .5em 0;}
 .carousel-cell{
@@ -203,6 +203,233 @@ header button[type=submit]:hover{
     font-size: 1.2em;
     color: white;
 } 
+
+
+
+
+/* ! ============= FOOTER ============= */
+
+footer{
+    position: relative;
+    width: 100%;
+    padding: 50px 100px 20px; 
+    background: #111;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+footer .container .sec{
+    margin-right: 30px;
+}
+footer .container .sec.aboutus{
+    width: 40%;
+}
+footer .container h8{
+    position: relative;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+/*linea rossa*/
+footer .container h8:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: red;
+}
+footer p{
+    color: #999;
+    margin-top: 15px;
+}
+
+.link{
+    position: relative;
+    width: 25%;
+}
+
+.link ul li{
+    list-style: none;
+}
+
+.link a{
+    margin-top: 15px;
+    color: #999;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.link a:hover{
+    color: white;
+}
+.contatti{
+    width: calc(35% - 60px);
+    margin-right: 0 !important;
+}
+.contatti .info{
+    position: relative;
+}
+.contatti .info li{
+    display: flex;
+    margin-bottom: 16px;
+}
+.contatti .info li i{
+    color: #999;
+    font-size: 17px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.contatti .info li a{
+    color: #999;
+    font-size: 17px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.contatti .info li a:hover{
+    color: white;
+}
+
+.copyright{
+    width: 100%;
+    background-color: #181818;
+    text-align: center;
+    padding: 8px 100px;
+    color: #999;
+}
+
+/* === FINE FOOTER === */
+
+
+
+
+
+/* === INIZIO SLIDE CART MENU === */
+
+
+#slcontent .slide button{
+    position: fixed;
+    right: 1.5%;
+    z-index: 50;
+    top: 7%;
+    background-color: orange;
+    border-radius: 1.5rem;
+    padding: 1em;
+    border: none;
+    cursor: pointer;
+    transform: perspective();
+}
+
+#slcontent .slide button:hover{
+    transform: scale(1.05);
+}
+
+#slcontent .slide i{
+    font-size: 15px;
+    margin: 0 .15em;
+}
+
+.nav{
+    height: 75%;
+    width: 0;
+    position: fixed;
+    z-index:50;
+    top: 6.7%;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 4em;
+    transition: 0.7s;
+    border-bottom-left-radius: 3rem;
+    box-shadow: -7px 7px 10px black;
+}
+
+
+/* X close */
+.nav a{
+    position: absolute;
+    margin-top: -1.4rem;
+    margin-left: .95em;
+    font-size: 40px;
+    text-decoration: none;
+    color: white;
+}
+
+.nav a:hover{
+    color: orange;
+    transition: .08s;
+}
+
+
+.nav h13{
+    position: absolute;
+    margin-top: -.7em;
+    margin-left: 8.5rem;
+    font-size: 40px;
+    text-decoration: none;
+    color: white;
+    font-weight: 625;
+}
+
+.nav h13:before{
+    content: '';
+    position: absolute;
+    bottom: -.3rem;
+    left: 0;
+    width: 9rem;
+    height: .3rem;
+    background: orange;
+}
+
+.nav input{
+    position: absolute;
+    width: 80%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0.5rem 0.7rem;
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.nav .btn{
+    display: block;
+    width: 80%;
+    height: 50px;
+    border-radius: 25px;
+    margin: 40rem 2.8rem;
+    font-size: 1.2rem;
+    outline: none;
+    border: none;
+    background-image: linear-gradient(to right, #f08100, #ffa500, #f08100);
+    cursor: pointer;
+    color: #fff;
+    text-transform: uppercase;
+    background-size: 200%;
+    transition: .5s;
+}
+
+.nav .btn:hover{
+    background-position: right;
+}
+
+/* === FINE SLIDE MENU === */
+
+
+
 
 /* === RESPONSIVE === */
 
@@ -238,4 +465,46 @@ header button[type=submit]:hover{
     .signup-form{
         justify-content: center;
     }
+
+    /*footer*/
+    footer{
+        padding: 40px;
+    }
+    footer .container{
+        flex-direction: column;
+    }
+
+    /*Slide menu*/
+    #slcontent{
+        padding: 40px;
+    }
+    #slcontent .slide{
+        flex-direction: column;
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
