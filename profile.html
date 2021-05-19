@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,6 +11,7 @@
         crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/profile.css">
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
@@ -30,9 +30,7 @@
     <!-- ============ SweetAlert =================--> 
     <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>     SWEETALERT1 ORIGINALE --> 
     <script src="sweetalert2.all.min.js"></script>
-    
 </head>
-
 <body>
     <!-- ============= HEADER ============= -->
     <header>
@@ -66,93 +64,83 @@
         </ul>
     </header>
 
-    <!-- ============= MAIN ============= -->
-    <div class="main">
-        <div class="main_dx">
-            <div id="main_content">
-                <h1 class="title"> LiveXperience </h1>
-                <p class="sub_title"> Prenota i tuoi concerti con facilità tramite la piattaforma migliore al mondo</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============= SLIDER ============= -->
-    <div class="slider">
-        <div class="title_categ">
-            <h1 class="sub_title">Concerti</h1>
-        </div>
-        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
+    <!-- ============= BODY ============= -->
+    <div class="profile-body">
+        <div id="profile-sx" class="profile-sx">
+            <h1>Il mio profilo</h1>
+            <h3 class="h3hover" onclick="arrowActive(arrow1)" > <i id="arrow1" class="fas fa-arrow-right"></i> &nbsp;Informazioni personali</h3> 
+            <h3 class="h3hover" onclick="arrowActive(arrow2)" > <i id="arrow2" class="fas fa-arrow-right"></i> &nbsp;I miei acquisti</h3>
+            <h3 class="h3hover" onclick="arrowActive(arrow3);deleteAccountAlert()" style="color: red;"> <i id="arrow3" class="fas fa-arrow-right"style="color:black;"></i> &nbsp;Cancella registrazione</h3>
 
         </div>
-    </div>
-
-    <div class="slider">
-        <h1 class="sub_title">Sport</h1>
-        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
+        <div id="profile-dx_img" class="profile-dx_img">
+            <img src="images/imgProfile.svg" alt="">
+        </div>
+        <div id="profile-dx_info" class="profile-dx_info">
+            <div class="card-info">
+                <div class="center">
+                    <img class="avatar" src="images/avatar.svg" alt="">
                 </div>
+                <h2>Nome</h2>
+                <p>Pippo</p>
+                <h2>Cognome</h2>
+                <p>Pippo</p>
+                <h2>Data di nascita</h2>
+                <p>13/02/85</p>
+                <h2>Email</h2>
+                <p>pippopipo@dio.bestia</p>
+                <h2>Password</h2>
+                <p>***********<button onclick="changePasswordAlert()"><i class="fas fa-edit" style="color: rgb(202, 0, 0);"></i></button></p>
             </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-
+            
+        </div>
+        <div id="profile-dx_orders" class="profile-dx_orders">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Prezzo</th>
+                        <th>Data Evento</th>
+                        <th>Data Acquisto</th>
+                        <th>N° biglietti</th>
+                        <th>Posto</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Prova</td>
+                    <td>€50</td>
+                    <td>05/12/21</td>
+                    <td>30/01/20</td>
+                    <td>5</td>
+                    <td>Curva Sud</td>
+                </tr>
+                <tr>
+                    <td>Prova</td>
+                    <td>€50</td>
+                    <td>05/12/21</td>
+                    <td>30/01/20</td>
+                    <td>5</td>
+                    <td>Curva Sud</td>
+                </tr>
+                <tr>
+                    <td>Prova</td>
+                    <td>€50</td>
+                    <td>05/12/21</td>
+                    <td>30/01/20</td>
+                    <td>5</td>
+                    <td>Curva Sud</td>
+                </tr>
+                <tr>
+                    <td>Prova</td>
+                    <td>€50</td>
+                    <td>05/12/21</td>
+                    <td>30/01/20</td>
+                    <td>5</td>
+                    <td>Curva Sud</td>
+                </tr>
+            </table>
         </div>
     </div>
 
 </body>
-
 </html>

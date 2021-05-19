@@ -23,6 +23,10 @@ header form{
     display: flex;
     box-sizing: border-box;
 }
+button{
+    border: none;
+    outline: none;
+}
 
 /* ! ============= HEADER ============= */
 header{
@@ -38,8 +42,6 @@ header{
 }
 
 .profile button{
-    border: none;
-    outline: none;
     margin: 0px .2em;
     border-radius: .4em;
 }
