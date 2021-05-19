@@ -61,40 +61,29 @@
         <ul class="profile">
             <li><a href="login.html"> Log in </a></li>
             <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
-<<<<<<< HEAD
             <li><button><i class="fas fa-user"></i></li></button>
-=======
-            <li><button><i class="fas fa-user"></i></li></button> 
-            <li><button><i class="fas fa-shopping-cart"></i></button></li>
->>>>>>> a4558d3a8282cd8241f50ad0e55427a5d97062a7
+            <li>
+                <div class="slide">
+                    <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
+                </div> 
+            </li>
+
+
         </ul>
 
         
     </header>
+<!-- ============= SLIDE MENU CARRELLO ============= -->
 
-    <!-- ============= SLIDE MENU CARRELLO ============= -->
-
-        <div id="slcontent"> 
-            <div class="slide">
-                <a href="#" onclick="openSlideMenu()">
-                    <button><i class="fas fa-shopping-cart"></i></button>
-                </a>
-            </div>
-            
-            
-             <div id="menu" class="nav">
-                <h13>Carrello</h13>
-                    <a href="#" class="close" onclick="closeSlideMenu()">
-                    <i class="fas fa-times"></i></a>
-                    <input type="submit" class="btn" value="Acquista">
-            </div>
+    <div id="slcontent">
+        <div id="menu" class="nav">
+            <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i></a>
+                <input type="submit" class="btn" value="Acquista">
         </div>
-   
-
-    <!-- funzione javascript -->
-    <script type="text/javascript" src="main.js"></script>
-
-
+    </div>
+    
 
     <!-- ============= MAIN ============= -->
     <div class="main">
@@ -183,7 +172,6 @@
         </div>
     </div>
 
-<<<<<<< HEAD
 
 
      <!-- ============= FOOTER ============= -->
@@ -229,8 +217,6 @@
         <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
     </div>
 
-=======
->>>>>>> a4558d3a8282cd8241f50ad0e55427a5d97062a7
 </body>
 
 </html>
