@@ -36,11 +36,13 @@
 <body>
     <!-- ============= HEADER ============= -->
     <header>
+        <!-- logo -->
         <div class="logo">
             <a href="index.html">
                 liveXperience
             </a>
         </div>
+        <!-- barra di ricerca -->
         <div class="search-container">
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
@@ -58,38 +60,34 @@
                         height="13px" width="13px" /></button>
             </form>
         </div>
+        <!-- utility per il profilo + carrello-->
         <ul class="profile">
             <li><a href="login.html"> Log in </a></li>
             <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
             <li><button><i class="fas fa-user"></i></li></button>
+            <!-- carrello -->
+            <li>
+                <div class="slide">
+                    <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
+                </div> 
+            </li>
+
+
         </ul>
 
         
     </header>
+<!-- ============= SLIDE SIDE CART ============= -->
 
-    <!-- ============= SLIDE MENU CARRELLO ============= -->
-
-        <div id="slcontent"> 
-            <div class="slide">
-                <a href="#" onclick="openSlideMenu()">
-                    <button><i class="fas fa-shopping-cart"></i></button>
-                </a>
-            </div>
-            
-            
-             <div id="menu" class="nav">
-                <h13>Carrello</h13>
-                    <a href="#" class="close" onclick="closeSlideMenu()">
-                    <i class="fas fa-times"></i></a>
-                    <input type="submit" class="btn" value="Acquista">
-            </div>
+    <div id="slcontent">
+        <div id="menu" class="nav">
+            <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i></a>
+                <input type="submit" class="btn" value="Acquista">
         </div>
-   
-
-    <!-- funzione javascript -->
-    <script type="text/javascript" src="main.js"></script>
-
-
+    </div>
+    
 
     <!-- ============= MAIN ============= -->
     <div class="main">
@@ -183,6 +181,7 @@
      <!-- ============= FOOTER ============= -->
      <footer>
          <div class="container">
+             <!-- about us -->
              <div class="sec aboutus">
                  <h8>About Us</h8>
                  <p>LiveXperience è specializzato nella vendita di biglietti <br>
@@ -191,6 +190,7 @@
                     di partecipare a un evento pubblico acquistando il proprio biglietto <br>
                     in modo facile e sicuro.</p>
              </div>
+             <!-- link utili -->
              <div class="sec link">
                  <h8>Link Utili</h8>
                  <ul>
@@ -198,6 +198,7 @@
                      <li><a href="#">Informative Cookie</a></li>
                  </ul>
              </div>
+             <!-- contatti -->
              <div class="sec contatti">
                  <h8>Contatti</h8>
                  <ul class="info">
@@ -219,6 +220,7 @@
          </div>
 
     </footer>
+    <!-- ========= COPYRIGHT ========= -->
     <div class="copyright">
         <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
     </div>
