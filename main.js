@@ -1,12 +1,15 @@
-// Focus - Blur nel login e signup
+// ===== FOCUS - BLUR NEL LOGIN & SIGNUP =====
 
+// Richiamo tutti gli elementi di classe 'input'
 const inputs = document.querySelectorAll('.input');
 
+// Aggiungo effetto al click degli elementi di login e signup
 function focusFunc() {
     let parent = this.parentNode.parentNode;
     parent.classList.add('focus');
 }
 
+// Elimino effetto al click di un diverso elemento
 function blurFunc() {
     let parent = this.parentNode.parentNode;
     if (this.value == "") {
@@ -15,16 +18,21 @@ function blurFunc() {
 
 }
 
+// Per ogni 'input' abilito la funzione "focusFunc()" e "blurFunc()"
 inputs.forEach(input => {
     input.addEventListener('focus', focusFunc);
     input.addEventListener('blur', blurFunc);
 });
 
 
-// Conferma Password
 
+
+// ===== CONFERMA PASSWORD =====
+
+// Prendo gli ID di 'password' e 'conferma_password'
 var password = document.getElementById("password"), conferma_password = document.getElementById("conferma_password");
 
+// Se le 2 password non corrispondono viene mostrato il messaggio di errore
 function convalidaPassword() {
     if (password.value != conferma_password.value) {
         conferma_password.setCustomValidity("Le password non corrispondono");
@@ -33,6 +41,7 @@ function convalidaPassword() {
     }
 }
 
+// Uso onchange e onkeyup per memorizzare temporaneamente i valori di 'password' e 'conferma_password' alla pressione dei loro input. 
 password.onchange = convalidaPassword;
 conferma_password.onkeyup = convalidaPassword;
 
@@ -167,8 +176,9 @@ function arrowActive(arrowId) {
 
 
 
-// Slide MENU Carrello
+// ===== SLIDE MENU CARRELLO ======
 
+// Imposto larghezza del menu del carrello al click del bottone
 function openSlideMenu(){
     document.getElementById('menu').style.width = '400px';
     document.getElementById('slcontent').style.marginRight = '400px';
