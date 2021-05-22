@@ -75,7 +75,8 @@ header ul a{
 header ul li{
     transition: .3s;
 }
-header ul li:hover{
+header ul li:nth-of-type(1):hover,
+header ul li:nth-of-type(2):hover{
     transform: scale(1.05);
 }
 #SignUp{
@@ -318,41 +319,30 @@ footer p{
 /* === INIZIO SLIDE CART MENU === */
 
 
-#slcontent .slide button{
-    position: fixed;
-    right: 1.5%;
-    z-index: 50;
-    top: 7%;
+.slide button{
     background-color: orange;
-    border-radius: 1.5rem;
-    padding: 1em;
     border: none;
     cursor: pointer;
     transform: perspective();
 }
 
-#slcontent .slide button:hover{
-    transform: scale(1.05);
-}
-
-#slcontent .slide i{
+.slide i{
     font-size: 15px;
     margin: 0 .15em;
 }
-
 .nav{
-    height: 75%;
+    height: 100%;
     width: 0;
     position: fixed;
     z-index:50;
-    top: 6.7%;
+    top: 0;
     right: 0;
     background-color: #111;
     overflow-x: hidden;
     padding-top: 4em;
     transition: 0.7s;
-    border-bottom-left-radius: 3rem;
-    box-shadow: -7px 7px 10px black;
+    border-bottom-left-radius: .5rem;
+    box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
 }
 
 
@@ -395,7 +385,7 @@ footer p{
 .nav input{
     position: absolute;
     width: 80%;
-    height: 100%;
+    height: 75%;
     top: 0;
     left: 0;
     border: none;
@@ -411,7 +401,7 @@ footer p{
     width: 80%;
     height: 50px;
     border-radius: 25px;
-    margin: 40rem 2.8rem;
+    margin: 20rem 2.8rem;
     font-size: 1.2rem;
     outline: none;
     border: none;
