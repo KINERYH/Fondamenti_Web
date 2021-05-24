@@ -1,5 +1,6 @@
 // =========== Focus - Blur nel login e signup ============ //
 
+// prende tutti gli elemnti di classe input
 const inputs = document.querySelectorAll('.input');
 
 function focusFunc() {
@@ -15,6 +16,7 @@ function blurFunc() {
 
 }
 
+// metto in ascolto gli input 
 inputs.forEach(input => {
     input.addEventListener('focus', focusFunc);
     input.addEventListener('blur', blurFunc);
