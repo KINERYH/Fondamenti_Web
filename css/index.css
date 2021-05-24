@@ -167,7 +167,7 @@ header button[type=submit]:hover{
 /* ! ============= MAIN ============= */
 .main{
     margin:0px;
-    background-image: url("../images/concerto.jpg");
+    background-image: url("../images/concerto.jpeg");
     height: 100vh;
     width: 100%;
     background-size: cover;
