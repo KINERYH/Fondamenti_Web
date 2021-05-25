@@ -1,0 +1,80 @@
+body .main_event *,
+body .description *{
+    border: 1px solid black;
+}
+.main_event{
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    margin: 0;
+    height: 100vh;
+}
+.main_event img{
+    width: 50vw;
+    height: 60vh;
+}
+
+.main_dx *{
+    padding:.5em;
+    margin: .2em;
+}
+.main_dx h1{
+    font-size: 1.85em;
+}
+.main_dx span{
+    font-size: 1.5em;
+}
+.center {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+.checked {
+    color: orange;
+}
+.center i{
+    cursor: pointer;
+}
+.main_dx button{
+    border-radius: .5em;
+    background-color: rgb(219, 54, 219);
+    color: white;
+    padding: 1em;
+    font-family: inherit;
+    font-size: 1em;
+}
+
+/* ============ descrizione ========== */
+.description{
+    padding: 2em 10em;
+}
+
+.description h1{
+    font-size: 2em;
+    background-color: greenyellow;
+    display: inline-block;
+    border-radius: .3em;
+    padding: .2em;
+    box-shadow: 1em;
+}
+
+.description p{
+    background-color: whitesmoke;
+    padding: .5em 0em;
+    font-size: 1.25em;
+    border-radius: .3em;
+}
+
+/* ============ Responsive ========== */
+
+@media (max-width: 768px) {
+    .main_event{
+        justify-content:center;
+        flex-wrap: wrap;
+    }
+    .main_event img{
+        width: 80vw;
+        height: 50vh;
+    }
+}

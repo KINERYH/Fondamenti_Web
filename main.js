@@ -185,5 +185,10 @@ function closeSlideMenu(){  //chiusura carrello
     document.getElementById('slcontent').style.marginRight = '0';
 }
 
+// ======== Modifica prezzo in base ai click su + o - ======== //
+function riduciPrezzo(prezzo){
+    // Fai quello che devi fare
+}
+
 
 

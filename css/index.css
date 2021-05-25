@@ -26,6 +26,7 @@ header form{
 button{
     border: none;
     outline: none;
+    cursor:pointer;
 }
 
 /* ! ============= HEADER ============= */
@@ -111,6 +112,9 @@ header button[type=submit]{
 header button[type=submit]:hover{
     background-color: #24b372;
 }
+header button{
+    cursor: pointer;
+}
 
 /* ! ============= DROPDOWN ============= */
 
@@ -172,7 +176,7 @@ header button[type=submit]:hover{
     width: 100%;
     background-size: cover;
 }
-.main_dx{
+.main .main_dx{
     float: right;
     width:65%;
     height: 100vh;
