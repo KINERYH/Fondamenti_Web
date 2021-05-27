@@ -12,9 +12,9 @@ if ($conn->connect_error) {
 
 //Prendi le variabili
 $email = $_POST["email"];
-$password = $_POST["password"];
+$password = md5($_POST["password"]);
 
-
+//Query da eseguire
 $sql = "SELECT * FROM utente WHERE Mail = '$email'";
 $result = $conn->query($sql);
 
@@ -22,11 +22,16 @@ if ($result->num_rows > 0) {
     // output data of each row
     while ($row = $result->fetch_assoc()) {
         if ($row["Password"] == $password) {
+            
+            
+            /* REINDIRIZZA*/
             header("Location: ../profile.html");
             exit();
+            
         }
     }
 } else {
     echo "0 results";
 }
 $conn->close();
+

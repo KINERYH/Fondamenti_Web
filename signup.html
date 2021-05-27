@@ -62,7 +62,7 @@
 			<img src="images/imReg2.svg">
 		</div>
 		<div class="signup-form">
-			<form action="signup.html">
+			<form action="php/signup.php" method="POST">
 				<img class="avatar" src="images/avatar.svg">
 				<h2 class="title">Registrati!</h2>
 
@@ -73,7 +73,7 @@
                    </div>
                    <div class="div">
                            <h5>Nome</h5>
-                           <input type="text" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required class="input">
+                           <input type="text" name="nome" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required class="input">
                    </div>
                 </div>
 
@@ -84,7 +84,7 @@
                    </div>
                    <div class="div">
                            <h5>Cognome</h5>
-                           <input type="text" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required  class="input">
+                           <input type="text" name="cognome"pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required  class="input">
                    </div>
                 </div>
            		
@@ -95,7 +95,7 @@
            		   </div>
            		   <div class="div">
            		   		<h5>Email</h5>
-           		   		<input type="email" required class="input">
+           		   		<input type="email" name="email" required class="input">
            		   </div>
            		</div>
            		
@@ -105,7 +105,7 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="password" class="input">
+           		    	<input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="password" class="input">
             	   </div>
             	</div>
              
@@ -124,22 +124,22 @@
            		    	<i class="fas fa-birthday-cake"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="date" required class="input">
+           		    	<input type="date" name="date" required class="input">
             	   </div>
             	</div>
                 
                 <div class="genere">
-
+                    
                     <h6>Seleziona il tuo genere</h6>
 
-                    <input type="radio" id="uomo" name="gen"
+                    <input type="radio" value="M" id="uomo" name="gen"
                      checked="checked">
                     <label for="uomo">Uomo</label><br>
                     
-                    <input type="radio" id="donna" name="gen">
+                    <input type="radio" value="F" id="donna" name="gen">
                     <label for="donna">Donna</label><br>
                     
-                    <input type="radio" id="neutro" name="gen">
+                    <input type="radio" value="ND" id="neutro" name="gen">
                     <label for="neutro">Preferisco non rispondere</label><br>
             	</div>
                 

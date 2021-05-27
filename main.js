@@ -1,6 +1,6 @@
 // ===== FOCUS - BLUR NEL LOGIN & SIGNUP =====
 
-// Richiamo tutti gli elementi di classe 'input'
+// Prende tutti gli elementi di classe input
 const inputs = document.querySelectorAll('.input');
 
 // Aggiungo effetto al click degli elementi di login e signup
@@ -18,7 +18,7 @@ function blurFunc() {
 
 }
 
-// Per ogni 'input' abilito la funzione "focusFunc()" e "blurFunc()"
+// Metto in ascolto gli input 
 inputs.forEach(input => {
     input.addEventListener('focus', focusFunc);
     input.addEventListener('blur', blurFunc);
