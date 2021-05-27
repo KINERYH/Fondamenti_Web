@@ -26,6 +26,7 @@ header form{
 button{
     border: none;
     outline: none;
+    cursor:pointer;
 }
 
 /* ! ============= HEADER ============= */
@@ -47,12 +48,23 @@ header{
 }
 .profile li:nth-of-type(3) button{
     padding: 1em;
-    background-color: #005aff;
+    border: 1px solid #4ad295;
+    background:transparent;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
+}
+.profile li:nth-of-type(3) button:hover{
+    background-color: #A5F1CE;
 }
 .profile li:nth-of-type(4) button{
-    padding: 1em 1.5em;
-    background-image: linear-gradient(to left, #f8a000, #ffa500);
+    padding: 1em;
+    background-color: #08cc74;
+    color: white;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
+.profile li:nth-of-type(4) button:hover{
+    background-color: #059e59;
+}
+
 .profile li {display: inline;}
 .profile{
     display:flex;
@@ -110,6 +122,9 @@ header button[type=submit]{
 }
 header button[type=submit]:hover{
     background-color: #24b372;
+}
+header button{
+    cursor: pointer;
 }
 
 /* ! ============= DROPDOWN ============= */
@@ -172,7 +187,7 @@ header button[type=submit]:hover{
     width: 100%;
     background-size: cover;
 }
-.main_dx{
+.main .main_dx{
     float: right;
     width:65%;
     height: 100vh;

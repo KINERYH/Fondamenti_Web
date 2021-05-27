@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -11,7 +12,8 @@
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
         crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/event.css">
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
@@ -25,11 +27,13 @@
     <!-- ============= Font-Awesome ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
-    <!-- ============ Javascript =================--> 
-    <script src="main.js"></script>
-    
-</head>
+    <!-- ============ Javascript =================-->
+    <script src="../main.js"></script>
+    <!-- ============ SweetAlert =================--> 
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>     SWEETALERT1 ORIGINALE --> 
+    <script src="../sweetalert2.all.min.js"></script>
 
+</head>
 <body>
     <!-- ============= HEADER ============= -->
     <header>
@@ -66,117 +70,176 @@
             <li>
                 <div class="slide">
                     <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
-                </div> 
+                </div>
             </li>
 
 
         </ul>
 
-        
+
     </header>
-<!-- ============= SLIDE SIDE CART ============= -->
+    <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
         <div id="menu" class="nav">
             <h13>Carrello</h13>
-                <a href="#" class="close" onclick="closeSlideMenu()">
+            <a href="#" class="close" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i></a>
-                <input type="submit" class="btn" value="Acquista">
+            <input type="submit" class="btn" value="Acquista">
         </div>
     </div>
+
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "livexperience";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Recupero l'Id col metodo post, dopo aver selezionato l'evento dalla ricerca o dallo slider
+    $id = "1";
+
+    //Query da eseguire
+    $sql = "SELECT * FROM evento WHERE ID = '$id'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // output data of each row
+        while ($row = $result->fetch_assoc()) {
+            $description = $row["Descrizione"];
+            $image_url = $row["Img"];
+            $price = $row["Prezzo"];
+            $title = $row["Nome"];
+            $place = $row["Luogo"];
+            $limitePosti = $row["Disp"];
+            $date = $row["Data"];
+        }
+    } else {
+        echo "0 results";
+    }
+    $conn->close();
+    ?>
+
+
+    <!-- ============= PROVA BLUR ============= -->
+    <div class="bg_blur">
+        <img src="<?php echo $image_url?>"/>
+    </div>
+    <div class="overlay">
+
+    </div>
+
+
     
-
-    <!-- ============= MAIN ============= -->
-    <div class="main">
+    <!-- ============= BODY EVENT ============= -->
+    <div class="main_event">
+        <div class="main_sx">
+            <img src="<?php echo $image_url?>"/>
+        </div>
         <div class="main_dx">
-            <div id="main_content">
-                <h1 class="title"> LiveXperience </h1>
-                <p class="sub_title"> Prenota i tuoi concerti con facilità tramite la piattaforma migliore al mondo</p>
+            <h1> <?php echo $title ?> </h1>
+            <span><?php echo $place ?></span>
+            <span><?php echo $date?></span>
+            <br>
+            <span id="prezzo">€<?php echo number_format($price,2) ?></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>            
+            <br>
+            <div class=center>    
+                <i class="fas fa-minus" onclick="riduci(<?php echo $price ?>)"></i>
+                <span id="numero_biglietti">1</span>
+                <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+            </div>
+            <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
+            <div class="center">
+                <button><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
+            </div>
+        </div>
+       
+    </div>
+
+    <!-- ============= Descrizione ============= -->
+
+    <div class="description">
+        <h1>Descrizione</h1>
+        <p> <?php echo $description ?> </p>
+    </div>
+
+    <!-- ============= Eventi correlati ============= -->
+
+    <div class="ev_correlati">
+        <h1>Potrebbero interessarti anche questi eventi </h1>
+        <div class="center">
+            <div class="evento">
+                <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+                
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
             </div>
         </div>
     </div>
 
-    <!-- ============= SLIDER ============= -->
-    <div class="slider">
-        <div class="title_categ">
-            <h1 class="sub_title">Concerti</h1>
-        </div>
-        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="slider">
-        <h1 class="sub_title">Sport</h1>
-        <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-            <div class="carousel-cell">
-                <div class="carousel-cell__content">
-                    Prova
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
-
-     <!-- ============= FOOTER ============= -->
-     <footer>
+    <!-- ============= FOOTER ============= -->
+    <footer>
          <div class="container">
              <!-- about us -->
              <div class="sec aboutus">
@@ -221,7 +284,8 @@
     <div class="copyright">
         <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
     </div>
+    
 
 </body>
-
 </html>
+
