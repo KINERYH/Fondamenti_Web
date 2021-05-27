@@ -185,10 +185,41 @@ function closeSlideMenu(){  //chiusura carrello
     document.getElementById('slcontent').style.marginRight = '0';
 }
 
-// ======== Modifica prezzo in base ai click su + o - ======== //
-function riduciPrezzo(prezzo){
-    // Fai quello che devi fare
+// ======== Modifica prezzo e numero biglietti in base ai click su + o - ======== //
+
+function riduci(prezzo){
+    var n = document.getElementById("numero_biglietti").textContent;
+    n = parseInt(n);
+    if (n>1){
+    n=n-1;
+    document.getElementById("numero_biglietti").innerHTML = n;
+    var prezzo = "€" + (n*prezzo).toFixed(2);
+    document.getElementById("prezzo").innerHTML = prezzo ; 
+    var plus = document.getElementsByClassName("fa-plus");
+        plus[0].style.color="black";
+        document.getElementById("avvisoPosti").style.fontSize = "0";
+    }
+    if (n==1){
+        var meno = document.getElementsByClassName("fa-minus");
+        meno[0].style.color="red";  
+    }
+    
 }
-
-
-
+function aumenta(prezzo, limitePosti){
+    var n = document.getElementById("numero_biglietti").textContent;
+    n = parseInt(n);
+    if (n < limitePosti){
+    n=n+1;
+    document.getElementById("numero_biglietti").innerHTML = n;
+    var prezzo = "€" + (n*prezzo).toFixed(2);
+    document.getElementById("prezzo").innerHTML = prezzo;
+    var meno = document.getElementsByClassName("fa-minus");
+        meno[0].style.color="black";
+    }
+    if (n == limitePosti){
+        var piu = document.getElementsByClassName("fa-plus");
+        piu[0].style.color="red";
+        document.getElementById("avvisoPosti").style.fontSize = ".9em";
+    }    
+    
+}

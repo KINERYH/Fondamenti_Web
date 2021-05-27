@@ -102,7 +102,7 @@
     }
 
     // Recupero l'Id col metodo post, dopo aver selezionato l'evento dalla ricerca o dallo slider
-    $id = "0";
+    $id = "1";
 
     //Query da eseguire
     $sql = "SELECT * FROM evento WHERE ID = '$id'";
@@ -116,6 +116,8 @@
             $price = $row["Prezzo"];
             $title = $row["Nome"];
             $place = $row["Luogo"];
+            $limitePosti = $row["Disp"];
+            $date = $row["Data"];
         }
     } else {
         echo "0 results";
@@ -124,37 +126,164 @@
     ?>
 
 
+    <!-- ============= PROVA BLUR ============= -->
+    <div class="bg_blur">
+        <img src="<?php echo $image_url?>"/>
+    </div>
+    <div class="overlay">
+
+    </div>
+
+
+    
     <!-- ============= BODY EVENT ============= -->
     <div class="main_event">
         <div class="main_sx">
             <img src="<?php echo $image_url?>"/>
         </div>
         <div class="main_dx">
-            <h1> Finale champions league </h1>
-            <span>€<?php echo $price ?></span>
+            <h1> <?php echo $title ?> </h1>
+            <span><?php echo $place ?></span>
+            <span><?php echo $date?></span>
+            <br>
+            <span id="prezzo">€<?php echo number_format($price,2) ?></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
             <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <span class="fa fa-star"></span>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star"></span>            
             <br>
             <div class=center>    
-                <i class="fas fa-minus" onclick="riduciPrezzo(<?php echo $price ?>)"></i>
-                <span>3</span>
-                <i class="fas fa-plus"></i>
+                <i class="fas fa-minus" onclick="riduci(<?php echo $price ?>)"></i>
+                <span id="numero_biglietti">1</span>
+                <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
             </div>
+            <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
             <div class="center">
-                <button> Aggiungi al carrello </button>
+                <button><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
             </div>
         </div>
        
     </div>
-    
+
+    <!-- ============= Descrizione ============= -->
+
     <div class="description">
         <h1>Descrizione</h1>
         <p> <?php echo $description ?> </p>
     </div>
 
+    <!-- ============= Eventi correlati ============= -->
+
+    <div class="ev_correlati">
+        <h1>Potrebbero interessarti anche questi eventi </h1>
+        <div class="center">
+            <div class="evento">
+                <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+                
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+            </div>
+            <div class="evento">
+            <div class="blur_img"> 
+                    <img src="<?php echo $image_url?>"/>
+                    <img src="<?php echo $image_url?>"/>
+                    <span class="info">
+                        <?php echo $place ?>
+                        <br/>
+                        <?php echo $date ?>
+                        <br/>   
+                        €<?php echo number_format($price, 2) ?>
+                    </span>
+                </div>
+                <span class="title"><?php echo $title ?> </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============= FOOTER ============= -->
+    <footer>
+         <div class="container">
+             <!-- about us -->
+             <div class="sec aboutus">
+                 <h8>About Us</h8>
+                 <p>LiveXperience è specializzato nella vendita di biglietti <br>
+                    per eventi di musica, cultura e sport, <br>
+                    rivolto a qualsiasi tipo di utente che vuole vivere le emozioni  <br>
+                    di partecipare a un evento pubblico acquistando il proprio biglietto <br>
+                    in modo facile e sicuro.</p>
+             </div>
+             <!-- link utili -->
+             <div class="sec link">
+                 <h8>Link Utili</h8>
+                 <ul>
+                     <li><a href="https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018">Privacy</a></li>
+                     <li><a href="#">Informative Cookie</a></li>
+                 </ul>
+             </div>
+             <!-- contatti -->
+             <div class="sec contatti">
+                 <h8>Contatti</h8>
+                 <ul class="info">
+                     <li>
+                         <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                         <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                     </li> 
+                     <li>
+                         <span><i class="fas fa-phone" aria-hidden="true"></i></span>
+                         <p><a href="tel:080612224">080 612 224</a><br>
+                          <a href="tel:332622778">+39 332 622 778</a></p>
+                     </li>
+                     <li>
+                         <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
+                         <p> PIVA: 12345678910</p>
+                     </li>
+                 </ul>
+             </div>
+         </div>
+
+    </footer>
+    <!-- ========= COPYRIGHT ========= -->
+    <div class="copyright">
+        <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
+    </div>
     
 
 </body>
