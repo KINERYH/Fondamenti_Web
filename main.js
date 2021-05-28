@@ -223,3 +223,7 @@ function aumenta(prezzo, limitePosti){
     }    
     
 }
+
+function provaMetodo(id){
+    document.getElementById("titolo").innerHTML = id; 
+}
