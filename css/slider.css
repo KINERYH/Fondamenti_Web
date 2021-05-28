@@ -1,0 +1,74 @@
+.slider{margin: 0em 2em}
+.slider .sub_title{margin-left: .5em}
+.carousel-cell{
+    margin: 1em;
+} 
+.evento{
+    background-color: transparent;
+    margin-top: 2em;
+}
+
+.evento span{
+    display: block;
+    font-size: 1.2em;
+}
+
+.blur_img{
+    position: relative;
+    overflow: hidden;
+    border-radius: .5em;
+    height: 25vh;
+    width: 21vw;
+}
+
+.evento .blur_img img:nth-of-type(1){
+    background-size: cover;
+    height: 25vh;
+    width: 21vw;
+    border-radius: .5em;
+    transition: 1s;
+    z-index: 1;
+}
+.evento .blur_img img:nth-of-type(2){
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    height: 25vh;
+    width: 21vw;
+    z-index: 2;
+    border-radius: .5em;
+    filter: blur(0px);
+    transition: filter .5s cubic-bezier(.215, .61, .355, 1);
+}
+
+.evento .blur_img .info{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 30%;
+    display: block;
+    text-align: center;
+    font-size: 0em;
+    z-index:10;
+    color: white;
+    line-height:1.2em;
+    transition: font-size .3s cubic-bezier(.215, .61, .355, 1);
+}
+.evento:hover img:nth-of-type(2){
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+    cursor: pointer;
+}
+
+.evento:hover .info{
+    font-size: 1em;
+    cursor: pointer;
+}
+.evento .title{
+    margin-top: .35em;
+}
+
+footer{
+    margin-top: 3em;
+}

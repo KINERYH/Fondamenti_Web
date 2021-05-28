@@ -57,7 +57,7 @@ header{
 }
 .profile li:nth-of-type(4) button{
     padding: 1em;
-    background-color: #08cc74;
+    background-color: #06B063;
     color: white;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
@@ -202,27 +202,6 @@ header button{
     font-size:24px;
     margin-top:10px;
 }
-
-/* ! ============= SLIDER ============= */
-.slider{margin: 2.5em 2em}
-.slider .sub_title{margin-left: .5em}
-.main-carousel{padding: .5em 0;}
-.carousel-cell{
-    margin: 1em;
-} 
-.carousel-cell__content{
-    display: flex;
-    text-align: center;
-    align-items: center;
-    padding: 4.5em;
-    background:#e73c7e;
-    border-radius: 1em;
-    font-size: 1.2em;
-    color: white;
-} 
-
-
-
 
 /* ! ============= FOOTER ============= */
 

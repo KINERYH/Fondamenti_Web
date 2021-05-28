@@ -224,6 +224,12 @@ function aumenta(prezzo, limitePosti){
     
 }
 
-function provaMetodo(id){
-    document.getElementById("titolo").innerHTML = id; 
+function apriEvento(id){
+    var page='event_prova.php?id='+id;
+    document.location.href=page;
+}
+
+function apriEvento1(id){
+    var page='php/event_prova.php?id='+id;
+    document.location.href=page;
 }
