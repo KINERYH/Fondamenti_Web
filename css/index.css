@@ -182,6 +182,7 @@ header button{
 /* ! ============= MAIN ============= */
 .main{
     margin:0px;
+    margin-bottom: 3em;
     background-image: url("../images/concerto.jpeg");
     height: 100vh;
     width: 100%;
