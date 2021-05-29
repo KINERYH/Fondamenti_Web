@@ -70,6 +70,20 @@ header{
     display:flex;
     align-items: center;
 }
+
+#ciaoIndex{
+border: #49e69f solid 3px;
+padding: 0.7em 0.7em;
+position: relative;
+right: 1em;
+}
+
+#ciao{
+    left: 0;
+    color: #6abb95;
+    font-size: 1.3em;
+}
+
 header .logo{
     margin: 10px 4em;
     background-color: #38d39f;

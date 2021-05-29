@@ -48,9 +48,8 @@ conferma_password.onkeyup = convalidaPassword;
 
 // =========== ALERT CON SWEETALERT ============= //
 
-
 // Alert per modifica password
-function changePasswordAlert() {
+function changePasswordAlert(old_password) {
     Swal.fire({
         title: "Modifica la Password",
         html: '<h1>Inserisci la password Attuale </h1><input type="password" id="old_pw" class="swal2-input" placeholder="Password Attuale">' +
@@ -61,16 +60,17 @@ function changePasswordAlert() {
         cancelButtonText: "Annulla",
         focusConfirm: false,
         preConfirm: () => {
-            // Per ora metto la vecchia password posta pari a "password" --> refactorizzare il codice quando colleghiamo il db
-            const old_password = 'password'
             // Prendo i valori inseriti nei campi ed eseguo dei controlli
             const old_pw = Swal.getPopup().querySelector('#old_pw').value
             const confirm_pw = Swal.getPopup().querySelector('#confirm_pw').value
             const new_pw = Swal.getPopup().querySelector('#new_pw').value
+            //Uso la libreria CryptoJS per criptare la password inserita
+            var old_crypto = CryptoJS.MD5(old_pw);
+
             // Per ora controllo solo se i campi sono vuoti, se le password nuove coincidono o se la password vecchia coincide
             if (!old_pw || !new_pw || !confirm_pw) {
                 Swal.showValidationMessage(`E' necessario riempire tutti i campi`)
-            } else if (old_pw != old_password){  // controllo se la password vecchia inserita è uguale a quella attuale
+            } else if (old_crypto != old_password){  // controllo se la password vecchia inserita è uguale a quella attuale
                 Swal.showValidationMessage(`La password attuale immessa non è corretta`)
             }else if (confirm_pw != new_pw) {   // controllo se la password nuova inserita è uguale al campo dove si conferma la password nuova
                 Swal.showValidationMessage(`Le due password immesse sono differenti`)
@@ -86,12 +86,13 @@ function changePasswordAlert() {
             icon: 'success',
         });
         }
-       
     })
 }
 
+
+
 // Alert per conferma eliminazione account
-function deleteAccountAlert(){
+function deleteAccountAlert(oldpassword){
     Swal.fire({
         title: 'Eliminazione account',
         text: "Sei veramente sicuro di voler eliminare l'account?",
@@ -114,9 +115,10 @@ function deleteAccountAlert(){
                 showDenyButton: true,
                 denyButtonText: 'Annulla',
                 denyButtonColor: 'gray',
-                preConfirm: (password) => {
-                    // Confronto a caso con password123 --> refactorizzare per eseguire il confronto con la pw nel db
-                    if(password != 'password123'){ // la passsword non è corretta
+                preConfirm: (password) => { //password che inserisco
+                    var old_crypto = CryptoJS.MD5(password);
+                    // Confronto con oldpassword del database
+                    if(old_crypto != oldpassword){ // la passsword non è corretta
                         Swal.showValidationMessage(`La password immessa non è corretta`)
                     }
                 }
@@ -193,6 +195,8 @@ function closeSlideMenu(){  //chiusura carrello
     document.getElementById('slcontent').style.marginRight = '0';
 }
 
+
+
 // ======== Modifica prezzo e numero biglietti in base ai click su + o - ======== //
 
 function riduci(prezzo){
@@ -240,4 +244,22 @@ function apriEvento(id){
 function apriEvento1(id){
     var page='php/event.php?id='+id;
     document.location.href=page;
+}
+
+
+
+function nascondoBtn(session){
+//Nascondo i link di login e signup se l'utente è loggato
+    if(session){
+        document.getElementById("login").style.display="none";
+        document.getElementById("SignUp").style.display="none";
+    }
+//Nascondo i bottoni del profilo e del carrello e la scritta "Ciao nome+cognome" se l'utente non è loggato
+    else{
+        document.getElementById("profile").style.display="none";
+        document.getElementById("carrello").style.display="none";
+        document.getElementById("ciao").style.display="none";
+        document.getElementById("ciaoIndex").style.display="none";
+    }
+    
 }
