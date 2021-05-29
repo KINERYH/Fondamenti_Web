@@ -94,7 +94,7 @@
     }
 
     // Recupero l'Id col metodo post, dopo aver selezionato l'evento dalla ricerca o dallo slider
-    $id = "3";
+    $id = $_GET['id'];
 
     //Query da eseguire
     $sql = "SELECT * FROM evento WHERE ID = '$id'";
@@ -156,9 +156,8 @@
                 <button><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
             </div>
         </div>
-
     </div>
-    
+
     <!-- ============= Descrizione ============= -->
 
     <div class="description">
@@ -180,17 +179,21 @@
         die("Connection failed: " . $conn->connect_error);
     }
     // Query da eseguire
-    $sql = "SELECT * FROM evento WHERE Categoria = '$category'";
+    $sql = "SELECT * FROM evento WHERE Categoria = '$category' AND ID <> '$id'";
     $result = $conn->query($sql);
-    $max = $result->num_rows;
+    while ($row = $result->fetch_assoc()) {
+        $eventi[] = $row;
+    }
+    shuffle($eventi);
     ?>
 
     <div class="ev_correlati">
-        <h1>Potrebbero interessarti anche questi eventi </h1>
+        <h1>Potrebbero interessarti anche questi eventi</h1>
         <div class="center">
-        <?php $row = $result->fetch_assoc(); $id = $row["ID"]; ?>
-            <div class="evento" onclick="provaMetodo(<?php echo $id ?>)">
-                <div class="blur_img" >
+            <?php $row = $eventi["0"];
+            $id = $row["ID"]; ?>
+            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
+                <div class="blur_img">
                     <img src="<?php echo $row["Img"] ?>" />
                     <img src="<?php echo $row["Img"] ?>" />
                     <span class="info">
@@ -204,10 +207,11 @@
                 </div>
                 <span class="title" id="titolo"><?php echo $row["Nome"] ?> </span>
             </div>
-            <?php $row = $result->fetch_assoc(); $id = $row["ID"]; ?>
-            <div class="evento" onclick="provaMetodo(<?php echo $id ?>)">
+            <?php $row = $eventi["1"];
+            $id = $row["ID"]; ?>
+            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
                 <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" /> 
+                    <img src="<?php echo $row["Img"] ?>" />
                     <img src="<?php echo $row["Img"] ?>" />
                     <span class="info">
                         <?php echo $row["Luogo"] ?>
@@ -220,10 +224,11 @@
                 </div>
                 <span class="title"><?php echo $row["Nome"] ?> </span>
             </div>
-            <?php $row = $result->fetch_assoc(); $id = $row["ID"]; ?>
-            <div class="evento" onclick="provaMetodo(<?php echo $id ?>)">
+            <?php $row = $eventi["2"];
+            $id = $row["ID"]; ?>
+            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
                 <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" /> 
+                    <img src="<?php echo $row["Img"] ?>" />
                     <img src="<?php echo $row["Img"] ?>" />
                     <span class="info">
                         <?php echo $row["Luogo"] ?>
@@ -236,8 +241,9 @@
                 </div>
                 <span class="title"><?php echo $row["Nome"] ?> </span>
             </div>
-            <?php $row = $result->fetch_assoc(); $id = $row["ID"]; ?>
-            <div class="evento" onclick="provaMetodo(<?php echo $id ?>)">
+            <?php $row = $eventi["3"];
+            $id = $row["ID"]; ?>
+            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
                 <div class="blur_img">
                     <img src="<?php echo $row["Img"] ?>" />
                     <img src="<?php echo $row["Img"] ?>" />
