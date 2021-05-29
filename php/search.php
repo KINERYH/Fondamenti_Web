@@ -9,8 +9,8 @@
     <!-- ============= RESET STYLE ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/search.css">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/search.css">
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
@@ -21,14 +21,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
     <!-- ============ Javascript =================-->
-    <script src="main.js"></script>
+    <script src="../main.js"></script>
 
 </head>
+<body>
     <!-- ============= HEADER ============= -->
     <header>
         <!-- logo -->
         <div class="logo">
-            <a href="index.php">
+            <a href="../index.php">
                 liveXperience
             </a>
         </div>
@@ -59,9 +60,66 @@
                     <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
                 </div>
             </li>
-
-
         </ul>
-
-
     </header>
+    <!-- ============= SLIDE SIDE CART ============= -->
+
+    <div id="slcontent">
+        <div id="menu" class="nav">
+            <h13>Carrello</h13>
+            <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i></a>
+            <input type="submit" class="btn" value="Acquista">
+        </div>
+    </div>
+
+    <!-- ============= RISULTATI DI RICERCA ============= -->
+    <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "livexperience";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $categoria = $_GET['Categoria'];
+        $sql = " SELECT * FROM evento WHERE Categoria = '$categoria' ";
+        $result = $conn->query($sql);
+        $eventi = "";
+        while ($row = $result->fetch_assoc()) {
+            $subDesc = substr($row["Descrizione"], 0, 150);
+            $eventi.="<div class=\"event\">
+            <div class=\"event-sx\">
+                <div class=\"img\">
+                <a href=\"event.php?id=".$row["ID"]."\"><img src=".$row["Img"]."/></a>
+                </div>
+                <div class=\"info\">
+                    <h2>".$row["Nome"]."</h1>
+                    <span>".$row["Luogo"]."</span>
+                    <span>".$row["Data"]."</span>
+                    <p>".$subDesc."... <a href=\"event.php?id=".$row["ID"]."\">scopri di più</a></p>
+                </div>
+            </div>
+                <div class=\"acquista\">
+                    <span>€ ".number_format($row["Prezzo"],2)."</span>
+                    <span>solo ".$row["Disp"]." biglietti rimasti</span>
+                    <a href=\"event.php?id=".$row["ID"]."\"><button>Vai all'evento <i class=\"fas fa-chevron-right\"></i></button></a>
+                </div>
+        </div>";
+        }
+
+    ?>
+    <div class="body-search">
+        <h3>I risultati di ricerca hanno prodotto: </h3>
+        <?php echo $eventi ?>
+    </div>
+    
+
+    
+
+
+</body>
+</html>
