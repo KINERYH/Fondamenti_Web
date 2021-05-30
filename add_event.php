@@ -123,7 +123,7 @@ if(isset($_SESSION['infoUtente'])){
                    </div>
                    <div class="div">
                            <h5>Descrizione</h5>
-                           <textarea class="input" style="resize: none; height:95px"></textarea>
+                           <textarea class="input" name="descrizione" style="resize: none; height:95px"></textarea>
                    </div>
                 </div>
            		
@@ -163,7 +163,7 @@ if(isset($_SESSION['infoUtente'])){
            		   </div>
            		   <div class="div">
                         <h5>Disponibilità</h5>
-           		    	<input type="number" name="disponibilita" max="9999" required class="input">
+           		    	<input type="number" name="disponibilita" max="999999" required class="input">
             	   </div>
             	</div>
                 

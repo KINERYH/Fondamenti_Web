@@ -16,7 +16,7 @@ $email = $_REQUEST['email'];
 $sql = "DELETE * FROM utente WHERE Mail = '$email'";
 $result = $conn->query($sql);
 
-header("Location: ../signup.html");
+header("Location: ../signup.php");
 
 
     $conn->close();

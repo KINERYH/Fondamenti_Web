@@ -153,7 +153,7 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
             	</div>
                 
                 <input type="submit" class="btn" value="SignUp">
-            	<a href="login.html">Hai già un account? Fai il login!</a>
+            	<a href="login.php">Hai già un account? Fai il login!</a>
             </form>
         </div>
     </div>

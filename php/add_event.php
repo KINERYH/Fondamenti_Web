@@ -23,7 +23,7 @@ $categoria = $_POST["format"];
 
 $sql = "INSERT INTO evento (Nome, Descrizione, Data, Prezzo, Luogo, Disp, Img, Categoria) VALUES ('$title', '$description', '$date', '$price', '$place', '$limitePosti', '0', '$categoria')";
 
-header("Location: ../add_event.html");
+header("Location: ../add_event.php");
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

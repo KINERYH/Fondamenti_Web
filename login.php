@@ -91,7 +91,7 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
                         </div>
                     </div>
                     <input type="submit" class="btn" value="Login" name="login">
-                    <a href="signup.html">Non hai un account? Clicca qui per crearne uno!</a>
+                    <a href="signup.php">Non hai un account? Clicca qui per crearne uno!</a>
                  </form>
             </div>
         </div>
