@@ -1,11 +1,12 @@
 <?php 
 session_start();
-if(!isset($_SESSION['infoUtente'])){
+if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     error_reporting(0);
 }else{
-    $info = $_SESSION["infoUtente"];
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -19,7 +20,7 @@ if(!isset($_SESSION['infoUtente'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->
     <link rel="stylesheet" href="../css/index.css">
-    <link rel="stylesheet" href="../css/event.css">
+    <link rel="stylesheet" href="../css/search.css">
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
@@ -31,12 +32,8 @@ if(!isset($_SESSION['infoUtente'])){
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
     <!-- ============ Javascript =================-->
     <script src="../main.js"></script>
-    <!-- ============ SweetAlert =================-->
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>     SWEETALERT1 ORIGINALE -->
-    <script src="../sweetalert2.all.min.js"></script>
 
 </head>
-
 <body>
     <!-- ============= HEADER ============= -->
     <header>
@@ -63,8 +60,7 @@ if(!isset($_SESSION['infoUtente'])){
             </form>
         </div>
         <!-- utility per il profilo + carrello-->
-          <!-- utility per il profilo + carrello-->
-          <ul class="profile">
+        <ul class="profile">
             <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
             <li><a href="../add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
             <li><a href="../login.php" id="login"> Log in </a></li>
@@ -77,12 +73,11 @@ if(!isset($_SESSION['infoUtente'])){
                 </div>
             </li>
         </ul>
-
-
     </header>
-    
+
+
     <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
-   
+
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
@@ -94,185 +89,50 @@ if(!isset($_SESSION['infoUtente'])){
         </div>
     </div>
 
+    <!-- ============= RISULTATI DI RICERCA ============= -->
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "livexperience";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Recupero l'Id col metodo post, dopo aver selezionato l'evento dalla ricerca o dallo slider
-    $id = $_GET['id'];
-
-    //Query da eseguire
-    $sql = "SELECT * FROM evento WHERE ID = '$id'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            $description = $row["Descrizione"];
-            $image_url = $row["Img"];
-            $price = $row["Prezzo"];
-            $title = $row["Nome"];
-            $place = $row["Luogo"];
-            $limitePosti = $row["Disp"];
-            $date = $row["Data"];
-            $category = $row["Categoria"];
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "livexperience";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
+        $categoria = $_GET['Categoria'];
+        $sql = " SELECT * FROM evento WHERE Categoria = '$categoria' ";
+        $result = $conn->query($sql);
+        $eventi = "";
+        while ($row = $result->fetch_assoc()) {
+            $subDesc = substr($row["Descrizione"], 0, 150);
+            $eventi.="<div class=\"event\">
+            <div class=\"event-sx\">
+                <div class=\"img\">
+                <a href=\"event.php?id=".$row["ID"]."\"><img src=".$row["Img"]."/></a>
+                </div>
+                <div class=\"info\">
+                    <h2>".$row["Nome"]."</h1>
+                    <span>".$row["Luogo"]."</span>
+                    <span>".$row["Data"]."</span>
+                    <p>".$subDesc."... <a href=\"event.php?id=".$row["ID"]."\">scopri di più</a></p>
+                </div>
+            </div>
+                <div class=\"acquista\">
+                    <span>€ ".number_format($row["Prezzo"],2)."</span>
+                    <span>solo ".$row["Disp"]." biglietti rimasti</span>
+                    <a href=\"event.php?id=".$row["ID"]."\"><button>Vai all'evento <i class=\"fas fa-chevron-right\"></i></button></a>
+                </div>
+        </div>";
+        }
+
     ?>
-
-
-    <!-- ============= PROVA BLUR ============= -->
-    <div class="bg_blur">
-        <img src="<?php echo $image_url ?>" />
+    <div class="body-search">
+        <h3>I risultati di ricerca hanno prodotto: </h3>
+        <?php echo $eventi ?>
     </div>
-    <div class="overlay">
-
-    </div>
-
-
-
-    <!-- ============= BODY EVENT ============= -->
-    <div class="main_event">
-        <div class="main_sx">
-            <img src="<?php echo $image_url ?>" />
-        </div>
-        <div class="main_dx">
-            <h1> <?php echo $title ?> </h1>
-            <span><?php echo $place ?></span>
-            <span><?php echo $date ?></span>
-            <br>
-            <span id="prezzo">€<?php echo number_format($price, 2) ?></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <br>
-            <div class=center>
-                <i class="fas fa-minus" onclick="riduci(<?php echo $price ?>)"></i>
-                <span id="numero_biglietti">1</span>
-                <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
-            </div>
-            <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
-            <div class="center">
-                <button><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============= Descrizione ============= -->
-
-    <div class="description">
-        <h1>Descrizione</h1>
-        <p> <?php echo $description ?> </p>
-    </div>
-
-    <!-- ============= Eventi correlati ============= -->
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "livexperience";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Query da eseguire
-    $sql = "SELECT * FROM evento WHERE Categoria = '$category' AND ID <> '$id'";
-    $result = $conn->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $eventi[] = $row;
-    }
-    shuffle($eventi);
-    ?>
-
-    <div class="ev_correlati">
-        <h1>Potrebbero interessarti anche questi eventi</h1>
-        <div class="center">
-            <?php $row = $eventi["0"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
-                </div>
-                <span class="title" id="titolo"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["1"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
-                </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["2"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
-                </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["3"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
-                </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- ============= FOOTER ============= -->
     <footer>
@@ -321,8 +181,8 @@ if(!isset($_SESSION['infoUtente'])){
     <div class="copyright">
         <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
     </div>
+    
 
 
 </body>
-
 </html>

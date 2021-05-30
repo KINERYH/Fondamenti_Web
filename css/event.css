@@ -91,7 +91,7 @@ body {
     transition: all .5s cubic-bezier(.215, .61, .355, 1);
 }
 .main_dx button:hover{
-    background: #20c77c;
+    background: #059654;
 }
 
 #avvisoPosti{

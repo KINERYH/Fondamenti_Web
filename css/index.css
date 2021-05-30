@@ -46,22 +46,34 @@ header{
     margin: 0px .2em;
     border-radius: .4em;
 }
-.profile li:nth-of-type(3) button{
+
+.profile li:nth-of-type(1) button{
+    padding: 1em;
+    background-color: #FFD700;
+    color: white;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
+}
+.profile li:nth-of-type(1) button:hover{
+    background-color: orange;
+}
+
+
+.profile li:nth-of-type(4) button{
     padding: 1em;
     border: 1px solid #4ad295;
     background:transparent;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
-.profile li:nth-of-type(3) button:hover{
+.profile li:nth-of-type(4) button:hover{
     background-color: #A5F1CE;
 }
-.profile li:nth-of-type(4) button{
+.profile li:nth-of-type(5) button{
     padding: 1em;
     background-color: #06B063;
     color: white;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
-.profile li:nth-of-type(4) button:hover{
+.profile li:nth-of-type(5) button:hover{
     background-color: #059e59;
 }
 
@@ -141,6 +153,53 @@ header button{
     cursor: pointer;
 }
 
+/* =============== RICERCA ==================*/
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+  }
+
+  .autocomplete input{
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .autocomplete input[type=text]{
+    background-color: #f1f1f1;
+    width: 100%;
+  }
+
+  .autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+  }
+  .autocomplete-items div {
+      position: fixed;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+  }
+  .autocomplete-items div:hover {
+    /*when hovering an item:*/
+    background-color: #e9e9e9;
+  }
+  .autocomplete-active {
+    /*when navigating through the items using the arrow keys:*/
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+  }
+
 /* ! ============= DROPDOWN ============= */
 
 .dropBtn {
@@ -196,6 +255,7 @@ header button{
 /* ! ============= MAIN ============= */
 .main{
     margin:0px;
+    margin-bottom: 3em;
     background-image: url("../images/concerto.jpeg");
     height: 100vh;
     width: 100%;
@@ -449,9 +509,11 @@ footer p{
 }
 
 @media screen and (max-width: 900px){
+    /*
     .img{
         display: none;
     }
+    */
     .container{
         grid-template-columns: 1fr;
     }

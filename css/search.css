@@ -1,0 +1,103 @@
+.body-search{
+    padding: 5em 0em;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    background:#A5F1CE;
+}
+.body-search h3{
+    padding: .6em 0em;
+    font-size: 1.3em;
+}
+.event{
+    margin: 1em;
+    width: 85vw;
+    padding: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    background: linear-gradient(135deg, #4AD294 5%, #A5F1CE); ;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.3);
+    border-radius: .2em;
+} 
+.event .event-sx{
+    display: flex;
+    align-items: center;
+    width: 80%;
+}
+.event .img{
+    width: 30%;
+    height: 100%;
+    border-radius: .2em;
+}
+.event .info{
+    width: 70%;
+    padding: 1em;
+}
+.event img{
+    width: 100%;
+    height: 100%;
+    border-radius: .2em;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0,0,0,.5);
+}
+.event .info *{
+    padding: .5em;
+}
+.event .info a{
+    padding: 0;
+}
+.event .info h1{
+    font-size: 5em;
+}
+.event .info span{
+    display: inline-block;
+}
+.event .acquista span:nth-of-type(1){
+    font-size: 1.5em;
+}
+
+.event .acquista span:nth-of-type(2){
+    display: block;
+    font-size: .9em;
+    padding: .5em 0em;
+    color: red;
+}
+.event .acquista button{
+    font-family: inherit;
+    background-color: #06B063;
+    padding: 1em;
+    color: white;
+    border-radius: .3em;
+    font-size: 1em;
+    transition: all 1s cubic-bezier(.215, .61, .355, 1);
+}
+.event .acquista button:hover{
+    background: #038d4f;
+}
+
+
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+    .body-search{
+        padding: 1em 2em;
+    }
+    .event{
+        flex-wrap: wrap;
+    }
+    .event .event-sx{
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .event .event-sx .img{
+        width: 100%;
+    }
+    .event .event-sx .info{
+        width: 100%;
+    }
+}

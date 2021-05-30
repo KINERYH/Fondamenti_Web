@@ -1,9 +1,9 @@
 <?php 
 session_start();
-if(!isset($_SESSION['infoUtente'])){
+if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     error_reporting(0);
 }else{
-    $info = $_SESSION["infoUtente"];
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
 }
 ?>
 
@@ -49,25 +49,27 @@ if(!isset($_SESSION['infoUtente'])){
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown_content">
-                    <a href="#">Concerti</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Teatro</a>
-                    <a href="#">Mostre e Musei</a>
+                    <a href="php/search.php?Categoria=Musica">Concerti</a>
+                    <a href="php/search.php?Categoria=Sport">Sport</a>
+                    <a href="php/search.php?Categoria=Teatro">Teatro</a>
+                    <a href="php/search.php?Categoria=Musei">Mostre e Musei</a>
                 </div>
             </div>
-            <form action="#">
-                <input type="text" placeholder="Cerca il tuo evento" name="search">
+            <form autocomplete="off" action="#">
+                <div class="autocomplete" style="width: 300px;">
+                    <input id="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
+                </div>
                 <button type="submit"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTA1Ljc0OSw0NzUuNTg3bC0xNDUuNi0xNDUuNmMyOC4yMDMtMzQuODM3LDQ1LjE4NC03OS4xMDQsNDUuMTg0LTEyNy4zMTdjMC0xMTEuNzQ0LTkwLjkyMy0yMDIuNjY3LTIwMi42NjctMjAyLjY2Nw0KCQkJUzAsOTAuOTI1LDAsMjAyLjY2OXM5MC45MjMsMjAyLjY2NywyMDIuNjY3LDIwMi42NjdjNDguMjEzLDAsOTIuNDgtMTYuOTgxLDEyNy4zMTctNDUuMTg0bDE0NS42LDE0NS42DQoJCQljNC4xNiw0LjE2LDkuNjIxLDYuMjUxLDE1LjA4Myw2LjI1MXMxMC45MjMtMi4wOTEsMTUuMDgzLTYuMjUxQzUxNC4wOTEsNDk3LjQxMSw1MTQuMDkxLDQ4My45MjgsNTA1Ljc0OSw0NzUuNTg3eg0KCQkJIE0yMDIuNjY3LDM2Mi42NjljLTg4LjIzNSwwLTE2MC03MS43NjUtMTYwLTE2MHM3MS43NjUtMTYwLDE2MC0xNjBzMTYwLDcxLjc2NSwxNjAsMTYwUzI5MC45MDEsMzYyLjY2OSwyMDIuNjY3LDM2Mi42Njl6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" height="13px" width="13px" /></button>
             </form>
         </div>
 
-        
-
         <!-- utility per il profilo + carrello-->
         <ul class="profile">
-            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
-            <li><a href="login.html" id="login"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
+           
+            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div> 
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>
+            <li><a href="login.php" id="login"> Log in </a></li>
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
             <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
             <!-- carrello -->
             <li>
@@ -77,10 +79,44 @@ if(!isset($_SESSION['infoUtente'])){
             </li>
         </ul>
 
+        <!-- ============ QUERY PER RECUPERARE I NOMI DEGLI EVENTI ======== -->
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "livexperience";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "SELECT Nome FROM evento";
+        $result = $conn->query($sql);
+        $max = $result->num_rows;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $eventi[] = $row;
+            }
+        }
+        // Salvo tutti i titoli dei concerti in un array
+        for ($i = 0; $i < $max; $i++) {
+            $titoli[$i] = $eventi[$i]["Nome"];
+        }
+        ?>
+
+        <!-- Script per eseguire la funzione (definita in main.js) per l'autocomplete -->
+        <script>
+            var titoli = <?php echo json_encode($titoli); ?>;
+            //var countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Anguilla", "Antigua &amp; Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia &amp; Herzegovina", "Botswana", "Brazil", "British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", "Central Arfrican Republic", "Chad", "Chile", "China", "Colombia", "Congo", "Cook Islands", "Costa Rica", "Cote D Ivoire", "Croatia", "Cuba", "Curacao", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Ethiopia", "Falkland Islands", "Faroe Islands", "Fiji", "Finland", "France", "French Polynesia", "French West Indies", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guam", "Guatemala", "Guernsey", "Guinea", "Guinea Bissau", "Guyana", "Haiti", "Honduras", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", "Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Macau", "Macedonia", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauro", "Nepal", "Netherlands", "Netherlands Antilles", "New Caledonia", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan", "Palau", "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", "Saint Pierre &amp; Miquelon", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea", "South Sudan", "Spain", "Sri Lanka", "St Kitts &amp; Nevis", "St Lucia", "St Vincent", "Sudan", "Suriname", "Swaziland", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor L'Este", "Togo", "Tonga", "Trinidad &amp; Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks &amp; Caicos", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States of America", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Virgin Islands (US)", "Yemen", "Zambia", "Zimbabwe"];
+            autocomplete(document.getElementById("search_bar"), titoli);
+        </script>
+
 
     </header>
     
-    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
+    <?php $valAdmin = $info["Admin"];?>
+    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente'])) ,  $valAdmin ?>)">
     
     <!-- ============= SLIDE SIDE CART ============= -->
 
@@ -107,30 +143,20 @@ if(!isset($_SESSION['infoUtente'])){
 
     <!-- ============= Query al DB per ottenere gli eventi ============= -->
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "livexperience";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Query da eseguire
+    // Query per eventi Musica
     $sql = "SELECT * FROM evento WHERE Categoria = 'Musica'";
     $musica = $conn->query($sql);
     while ($row = $musica->fetch_assoc()) {
-        $eventi_musica[] = $row;    
-    } 
+        $eventi_musica[] = $row;
+    }
     shuffle($eventi_musica);
 
     // Query da eseguire CAMBIARE CATEGORIAAAAAA
     $sql = "SELECT * FROM evento WHERE Categoria = 'Musica'";
     $sport = $conn->query($sql);
     while ($row = $sport->fetch_assoc()) {
-        $eventi_sport[] = $row;    
-    } 
+        $eventi_sport[] = $row;
+    }
     shuffle($eventi_sport);
     ?>
     <!-- ============= SLIDER ============= -->
@@ -356,7 +382,7 @@ if(!isset($_SESSION['infoUtente'])){
     <div class="slider">
         <h1 class="sub_title">Sport</h1>
         <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true }'>
-        <div class="carousel-cell">
+            <div class="carousel-cell">
                 <div class="carousel-cell__content">
                     <?php $row = $eventi_sport["0"];
                     $id = $row["ID"]; ?>

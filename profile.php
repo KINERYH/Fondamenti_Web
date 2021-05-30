@@ -2,9 +2,8 @@
 session_start();
 $info = $_SESSION["infoUtente"];
 
-//Se l'utente non è loggato, viene indirizzato al login
 if(!isset($_SESSION['infoUtente'])){
-    header("location:login.html");
+    header("location:login.php");  //Se non si è loggati, se cerco di andare in profile, vengo reinderizzato in login
 }
 ?>
 
@@ -68,8 +67,10 @@ if(!isset($_SESSION['infoUtente'])){
             </form>
         </div>
         <ul class="profile">
-            <li><a href="login.html" id="login"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
+            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
+            <li><a href="login.php" id="login"> Log in </a></li>
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
             <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
             <!-- carrello -->
             <li>

@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+    error_reporting(0);
+}else{
+    header("location:index.php"); //Se si è loggati, se cerco di andare in login, vengo reinderizzato nella home
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -46,8 +55,8 @@
             </form>
         </div>
         <ul class="profile">
-            <li><a href="login.html"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
+            <li><a href="login.php"> Log in </a></li>
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
         </ul>
     </header>
     
