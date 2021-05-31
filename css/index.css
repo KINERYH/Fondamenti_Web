@@ -52,22 +52,34 @@ header{
     margin: 0px .2em;
     border-radius: .4em;
 }
-.profile li:nth-of-type(3) button{
+
+.profile li:nth-of-type(1) button{
+    padding: 1em;
+    background-color: #FFD700;
+    color: white;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
+}
+.profile li:nth-of-type(1) button:hover{
+    background-color: orange;
+}
+
+
+.profile li:nth-of-type(4) button{
     padding: 1em;
     border: 1px solid #4ad295;
     background:transparent;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
-.profile li:nth-of-type(3) button:hover{
+.profile li:nth-of-type(4) button:hover{
     background-color: #A5F1CE;
 }
-.profile li:nth-of-type(4) button{
+.profile li:nth-of-type(5) button{
     padding: 1em;
     background-color: #06B063;
     color: white;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
 }
-.profile li:nth-of-type(4) button:hover{
+.profile li:nth-of-type(5) button:hover{
     background-color: #059e59;
 }
 
@@ -76,6 +88,20 @@ header{
     display:flex;
     align-items: center;
 }
+
+#ciaoIndex{
+border: #49e69f solid 3px;
+padding: 0.7em 0.7em;
+position: relative;
+right: 1em;
+}
+
+#ciao{
+    left: 0;
+    color: #6abb95;
+    font-size: 1.3em;
+}
+
 .logo{
     margin: 1em 4em;
     background-color: #38d39f;
@@ -687,12 +713,6 @@ header .hamburger {
     cursor: pointer;
     transition: .5s;
 }
-
-
-
-
-
-
 
 
 

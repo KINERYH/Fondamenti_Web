@@ -1,13 +1,15 @@
-// =========== Focus - Blur nel login e signup ============ //
+// ===== FOCUS - BLUR NEL LOGIN & SIGNUP =====
 
-// prende tutti gli elemnti di classe input
+// Prende tutti gli elementi di classe input
 const inputs = document.querySelectorAll('.input');
 
+// Aggiungo effetto al click degli elementi di login e signup
 function focusFunc() {
     let parent = this.parentNode.parentNode;
     parent.classList.add('focus');
 }
 
+// Elimino effetto al click di un diverso elemento
 function blurFunc() {
     let parent = this.parentNode.parentNode;
     if (this.value == "") {
@@ -16,17 +18,21 @@ function blurFunc() {
 
 }
 
-// metto in ascolto gli input 
+// Metto in ascolto gli input 
 inputs.forEach(input => {
     input.addEventListener('focus', focusFunc);
     input.addEventListener('blur', blurFunc);
 });
 
 
-// Conferma Password
 
+
+// ===== CONFERMA PASSWORD =====
+
+// Prendo gli ID di 'password' e 'conferma_password'
 var password = document.getElementById("password"), conferma_password = document.getElementById("conferma_password");
 
+// Se le 2 password non corrispondono viene mostrato il messaggio di errore
 function convalidaPassword() {
     if (password.value != conferma_password.value) {
         conferma_password.setCustomValidity("Le password non corrispondono");
@@ -35,11 +41,12 @@ function convalidaPassword() {
     }
 }
 
+// Uso onchange e onkeyup per memorizzare temporaneamente i valori di 'password' e 'conferma_password' alla pressione dei loro input. 
 password.onchange = convalidaPassword;
 conferma_password.onkeyup = convalidaPassword;
 
 // Alert per modifica password
-function changePasswordAlert() {
+function changePasswordAlert(old_password) {
     Swal.fire({
         title: "Modifica la Password",
         html: '<h1>Inserisci la password Attuale </h1><input type="password" id="old_pw" class="swal2-input" placeholder="Password Attuale">' +
@@ -50,16 +57,17 @@ function changePasswordAlert() {
         cancelButtonText: "Annulla",
         focusConfirm: false,
         preConfirm: () => {
-            // Per ora metto la vecchia password posta pari a "password" --> refactorizzare il codice quando colleghiamo il db
-            const old_password = 'password'
             // Prendo i valori inseriti nei campi ed eseguo dei controlli
             const old_pw = Swal.getPopup().querySelector('#old_pw').value
             const confirm_pw = Swal.getPopup().querySelector('#confirm_pw').value
             const new_pw = Swal.getPopup().querySelector('#new_pw').value
+            //Uso la libreria CryptoJS per criptare la password inserita
+            var old_crypto = CryptoJS.MD5(old_pw);
+
             // Per ora controllo solo se i campi sono vuoti, se le password nuove coincidono o se la password vecchia coincide
             if (!old_pw || !new_pw || !confirm_pw) {
                 Swal.showValidationMessage(`E' necessario riempire tutti i campi`)
-            } else if (old_pw != old_password){  // controllo se la password vecchia inserita è uguale a quella attuale
+            } else if (old_crypto != old_password){  // controllo se la password vecchia inserita è uguale a quella attuale
                 Swal.showValidationMessage(`La password attuale immessa non è corretta`)
             }else if (confirm_pw != new_pw) {   // controllo se la password nuova inserita è uguale al campo dove si conferma la password nuova
                 Swal.showValidationMessage(`Le due password immesse sono differenti`)
@@ -75,12 +83,13 @@ function changePasswordAlert() {
             icon: 'success',
         });
         }
-       
     })
 }
 
+
+
 // Alert per conferma eliminazione account
-function deleteAccountAlert(){
+function deleteAccountAlert(oldpassword){
     Swal.fire({
         title: 'Eliminazione account',
         text: "Sei veramente sicuro di voler eliminare l'account?",
@@ -103,9 +112,10 @@ function deleteAccountAlert(){
                 showDenyButton: true,
                 denyButtonText: 'Annulla',
                 denyButtonColor: 'gray',
-                preConfirm: (password) => {
-                    // Confronto a caso con password123 --> refactorizzare per eseguire il confronto con la pw nel db
-                    if(password != 'password123'){ // la passsword non è corretta
+                preConfirm: (password) => { //password che inserisco
+                    var old_crypto = CryptoJS.MD5(password);
+                    // Confronto con oldpassword del database
+                    if(old_crypto != oldpassword){ // la passsword non è corretta
                         Swal.showValidationMessage(`La password immessa non è corretta`)
                     }
                 }
@@ -170,9 +180,10 @@ function arrowActive(arrowId) {
 
 
 
-// ======== Slide MENU Carrello ========= //
+// ===== SLIDE MENU CARRELLO ======
 
-function openSlideMenu(){  //apertura carrello
+// Imposto larghezza del menu del carrello al click del bottone
+function openSlideMenu(){
     document.getElementById('menu').style.width = '400px';
     document.getElementById('slcontent').style.marginRight = '400px';
     var overlay = document.createElement('div');
@@ -205,6 +216,8 @@ function closeLeftMenu(){  //chiusura carrello
             document.getElementById('overlay-cart').remove();
         },1000);
 }
+
+
 
 // ======== Modifica prezzo e numero biglietti in base ai click su + o - ======== //
 
@@ -264,4 +277,25 @@ function add_to_cart(id){
     var event = document.getElementsByClassName("cart-event")[0];
     var event2 = event.cloneNode(true);
     document.getElementById("cart-events").appendChild(event2);
+}
+
+/* ====== CONTROLLI SESSIONE E LOGIN ====== */
+function nascondoBtn(session, valAdmin){
+//Nascondo i link di login e signup se l'utente è loggato
+    if(session){
+        if(valAdmin == 0){
+            document.getElementById("add_event").style.display="none";
+        }
+        document.getElementById("login").style.display="none";
+        document.getElementById("SignUp").style.display="none";
+    }
+//Nascondo i bottoni del profilo e del carrello e la scritta "Ciao nome+cognome" se l'utente non è loggato
+    else{
+        document.getElementById("profile").style.display="none";
+        document.getElementById("carrello").style.display="none";
+        document.getElementById("ciao").style.display="none";
+        document.getElementById("ciaoIndex").style.display="none";
+        document.getElementById("add_event").style.display="none";
+    }
+    
 }

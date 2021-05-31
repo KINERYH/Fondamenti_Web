@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+    error_reporting(0);
+}else{
+    header("location:index.php"); //Se si è loggati, se cerco di andare in login, vengo reinderizzato nella home
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -46,10 +55,11 @@
             </form>
         </div>
         <ul class="profile">
-            <li><a href="login.html"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
+            <li><a href="login.php"> Log in </a></li>
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
         </ul>
     </header>
+    
 
     <div id="body-login">
         <img class="onda" src="images/wave.png">
@@ -80,8 +90,8 @@
                             <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" class="input">
                         </div>
                     </div>
-                    <input type="submit" class="btn" value="Login">
-                    <a href="signup.html">Non hai un account? Clicca qui per crearne uno!</a>
+                    <input type="submit" class="btn" value="Login" name="login">
+                    <a href="signup.php">Non hai un account? Clicca qui per crearne uno!</a>
                  </form>
             </div>
         </div>
@@ -91,44 +101,41 @@
 
 
 
-
-    <!-- ============= FOOTER ============= -->
-    <footer>
-        <div class="container">
-            <div class="sec aboutus">
-                <h8>About Us</h8>
-                <p>LiveXperience è specializzato nella vendita di biglietti <br>
-                    per eventi di musica, cultura e sport, <br>
-                    rivolto a qualsiasi tipo di utente che vuole vivere le emozioni <br>
-                    di partecipare a un evento pubblico acquistando il proprio biglietto <br>
-                    in modo facile e sicuro.</p>
-            </div>
-            <div class="sec link">
-                <h8>Link Utili</h8>
-                <ul>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Informative Cookie</a></li>
-                </ul>
-            </div>
-            <div class="sec contatti">
-                <h8>Contatti</h8>
-                <ul class="info">
-                    <li>
-                        <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
-                        <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
-                    </li>
-                    <li>
-                        <span><i class="fas fa-phone" aria-hidden="true"></i></span>
-                        <p><a href="tel:080612224">080 612 224</a><br>
-                            <a href="tel:332622778">+39 332 622 778</a>
-                        </p>
-                    </li>
-                    <li>
-                        <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
-                        <p> PIVA: 12345678910</p>
-                    </li>
-                </ul>
-            </div>
+<!-- ============= FOOTER ============= -->
+<footer>
+    <div class="container">
+        <div class="sec aboutus">
+            <h8>About Us</h8>
+            <p>LiveXperience è specializzato nella vendita di biglietti <br>
+                per eventi di musica, cultura e sport, <br>
+                rivolto a qualsiasi tipo di utente che vuole vivere le emozioni  <br>
+                di partecipare a un evento pubblico acquistando il proprio biglietto <br>
+                in modo facile e sicuro.</p>
+        </div>
+        <div class="sec link">
+            <h8>Link Utili</h8>
+            <ul>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Informative Cookie</a></li>
+            </ul>
+        </div>
+        <div class="sec contatti">
+            <h8>Contatti</h8>
+            <ul class="info">
+                <li>
+                    <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                    <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                </li> 
+                <li>
+                    <span><i class="fas fa-phone" aria-hidden="true"></i></span>
+                    <p><a href="tel:080612224">080 612 224</a><br>
+                     <a href="tel:332622778">+39 332 622 778</a></p>
+                </li>
+                <li>
+                    <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
+                    <p> PIVA: 12345678910</p>
+                </li>
+            </ul>
         </div>
 
     </footer>

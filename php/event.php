@@ -1,3 +1,12 @@
+<?php 
+session_start();
+if(!isset($_SESSION['infoUtente'])){
+    error_reporting(0);
+}else{
+    $info = $_SESSION["infoUtente"];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -57,22 +66,26 @@
             </form>
         </div>
         <!-- utility per il profilo + carrello-->
-        <ul class="profile">
-            <li><a href="../login.html"> Log in </a></li>
-            <li><a href="../signup.html" id="SignUp"> Sign Up </a></li>
-            <li><a href="../profile.html"><button><i class="fas fa-user"></i></button></a></li>
+          <!-- utility per il profilo + carrello-->
+          <ul class="profile">
+            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+            <li><a href="../add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
+            <li><a href="../login.php" id="login"> Log in </a></li>
+            <li><a href="../signup.php" id="SignUp"> Sign Up </a></li>
+            <li><a href="../profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
             <!-- carrello -->
             <li>
-                <div class="slide">
+                <div class="slide" id="carrello">
                     <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
                 </div>
             </li>
-
-
         </ul>
 
 
     </header>
+    
+    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
+   
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">

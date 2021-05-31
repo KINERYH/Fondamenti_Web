@@ -1,0 +1,296 @@
+/* ! ============= BASE STYLE ============= */
+*:focus{
+    border:none;
+    outline-offset: 0px;
+    outline: none;
+}
+*,
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+a{text-decoration: none;}
+body{
+    background:white;
+    margin:0px;
+    font-family: 'Rubik', sans-serif;
+    text-decoration: none;
+}
+h1,h2{font-family: 'Righteous';}
+header form{
+    display: flex;
+    box-sizing: border-box;
+}
+button{
+    border: none;
+    outline: none;
+}
+/* ! ============= HEADER ============= */
+header{
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index:10;
+    box-shadow: 0px 0px 16px 0px rgb(0,0,0,.5);
+}
+
+.profile button{
+    margin: 0px .2em;
+    border-radius: .4em;
+}
+.profile li:nth-of-type(3) button{
+    padding: 1em;
+    background-color: #005aff;
+}
+.profile li:nth-of-type(4) button{
+    padding: 1em 1.5em;
+    background-image: linear-gradient(to left, #f8a000, #ffa500);
+}
+.profile li {display: inline;}
+.profile{
+    display:flex;
+    align-items: center;
+}
+header .logo{
+    margin: 10px 4em;
+    background-color: #38d39f;
+    font-weight: 600;
+    font-size: 1.2em;
+    padding: .5em;
+}
+header .logo a{
+    color: white;
+}
+header ul a{
+    color: black;
+    padding: 5px;
+}
+header ul li{
+    transition: .3s;
+}
+header ul li:nth-of-type(1):hover,
+header ul li:nth-of-type(2):hover{
+    transform: scale(1.05);
+}
+#SignUp{
+    color:#e73c7e;
+}
+header .search-container{
+    margin: .5em 0em;
+    display:flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+header input[type=text]{
+    border-radius: 3px;
+    font-size:14px;
+    padding: 11px;
+    border: none;  
+    width: 25em;
+    background-color: #eff3f6;  
+}
+header ul{
+    margin: 10px 2em;
+}
+header button[type=submit]{
+    margin-left:.3em;
+    padding:1em;
+    border-radius: 3px;
+    border: none;
+    background-color: #4ad295;
+    cursor: pointer;
+    transition: .5s;
+}
+header button[type=submit]:hover{
+    background-color: #24b372;
+}
+
+/* ! ============= DROPDOWN ============= */
+
+.dropBtn {
+    background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+    border-radius: 3px;
+    color: black;
+    padding: .9em;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    transition: .5s;
+    background-size: 200%;
+}
+
+.dropdown {
+    position: relative; 
+    margin: 0em .5em;
+    overflow: hidden;   
+}
+
+.dropdown_content {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 11;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: .3em;
+}
+
+.dropdown_content a {
+    float : none;
+    color: black;
+    z-index: 1;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-radius: .3em;
+}
+  
+.dropdown_content a:hover {
+    background-color: #f1f1f1
+}
+
+.dropdown:hover .dropdown_content {
+    display: block;
+}
+
+.dropdown:hover .dropBtn {
+    background-position: right;
+}
+
+/* === GRAZIE ===*/
+
+.grmain{
+    width: 100%;
+    height: 100%;
+    /* metto il contenuto in 2 righe */
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 0;
+    padding: 8% 2%;
+}
+
+.grmain h13{
+    font-size: 30px;
+    margin-bottom: 30px;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.grmain .sendemail{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+
+
+/* ! ============= FOOTER ============= */
+
+footer{
+    position: relative;
+    width: 100%;
+    padding: 50px 100px 20px; 
+    background: #111;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer .container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+footer .container .sec{
+    margin-right: 30px;
+}
+footer .container .sec.aboutus{
+    width: 40%;
+}
+footer .container h8{
+    position: relative;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+/*linea rossa*/
+footer .container h8:before{
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: red;
+}
+footer p{
+    color: #999;
+    margin-top: 15px;
+}
+
+.link{
+    position: relative;
+    width: 25%;
+}
+
+.link ul li{
+    list-style: none;
+}
+
+.link a{
+    margin-top: 15px;
+    color: #999;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.link a:hover{
+    color: white;
+}
+.contatti{
+    width: calc(35% - 60px);
+    margin-right: 0 !important;
+}
+.contatti .info{
+    position: relative;
+}
+.contatti .info li{
+    display: flex;
+    margin-bottom: 16px;
+}
+.contatti .info li i{
+    color: #999;
+    font-size: 17px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.contatti .info li a{
+    color: #999;
+    font-size: 17px;
+    margin-right: 10px;
+    margin-top: 15px;
+}
+
+.contatti .info li a:hover{
+    color: white;
+}
+
+.copyright{
+    width: 100%;
+    background-color: #181818;
+    text-align: center;
+    padding: 8px 100px;
+    color: #999;
+}
+
+/* === FINE FOOTER === */

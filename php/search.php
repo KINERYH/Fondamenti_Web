@@ -1,3 +1,13 @@
+<?php 
+session_start();
+if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+    error_reporting(0);
+}else{
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -54,17 +64,23 @@
         </div>
         <!-- utility per il profilo + carrello-->
         <ul class="profile">
-            <li><a href="login.html"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
-            <li><a href="profile.html"><button><i class="fas fa-user"></i></button></a></li>
+            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+            <li><a href="../add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
+            <li><a href="../login.php" id="login"> Log in </a></li>
+            <li><a href="../signup.php" id="SignUp"> Sign Up </a></li>
+            <li><a href="../profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
             <!-- carrello -->
             <li>
-                <div class="slide">
+                <div class="slide" id="carrello">
                     <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
                 </div>
             </li>
         </ul>
     </header>
+
+
+    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
+
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
@@ -140,8 +156,54 @@
         <?php echo $eventi ?>
     </div>
 
+    <!-- ============= FOOTER ============= -->
+    <footer>
+        <div class="container">
+            <!-- about us -->
+            <div class="sec aboutus">
+                <h8>About Us</h8>
+                <p>LiveXperience è specializzato nella vendita di biglietti <br>
+                    per eventi di musica, cultura e sport, <br>
+                    rivolto a qualsiasi tipo di utente che vuole vivere le emozioni <br>
+                    di partecipare a un evento pubblico acquistando il proprio biglietto <br>
+                    in modo facile e sicuro.</p>
+            </div>
+            <!-- link utili -->
+            <div class="sec link">
+                <h8>Link Utili</h8>
+                <ul>
+                    <li><a href="https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018">Privacy</a></li>
+                    <li><a href="#">Informative Cookie</a></li>
+                </ul>
+            </div>
+            <!-- contatti -->
+            <div class="sec contatti">
+                <h8>Contatti</h8>
+                <ul class="info">
+                    <li>
+                        <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                        <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-phone" aria-hidden="true"></i></span>
+                        <p><a href="tel:080612224">080 612 224</a><br>
+                            <a href="tel:332622778">+39 332 622 778</a>
+                        </p>
+                    </li>
+                    <li>
+                        <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
+                        <p> PIVA: 12345678910</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-
+    </footer>
+    <!-- ========= COPYRIGHT ========= -->
+    <div class="copyright">
+        <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
+    </div>
+    
 
 
 </body>

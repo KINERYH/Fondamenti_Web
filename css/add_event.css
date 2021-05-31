@@ -1,0 +1,66 @@
+#body-addevent .container{
+    width: 100vw;
+    height: 100vh;
+    /* metto il contenuto in 2 colonne */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 7rem;
+    padding: 5% 2%;
+}
+
+.addevent-form{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+select{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0!important;
+    background: white;
+    background-image: none;
+    flex: 1;
+    padding: 0 .5em;
+    color: rgb(121, 107, 107);
+    cursor: pointer;
+    font-size: 1em;
+}
+
+select::-ms-expand{
+    display: none;
+}
+
+.select{
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 3em;
+    line-height: 3;
+    background: white;
+    overflow: hidden;
+    border-radius: .25em;
+}
+
+/*Triangolo*/
+.select:after{
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    background: white;
+    cursor: pointer;
+    pointer-events: none;
+    transition: .25s all ease;
+}
+
+.select:hover:after{
+    color: #38d39f;
+}
+
+

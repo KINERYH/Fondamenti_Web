@@ -1,3 +1,18 @@
+<?php 
+session_start();
+$info = $_SESSION["infoUtente"];
+if(isset($_SESSION['infoUtente'])){
+    if($info["Admin"] == 0){
+        header("location:index.php");  //Se si è loggati, ma non si è Admin, e cerco di andare in add_event vengo reinderizzato in index
+    }
+}else{
+    header("location:login.php");  //Se si è loggati, ma non si è Admin, e cerco di andare in add_event vengo reinderizzato in index
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="it">
 
@@ -12,6 +27,7 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="css/add_event.css">
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
@@ -48,103 +64,126 @@
                         height="13px" width="13px" /></button>
             </form>
         </div>
+        <!-- utility per il profilo + carrello-->
         <ul class="profile">
-            <li><a href="login.html"> Log in </a></li>
-            <li><a href="signup.html" id="SignUp"> Sign Up </a></li>
+            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
+            <li><a href="login.php" id="login"> Log in </a></li>
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
+            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
+            <!-- carrello -->
+            <li>
+                <div class="slide" id="carrello">
+                    <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+            </li>
         </ul>
     </header>
 
 
-<div id="body-signup">
+    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
+    
+    <!-- ============= SLIDE SIDE CART ============= -->
+
+    <div id="slcontent">
+        <div id="menu" class="nav">
+            <h13>Carrello</h13>
+            <a href="#" class="close" onclick="closeSlideMenu()">
+                <i class="fas fa-times"></i></a>
+            <input type="submit" class="btn" value="Acquista">
+        </div>
+    </div>
+
+
+<div id="body-addevent">
     <img class="onda" src="images/wave.png">
 	<div class="container">
 		<div class="img">
-			<img src="images/imReg2.svg">
+			<img src="images/add_event.svg">
 		</div>
-		<div class="signup-form">
-			<form action="php/signup.php" method="POST">
-				<img class="avatar" src="images/avatar.svg">
-				<h2 class="title">Registrati!</h2>
+		<div class="addevent-form">
+			<form action="php/add_event.php" method="POST">
+				<h2 class="title">Inserisci evento</h2>
 
                 <div class="input-div nome">
                     <!-- i = icone -->
                    <div class="i">
-                           <i class="fas fa-user"></i>
+                           <i class="fas fa-pencil-alt"></i>
                    </div>
                    <div class="div">
                            <h5>Nome</h5>
-                           <input type="text" name="nome" pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required class="input">
+                           <input type="text" name="nome" required class="input">
                    </div>
                 </div>
 
-                <div class="input-div cognome">
+                <div class="input-div descrizione" style="height:100px">
                     <!-- i = icone -->
                    <div class="i">
-                           <i class="fas fa-user"></i>
+                           <i class="fas fa-bars"></i>
                    </div>
                    <div class="div">
-                           <h5>Cognome</h5>
-                           <input type="text" name="cognome"pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required  class="input">
+                           <h5>Descrizione</h5>
+                           <textarea class="input" name="descrizione" style="resize: none; height:95px"></textarea>
                    </div>
                 </div>
            		
-                <div class="input-div email">
+                <div class="input-div data">
                        <!-- i = icone -->
            		   <div class="i">
-           		   		<i class="fas fa-envelope"></i>
+           		   		<i class="fas fa-calendar"></i>
            		   </div>
            		   <div class="div">
-           		   		<h5>Email</h5>
-           		   		<input type="email" name="email" required class="input">
+           		   		<input type="date" name="data" required class="input">
            		   </div>
            		</div>
            		
-                   <div class="input-div password">
+                   <div class="input-div prezzo">
            		   <div class="i"> 
-           		    	<i class="fas fa-lock"></i>
+           		    	<i class="fas fa-euro-sign"></i>
            		   </div>
            		   <div class="div">
-           		    	<h5>Password</h5>
-           		    	<input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="password" class="input">
+           		    	<h5>Prezzo</h5>
+           		    	<input type="number" name="prezzo" max="9999" required class="input">
             	   </div>
             	</div>
              
-                <div class="input-div ripeti-password">
+                <div class="input-div luogo">
            		   <div class="i"> 
-           		    	<i class="fas fa-lock"></i>
+           		    	<i class="fas fa-map-marked-alt"></i>
            		   </div>
            		   <div class="div">
-           		    	<h5>Conferma Password</h5>
-           		    	<input type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"  title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" id="conferma_password" class="input">
+           		    	<h5>Luogo</h5>
+           		    	<input type="text" name="luogo" class="input">
             	   </div>
             	</div>
                 
-                <div class="input-div data-nascita">
+                <div class="input-div disponibilita">
            		   <div class="i"> 
-           		    	<i class="fas fa-calendar-alt"></i>
+           		    	<i class="fas fa-ticket-alt"></i>
            		   </div>
            		   <div class="div">
-           		    	<input type="date" name="date" required class="input">
+                        <h5>Disponibilità</h5>
+           		    	<input type="number" name="disponibilita" max="999999" required class="input">
             	   </div>
             	</div>
                 
-                <div class="genere">
-                    
-                    <h6>Seleziona il tuo genere</h6>
+                
+                <div class="select">
+                    <select name="format" id="format" required>
+                        <option selected disabled>Scegli una categoria</option>
+                        <option name="cat" value="Musica">Concerti</option>
+                        <option name="cat" value="Sport">Sport</option>
+                        <option name="cat" value="Teatro">Teatro</option>
+                        <option name="cat" value="Mostre_e_Musei">Mostre e Musei</option>
+                    </select>
+                </div>
 
-                    <input type="radio" value="M" id="uomo" name="gen"
-                     checked="checked">
-                    <label for="uomo">Uomo</label><br>
-                    
-                    <input type="radio" value="F" id="donna" name="gen">
-                    <label for="donna">Donna</label><br>
-                    
-                    <input type="radio" value="ND" id="neutro" name="gen">
-                    <label for="neutro">Preferisco non rispondere</label><br>
-            	</div>
+                    <input type="submit" class="btn" value="Inserisci">
+            </div>
+        </div>
+    </div>
                 
-                <input type="submit" class="btn" value="SignUp">
-            	<a href="login.html">Hai già un account? Fai il login!</a>
+                
             </form>
         </div>
     </div>
