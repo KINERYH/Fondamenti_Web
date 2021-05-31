@@ -31,6 +31,9 @@
 <body>
     <!-- ============= HEADER ============= -->
     <header>
+        <div class="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
         <!-- logo -->
         <div class="logo">
             <a href="../index.php">
@@ -76,8 +79,54 @@
         <div id="menu" class="nav">
             <h13>Carrello</h13>
             <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i></a>
-            <input type="submit" class="btn" value="Acquista">
+                <i class="fas fa-times"></i>
+            </a>
+            <div id="cart-events">
+            <div class="cart-event">
+                <div class="img">
+                    <img src="../images/concerto.jpeg" alt="">
+                </div>
+                <div class="dx">
+                    <div class="info">
+                        <span>Titolo</span>
+                        <br>
+                        <span>Data</span> <span>15/18/50</span>
+                    </div>
+                    <div class="prezzo">
+                        <span>
+                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
+                            <span id="numero_biglietti_cart">1</span>
+                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+                        </span>
+                        <span>€58,60</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cart-event">
+                <div class="img">
+                    <img src="../images/concerto.jpeg" alt="">
+                </div>
+                <div class="dx">
+                    <div class="info">
+                        <span>Titolo</span>
+                        <br>
+                        <span>Data</span> <span>15/18/50</span>
+                    </div>
+                    <div class="prezzo">
+                        <span>
+                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
+                            <span id="numero_biglietti_cart">1</span>
+                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+                        </span>
+                        <span>€58,60</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="center">
+                <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
+            </div>
         </div>
     </div>
 
@@ -153,7 +202,7 @@
             </div>
             <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
             <div class="center">
-                <button><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
+                <button onclick="add_to_cart(<?php echo $id ?>)"><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
             </div>
         </div>
     </div>

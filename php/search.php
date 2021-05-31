@@ -14,6 +14,8 @@
     <!-- ============= Google Font ============= -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Rubik&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap" rel="stylesheet">
     <!-- ============= Slider ============= -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.pkgd.min.js" integrity="sha512-cA8gcgtYJ+JYqUe+j2JXl6J3jbamcMQfPe0JOmQGDescd+zqXwwgneDzniOd3k8PcO7EtTW6jA7L4Bhx03SXoA==" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.min.css" integrity="sha512-BiFZ6oflftBIwm6lYCQtQ5DIRQ6tm02svznor2GYQOfAlT3pnVJ10xCrU3XuXnUrWQ4EG8GKxntXnYEdKY0Ugg==" crossorigin="anonymous" />
@@ -24,6 +26,7 @@
     <script src="../main.js"></script>
 
 </head>
+
 <body>
     <!-- ============= HEADER ============= -->
     <header>
@@ -69,57 +72,78 @@
             <h13>Carrello</h13>
             <a href="#" class="close" onclick="closeSlideMenu()">
                 <i class="fas fa-times"></i></a>
-            <input type="submit" class="btn" value="Acquista">
+            <button type="submit" class="btn"><i class="fas fa-lock"></i> Acquista</button>
+            
         </div>
     </div>
 
     <!-- ============= RISULTATI DI RICERCA ============= -->
     <?php
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "livexperience";
-        // Create connection
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "livexperience";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $isCategoria;
+    if (!(is_null(@$_GET['Categoria']))) {
         $categoria = $_GET['Categoria'];
         $sql = " SELECT * FROM evento WHERE Categoria = '$categoria' ";
         $result = $conn->query($sql);
-        $eventi = "";
-        while ($row = $result->fetch_assoc()) {
-            $subDesc = substr($row["Descrizione"], 0, 150);
-            $eventi.="<div class=\"event\">
+        $isCategoria = true;
+    }
+    
+    if (!(is_null(@$_GET['search_bar']))) {
+        $search = $_GET['search_bar'];
+        $sql = "SELECT * FROM evento WHERE Nome LIKE '%$search%' OR Luogo LIKE '%$search%' ";
+        $result = $conn->query($sql);
+        $isCategoria = false;
+    }
+    
+
+    $eventi = "";
+    while ($row = $result->fetch_assoc()) {
+        $subDesc = substr($row["Descrizione"], 0, 150);
+        $eventi .= "<div class=\"event\">
             <div class=\"event-sx\">
                 <div class=\"img\">
-                <a href=\"event.php?id=".$row["ID"]."\"><img src=".$row["Img"]."/></a>
+                <a href=\"event.php?id=" . $row["ID"] . "\"><img src=" . $row["Img"] . "/></a>
                 </div>
                 <div class=\"info\">
-                    <h2>".$row["Nome"]."</h1>
-                    <span>".$row["Luogo"]."</span>
-                    <span>".$row["Data"]."</span>
-                    <p>".$subDesc."... <a href=\"event.php?id=".$row["ID"]."\">scopri di più</a></p>
+                    <h2>" . $row["Nome"] . "</h2>
+                    <span>" . $row["Luogo"] . "</span>
+                    <span>" . $row["Data"] . "</span>
+                    <p>" . $subDesc . "... <a href=\"event.php?id=" . $row["ID"] . "\">scopri di più</a></p>
                 </div>
             </div>
                 <div class=\"acquista\">
-                    <span>€ ".number_format($row["Prezzo"],2)."</span>
-                    <span>solo ".$row["Disp"]." biglietti rimasti</span>
-                    <a href=\"event.php?id=".$row["ID"]."\"><button>Vai all'evento <i class=\"fas fa-chevron-right\"></i></button></a>
+                    <span>€ " . number_format($row["Prezzo"], 2) . "</span>
+                    <span>" . $row["Disp"] . " biglietti rimasti</span>
+                    <a href=\"event.php?id=" . $row["ID"] . "\"><button>Vai all'evento <i class=\"fas fa-chevron-right\"></i></button></a>
                 </div>
         </div>";
-        }
+    }
 
     ?>
     <div class="body-search">
-        <h3>I risultati di ricerca hanno prodotto: </h3>
+        <h3>La tua ricerca per <strong><?php 
+            if ($isCategoria){
+                echo $categoria;
+            } else {echo $search;}
+             
+        ?> </strong>
+        ha prodotto i seguenti risultati: </h3>
         <?php echo $eventi ?>
     </div>
-    
 
-    
+
+
 
 
 </body>
+
 </html>

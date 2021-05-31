@@ -28,6 +28,12 @@ button{
     outline: none;
     cursor:pointer;
 }
+.center {
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-wrap: wrap;
+}
 
 /* ! ============= HEADER ============= */
 header{
@@ -70,14 +76,14 @@ header{
     display:flex;
     align-items: center;
 }
-header .logo{
-    margin: 10px 4em;
+.logo{
+    margin: 1em 4em;
     background-color: #38d39f;
     font-weight: 600;
     font-size: 1.2em;
     padding: .5em;
 }
-header .logo a{
+.logo a{
     color: white;
 }
 header ul a{
@@ -180,7 +186,7 @@ header button{
     background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
     border-radius: 3px;
     color: black;
-    padding: .9em;
+    padding: .9em ;
     font-size: 14px;
     border: none;
     cursor: pointer;
@@ -362,7 +368,7 @@ footer p{
 
 
 .slide button{
-    background-color: orange;
+    background-color: #06B063;
     border: none;
     cursor: pointer;
     transform: perspective();
@@ -379,11 +385,10 @@ footer p{
     z-index:50;
     top: 0;
     right: 0;
-    background-color: #111;
+    background-color: rgb(255, 254, 254);
     overflow-x: hidden;
-    padding-top: 4em;
+    padding-top: 5em;
     transition: 0.7s;
-    border-bottom-left-radius: .5rem;
     box-shadow: -7px 7px 10px rgba(0,0,0,0.2);
 }
 
@@ -391,26 +396,26 @@ footer p{
 /* X close */
 .nav a{
     position: absolute;
-    margin-top: -1.4rem;
+    margin-top: -2.3rem;
     margin-left: .95em;
     font-size: 40px;
     text-decoration: none;
-    color: white;
+    color: black;
 }
 
 .nav a:hover{
-    color: orange;
+    color: #06B063;
     transition: .08s;
 }
 
 
 .nav h13{
     position: absolute;
-    margin-top: -.7em;
+    margin-top: -1em;
     margin-left: 8.5rem;
     font-size: 40px;
     text-decoration: none;
-    color: white;
+    color: black;
     font-weight: 625;
 }
 
@@ -421,33 +426,17 @@ footer p{
     left: 0;
     width: 9rem;
     height: .3rem;
-    background: orange;
-}
-
-.nav input{
-    position: absolute;
-    width: 80%;
-    height: 75%;
-    top: 0;
-    left: 0;
-    border: none;
-    outline: none;
-    background: none;
-    padding: 0.5rem 0.7rem;
-    font-size: 1.2rem;
-    color: #555;
+    background: #06B063;
 }
 
 .nav .btn{
-    display: block;
     width: 80%;
     height: 50px;
     border-radius: 25px;
-    margin: 20rem 2.8rem;
     font-size: 1.2rem;
     outline: none;
     border: none;
-    background-image: linear-gradient(to right, #f08100, #ffa500, #f08100);
+    background-image: linear-gradient(to right, #059654, #17cc90, #06B063);
     cursor: pointer;
     color: #fff;
     text-transform: uppercase;
@@ -459,7 +448,73 @@ footer p{
     background-position: right;
 }
 
-/* === FINE SLIDE MENU === */
+/* eventi nel carrello */
+.nav .cart-event{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    padding: 1em;
+    padding-left: 1.5em;
+    padding-bottom: .5em;
+    font-size: 1.1em;
+}
+.nav .cart-event .img{
+    width: 30%;
+    height: 100%;
+    border-radius: .3em;
+}
+.nav .cart-event .img img{
+    width: 100%;
+    height: 100%;
+    border-radius: .3em;
+}
+.nav .cart-event .dx{
+    width: 70%;
+    height: 100%;
+    padding: 1em;
+}
+.nav .cart-event span{
+    display: inline-block;
+    padding: .2em;
+}
+.nav .cart-event .dx .prezzo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav .cart-event .dx span i{
+    border-radius: .2em;
+    padding: .20em .35em;
+    border: 1px solid #4ad295;
+    cursor: pointer;
+    background-color: transparent ;
+    transition: background-color .5s cubic-bezier(.215, .61, .355, 1);
+}
+.nav .cart-event .dx span i:hover{
+    background-color: #A5F1CE;
+}
+
+
+
+
+/* Overlay cart */
+#overlay-cart{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index:49;
+    background: rgb(0,0,0,.5);
+    transition: background .8s cubic-bezier(.215, .61, .355, 1);
+    animation: trans_overlay_on 1s;
+}
+@keyframes trans_overlay_on{
+    0% {background: rgb(0,0,0,.0);}
+    100% {background: rgb(0,0,0,.5);}
+}
+
+/* ====== FINE SLIDE MENU ====== */
 
 
 
@@ -518,12 +573,120 @@ footer p{
     }
 
 }
+.flickity-viewport{
+    height: 40vh !important;
+}
+@media (max-width: 768px) {
+    .flickity-viewport{
+        height: 35vh !important;
+    }
+    .search-container{
+        display: none !important;
+    }
+    header .logo{
+        margin: 1em 1em;
+    }
+    .main .main_dx{
+        float: none;
+        width:100%;
+        height: 85vh;
+        align-items: flex-end;
+        padding: 0;
+    }
 
+    .slider .sub_title {
+        margin-top: 2em !important;
+        margin-bottom: -1em !important;
+    }
+    header ul {
+        margin: 1em 1em;
+    }
+    header ul li:nth-of-type(1),
+    header ul li:nth-of-type(2),
+    header ul li:nth-of-type(3){
+        display: none;
+    }
+    header .hamburger{
+        display: inline-block !important;
+        color: black;
+        padding: 1em;
+        font-size: 1.3em;
 
+    }
+}
 
-
-
-
+/* ============ LEFT MENU ============ */
+header .hamburger {
+    display: none;
+}
+#left_menu{
+    position: fixed; 
+    width: 0;
+    height: 100%;
+    background-color: white;
+    top: 0;
+    left: 0;
+    z-index:50;
+    overflow: hidden;
+    transition: width 1s cubic-bezier(.215, .61, .355, 1);
+    box-shadow: 0 5px 20px rgba(0,0,0,.3);
+    
+}
+.space_between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5em;
+}
+.space_between #close_left_menu i{
+    font-size: 2em;
+}
+#left_menu .logo {
+    margin: 0;
+}
+.space_around{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+}
+#left_menu ul{
+    padding: 1.5em;
+    width: 100%;
+    font-size: 1.3em;
+}
+#left_menu ul li{
+    padding: .5em;
+    margin: .3em;
+    margin-left: 0;
+    width: 100%;
+    border: 1px solid #06B063;
+    border-radius: .2em;
+    background: transparent;
+    transition: background .01s cubic-bezier(.215, .61, .355, 1);
+}
+#left_menu ul li:active{
+    background: #6bf3c6;
+}
+#left_menu ul a{
+    color: black;
+}
+#left_menu input[type=text]{
+    border-radius: 3px;
+    font-size:.8em;
+    padding: .65em;
+    border: none; 
+    background-color: #eff3f6; 
+    font-family: inherit;
+}
+#left_menu button[type=submit]{
+    padding:.9em 1em;
+    border-radius: 3px;
+    border: none;
+    background-color: #4ad295;
+    cursor: pointer;
+    transition: .5s;
+}
 
 
 
