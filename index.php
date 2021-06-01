@@ -1,9 +1,17 @@
-<?php 
+<?php
 session_start();
-if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
-}else{
+    $valAdmin = 0;
+} else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
+}
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
 }
 ?>
 
@@ -15,7 +23,7 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Homepage | liveXperience </title>
     <!-- ============= RESET STYLE ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->
@@ -29,18 +37,18 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.2.2/flickity.min.css" integrity="sha512-BiFZ6oflftBIwm6lYCQtQ5DIRQ6tm02svznor2GYQOfAlT3pnVJ10xCrU3XuXnUrWQ4EG8GKxntXnYEdKY0Ugg==" crossorigin="anonymous" />
     <!-- ============= Font-Awesome ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
-    <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <!-- ============ Javascript =================-->
     <script src="main.js"></script>
 
 </head>
 
-<body>
+<body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
     <!-- ========= LEFT MENU ========== -->
     <div id="left_menu">
         <!-- logo e chiusura -->
         <div class="space_between">
-           <div class="logo">
+            <div class="logo">
                 <a href="index.php">
                     liveXperience
                 </a>
@@ -52,42 +60,58 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
         <!-- menu -->
         <div class="space_around">
             <ul>
-                <a href="php/search.php?Categoria=Musica"><li>
-                    <i class="fas fa-microphone-alt"></i> &nbsp;Concerti
-                </li></a>
-                <a href="php/search.php?Categoria=Sport"><li>
-                    <i class="fas fa-futbol"></i> &nbsp;Sport
-                </li></a>
-                <a href="php/search.php?Categoria=Teatro"><li>
-                    <i class="fas fa-theater-masks"></i> &nbsp;Teatro
-                </li></a>
-                <a href="php/search.php?Categoria=Musei"><li>
-                    <i class="fas fa-atom"></i> &nbsp;Mostre e Musei
-                </li></a>
+                <a href="php/search.php?Categoria=Musica">
+                    <li>
+                        <i class="fas fa-microphone-alt"></i> &nbsp;Concerti
+                    </li>
+                </a>
+                <a href="php/search.php?Categoria=Sport">
+                    <li>
+                        <i class="fas fa-futbol"></i> &nbsp;Sport
+                    </li>
+                </a>
+                <a href="php/search.php?Categoria=Teatro">
+                    <li>
+                        <i class="fas fa-theater-masks"></i> &nbsp;Teatro
+                    </li>
+                </a>
+                <a href="php/search.php?Categoria=Musei">
+                    <li>
+                        <i class="fas fa-atom"></i> &nbsp;Mostre e Musei
+                    </li>
+                </a>
                 <li>
                     <form action="php/search.php" method="GET">
                         <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
                         <button type="submit"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTA1Ljc0OSw0NzUuNTg3bC0xNDUuNi0xNDUuNmMyOC4yMDMtMzQuODM3LDQ1LjE4NC03OS4xMDQsNDUuMTg0LTEyNy4zMTdjMC0xMTEuNzQ0LTkwLjkyMy0yMDIuNjY3LTIwMi42NjctMjAyLjY2Nw0KCQkJUzAsOTAuOTI1LDAsMjAyLjY2OXM5MC45MjMsMjAyLjY2NywyMDIuNjY3LDIwMi42NjdjNDguMjEzLDAsOTIuNDgtMTYuOTgxLDEyNy4zMTctNDUuMTg0bDE0NS42LDE0NS42DQoJCQljNC4xNiw0LjE2LDkuNjIxLDYuMjUxLDE1LjA4Myw2LjI1MXMxMC45MjMtMi4wOTEsMTUuMDgzLTYuMjUxQzUxNC4wOTEsNDk3LjQxMSw1MTQuMDkxLDQ4My45MjgsNTA1Ljc0OSw0NzUuNTg3eg0KCQkJIE0yMDIuNjY3LDM2Mi42NjljLTg4LjIzNSwwLTE2MC03MS43NjUtMTYwLTE2MHM3MS43NjUtMTYwLDE2MC0xNjBzMTYwLDcxLjc2NSwxNjAsMTYwUzI5MC45MDEsMzYyLjY2OSwyMDIuNjY3LDM2Mi42Njl6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" height="13px" width="13px" /></button>
                     </form>
-                </li>    
+                </li>
             </ul>
             <ul>
-                <a href="login.html"><li> 
-                    <i class="fas fa-sign-in-alt"></i> &nbsp;Log in 
-                </li></a>
-                <a href="signup.html"><li> 
-                    <i class="fas fa-user-plus"></i>&nbsp;Sign Up 
-                </li></a>
-                <a href="profile.html"><li>
-                    <i class="fas fa-user"></i> &nbsp;Profilo
-                </li></a>
-                <a href="#"><li> 
-                    <i class="fas fa-sign-out-alt"></i> &nbsp;Log in 
-                </li></a>
+                <a href="login.html">
+                    <li>
+                        <i class="fas fa-sign-in-alt"></i> &nbsp;Log in
+                    </li>
+                </a>
+                <a href="signup.html">
+                    <li>
+                        <i class="fas fa-user-plus"></i>&nbsp;Sign Up
+                    </li>
+                </a>
+                <a href="profile.html">
+                    <li>
+                        <i class="fas fa-user"></i> &nbsp;Profilo
+                    </li>
+                </a>
+                <a href="#">
+                    <li>
+                        <i class="fas fa-sign-out-alt"></i> &nbsp;Log out
+                    </li>
+                </a>
             </ul>
         </div>
 
-        
+
     </div>
     <!-- ============= HEADER ============= -->
     <header>
@@ -112,15 +136,17 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
                 </div>
             </div>
             <form action="php/search.php" method="GET">
-                    <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
+                <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
                 <button type="submit"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTA1Ljc0OSw0NzUuNTg3bC0xNDUuNi0xNDUuNmMyOC4yMDMtMzQuODM3LDQ1LjE4NC03OS4xMDQsNDUuMTg0LTEyNy4zMTdjMC0xMTEuNzQ0LTkwLjkyMy0yMDIuNjY3LTIwMi42NjctMjAyLjY2Nw0KCQkJUzAsOTAuOTI1LDAsMjAyLjY2OXM5MC45MjMsMjAyLjY2NywyMDIuNjY3LDIwMi42NjdjNDguMjEzLDAsOTIuNDgtMTYuOTgxLDEyNy4zMTctNDUuMTg0bDE0NS42LDE0NS42DQoJCQljNC4xNiw0LjE2LDkuNjIxLDYuMjUxLDE1LjA4Myw2LjI1MXMxMC45MjMtMi4wOTEsMTUuMDgzLTYuMjUxQzUxNC4wOTEsNDk3LjQxMSw1MTQuMDkxLDQ4My45MjgsNTA1Ljc0OSw0NzUuNTg3eg0KCQkJIE0yMDIuNjY3LDM2Mi42NjljLTg4LjIzNSwwLTE2MC03MS43NjUtMTYwLTE2MHM3MS43NjUtMTYwLDE2MC0xNjBzMTYwLDcxLjc2NSwxNjAsMTYwUzI5MC45MDEsMzYyLjY2OSwyMDIuNjY3LDM2Mi42Njl6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" height="13px" width="13px" /></button>
             </form>
         </div>
 
         <!-- utility per il profilo + carrello-->
         <ul class="profile">
-           
-            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div> 
+
+            <div id="ciaoIndex">
+                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>
+            </div>
             <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>
             <li><a href="login.php" id="login"> Log in </a></li>
             <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
@@ -160,19 +186,43 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
         ?>
 
     </header>
+
     
-    <?php $valAdmin = $info["Admin"];?>
-    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente'])) ,  $valAdmin ?>)">
-    
+
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
         <div id="menu" class="nav">
             <h13>Carrello</h13>
             <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i></a>
+                <i class="fas fa-times"></i>
+            </a>
+            <div id="cart-events">
+            <div class="cart-event">
+                <div class="img">
+                    <img src="../images/concerto.jpeg" alt="">
+                </div>
+                <div class="dx">
+                    <div class="info">
+                        <span>Titolo</span>
+                        <br>
+                        <span>Data</span> <span>15/18/50</span>
+                    </div>
+                    <div class="prezzo">
+                        <span>
+                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
+                            <span id="numero_biglietti_cart">1</span>
+                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+                        </span>
+                        <span>€58,60</span>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="center">
                 <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
             </div>
+        </div>
     </div>
 
 
@@ -692,7 +742,7 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
         <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
     </div>
 
-    
+
 
 
 </body>

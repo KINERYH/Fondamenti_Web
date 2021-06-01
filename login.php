@@ -1,9 +1,18 @@
-<?php 
+<?php
 session_start();
-if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
-}else{
+    $valAdmin = 0;
+} else {
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
     header("location:index.php"); //Se si è loggati, se cerco di andare in login, vengo reinderizzato nella home
+}
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
 }
 ?>
 
@@ -14,7 +23,7 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login | liveXperience </title>
     <!-- ============= RESET STYLE ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw==" crossorigin="anonymous" />
     <!-- ============= STYLE ============= -->

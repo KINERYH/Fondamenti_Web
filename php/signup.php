@@ -23,9 +23,9 @@ $hash = md5( rand(0,1000) );
 
 
 //Query da eseguire
-$sql = "INSERT INTO utente (Mail, Nome, Cognome, Genere, Password, Data_Nascita, Admin, hash) VALUES ('$email', '$nome', '$cognome', '$gen', '$password', '$date', '0', '$hash')";
+$sql = "INSERT INTO utente (Mail, Nome, Cognome, Genere, Password, Data_Nascita, isAdmin) VALUES ('$email', '$nome', '$cognome', '$gen', '$password', '$date', '0')";
 
-
+/*
    //Mando l'email
   $to = $email;
   $subject = 'Verifica Email'; //Assegno un oggetto all'email
@@ -38,7 +38,7 @@ $sql = "INSERT INTO utente (Mail, Nome, Cognome, Genere, Password, Data_Nascita,
 
   header('location:../grazie.html');
 
- 
+ */
 
 
 if ($conn->query($sql) === TRUE) {

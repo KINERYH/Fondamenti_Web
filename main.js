@@ -47,6 +47,7 @@ conferma_password.onkeyup = convalidaPassword;
 
 // Alert per modifica password
 function changePasswordAlert(old_password) {
+    var nuova_pw;
     Swal.fire({
         title: "Modifica la Password",
         html: '<h1>Inserisci la password Attuale </h1><input type="password" id="old_pw" class="swal2-input" placeholder="Password Attuale">' +
@@ -61,6 +62,7 @@ function changePasswordAlert(old_password) {
             const old_pw = Swal.getPopup().querySelector('#old_pw').value
             const confirm_pw = Swal.getPopup().querySelector('#confirm_pw').value
             const new_pw = Swal.getPopup().querySelector('#new_pw').value
+            nuova_pw = new_pw;
             //Uso la libreria CryptoJS per criptare la password inserita
             var old_crypto = CryptoJS.MD5(old_pw);
 
@@ -78,15 +80,18 @@ function changePasswordAlert(old_password) {
         // Faccio apparire solo il messaggio --> modificare la password nel db quando lo colleghiamo
     }).then((result) => {
         if(result.isConfirmed){
-             Swal.fire({
+            Swal.fire({
             title: 'Password Modificata Correttamente',
             icon: 'success',
+            allowOutsideClick: false,
+            allowEscapeClick: false,
         });
+        setCookie("unknown", nuova_pw, 1);
+        console.log("sono dentro");
+        window.location = "refresh.php";
         }
     })
 }
-
-
 
 // Alert per conferma eliminazione account
 function deleteAccountAlert(oldpassword){
@@ -125,6 +130,9 @@ function deleteAccountAlert(oldpassword){
                     Swal.fire({
                         title: 'Account Eliminato Correttamente',
                         icon: 'success',
+                    }).then(function() {
+                        console.log("sono dentro");
+                        window.location = "refresh.php";
                     });
                 }
             }))
@@ -197,7 +205,7 @@ function closeSlideMenu(){  //chiusura carrello
     setTimeout(
         function(){
             document.getElementById('overlay-cart').remove();
-        },1000);
+        },200);
 }
 
 // ======== LEFT MENU MOBILE ========= //
@@ -214,7 +222,7 @@ function closeLeftMenu(){  //chiusura carrello
     setTimeout(
         function(){
             document.getElementById('overlay-cart').remove();
-        },1000);
+        },500);
 }
 
 
@@ -268,21 +276,13 @@ function apriEvento1(id){
     document.location.href=page;
 }
 
-/* ====== AGGIUNGI AL CARRELLO ====== */
-
-function add_to_cart(id){
-    var n_biglietti = document.getElementById("numero_biglietti").textContent;
-    localStorage.setItem("id",id);
-    localStorage.setItem("n",n_biglietti);
-    var event = document.getElementsByClassName("cart-event")[0];
-    var event2 = event.cloneNode(true);
-    document.getElementById("cart-events").appendChild(event2);
-}
-
 /* ====== CONTROLLI SESSIONE E LOGIN ====== */
 function nascondoBtn(session, valAdmin){
 //Nascondo i link di login e signup se l'utente è loggato
-    if(session){
+console.log(valAdmin);
+console.log(session);
+    if(session == 1){ // se esiste una sessione
+        console.log(valAdmin);
         if(valAdmin == 0){
             document.getElementById("add_event").style.display="none";
         }
@@ -290,12 +290,158 @@ function nascondoBtn(session, valAdmin){
         document.getElementById("SignUp").style.display="none";
     }
 //Nascondo i bottoni del profilo e del carrello e la scritta "Ciao nome+cognome" se l'utente non è loggato
-    else{
+    else if (session == "0"){ // se NON esiste una sessione
         document.getElementById("profile").style.display="none";
-        document.getElementById("carrello").style.display="none";
         document.getElementById("ciao").style.display="none";
         document.getElementById("ciaoIndex").style.display="none";
         document.getElementById("add_event").style.display="none";
     }
     
+}
+
+/* ============ COOKIES ============ */
+
+    // setto i cookie convertendo array in stringa JSON
+    function setCookie(name,value,days) {
+        var values = JSON.stringify(value);
+        var expires = "";
+        if (days) {
+            // prendo data e sommo numero giorni
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (values || "")  + expires + "; path=/";
+    }
+
+    // Ottengo i cookie e li converto da JSON in un array js 
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0){
+                var values = c.substring(nameEQ.length,c.length);
+                return JSON.parse(values);
+            } 
+        }
+        return null;
+    }
+    
+    function deleteCookie(name) {   
+        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+// dobbiamo prendere titolo, data, prezzo, immagine e quantità selezionata dall'utente
+function addToCart(id,disp){
+   
+    //prendo i dati dell'evento su cui ho cliccato aggiungi al carrello
+    var n_biglietti = document.getElementById("numero_biglietti").textContent;
+    var title = document.getElementById("cart-title").textContent;
+    var price = document.getElementById("cart-price").textContent;
+    var date = document.getElementById("cart-date").textContent;
+    var img = document.getElementById("cart-img").src;
+    
+    var product = [id,title,price,date,img,n_biglietti,disp];
+
+    //controllo se esiste il cookie del carrello
+    products = getCookie("shopping-cart");
+    if (products == null){ // se il carrello è vuoto
+        console.log("sono nel ramo del null");
+        console.log(getCookie("shopping-cart"));
+        products = []; 
+        products.push(product);
+    }else{  // se il carrello non è vuoto   
+        // controllo se l'evento che sto inserendo è gia presente nel carrello
+        console.log("sono nel ramo del non null");
+        var flag=0;
+        for (let i=0; i<products.length; i++){
+            if (products[i][0] == id){ // l'evento è gia presente
+                var bigliettiTot = parseInt(products[i][5]) + parseInt(n_biglietti);
+                products[i][5] = String(bigliettiTot);
+                flag = 1;
+            }
+        }      
+        if (flag==0){ //se flag == 0, allora l'evento non c'è nel carrello e quindi lo aggiungo in coda al vettore degli eventi
+            products.push(product);
+        }
+        
+    
+    }
+
+    //Setto il cookie
+    setCookie("shopping-cart", products, "4");
+    // rimuovo tutti gli eventi nel carello per inserire i nuovi   
+    removeEvents();
+    //Aggiorno i prodotti nel carrello (togliendo quelli che stavano prima)
+    //(i child nodes incrementano di 2 in 2 a partire da 1)
+    console.log(getCookie("shopping-cart"));
+    updateCart();
+    openSlideMenu();
+}
+
+function removeEvents(){
+    var cart_events = document.getElementById("cart-events");
+    var numFigli = cart_events.childElementCount;
+    while(cart_events.childElementCount > 1){
+        cart_events.removeChild(cart_events.childNodes[2]);
+    }
+}
+
+function updateCart(){
+    var total_price;
+    var event = document.getElementsByClassName("cart-event")[0];
+    //var figlio = event.cloneNode(true);
+    var events = getCookie("shopping-cart");
+    var lastChild;
+    for(var i = 0; i < events.length; i++){
+        document.getElementById("cart-events").appendChild(event.cloneNode(true));
+        lastChild = document.getElementById("cart-events").lastChild;
+        lastChild.childNodes[3].childNodes[1].childNodes[1].innerHTML=events[i][1];
+        lastChild.childNodes[3].childNodes[1].childNodes[7].innerHTML=events[i][3];
+        lastChild.childNodes[3].childNodes[3].childNodes[3].innerHTML=events[i][2];
+        lastChild.childNodes[3].childNodes[3].childNodes[4].innerHTML=events[i][6];
+        lastChild.childNodes[1].childNodes[1].src = events[i][4];
+        lastChild.childNodes[3].childNodes[3].childNodes[1].childNodes[3].innerHTML = events[i][5];
+        lastChild.style.display ="flex";
+        //moltiplico prezzo unitario per biglietti e faccio il totale
+        total_price =+ parseFloat(events[i][2].replace('€', ''))*parseFloat(events[i][5]);
+    }  
+    document.getElementById("total-price").innerHTML = total_price;  
+}
+
+function onLoad(session, valAdmin){
+    nascondoBtn(session, valAdmin);
+    updateCart();
+}
+
+
+// aumenta e ridduci n° biglietti nel carello e relativo prezzo
+function aumenta_cart(plus){
+    console.log(plus);
+    var n_bigl = plus.parentNode.childNodes[3].textContent;
+    var disp = plus.parentNode.parentNode.childNodes[4].textContent;
+    var new_price;
+    console.log(disp);
+    if (n_bigl<disp){
+        plus.parentNode.childNodes[3].innerHTML = parseInt(n_bigl)+1;
+        new_price = parseFloat(plus.parentNode.parentNode.childNodes[3].textContent.replace('€', ''))*plus.parentNode.childNodes[3].textContent;
+        console.log(new_price);
+        plus.parentNode.parentNode.childNodes[3].innerHTML =  "€"+ new_price;
+    
+    }
+}
+
+function riduci_cart(meno){
+    var n_bigl = meno.parentNode.childNodes[3].textContent;
+    var disp = meno.parentNode.parentNode.childNodes[4].textContent;
+
+    if (n_bigl>1){
+        //meno.parentNode.childNodes[3].innerHTML =  
+    }
+}
+
+function acquista(){
+    window.location = "acquisto.php"
 }

@@ -1,10 +1,12 @@
-<?php 
+<?php
+// Verifichiamo se è effettuato il login
 session_start();
-if(!isset($_SESSION['infoUtente'])){
+if (!isset($_SESSION['infoUtente'])) {
     error_reporting(0);
-}else{
+} else {
     $info = $_SESSION["infoUtente"];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -66,9 +68,11 @@ if(!isset($_SESSION['infoUtente'])){
             </form>
         </div>
         <!-- utility per il profilo + carrello-->
-          <!-- utility per il profilo + carrello-->
-          <ul class="profile">
-            <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+        <!-- utility per il profilo + carrello-->
+        <ul class="profile">
+            <div id="ciaoIndex">
+                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>
+            </div>
             <li><a href="../add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
             <li><a href="../login.php" id="login"> Log in </a></li>
             <li><a href="../signup.php" id="SignUp"> Sign Up </a></li>
@@ -83,295 +87,267 @@ if(!isset($_SESSION['infoUtente'])){
 
 
     </header>
-    
-    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
-   
-    <!-- ============= SLIDE SIDE CART ============= -->
 
-    <div id="slcontent">
-        <div id="menu" class="nav">
-            <h13>Carrello</h13>
-            <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i>
-            </a>
-            <div id="cart-events">
-            <div class="cart-event">
-                <div class="img">
-                    <img src="../images/concerto.jpeg" alt="">
+    <body onload="onLoad( <?php echo (isset($_SESSION['infoUtente'])) ?>)">
+
+        <!-- ============= SLIDE SIDE CART ============= -->
+
+        <div id="slcontent">
+            <div id="menu" class="nav">
+                <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="cart-space-bet">
+                <div id="cart-events">
+                    <div class="cart-event">
+                        <div class="img">
+                            <img src="../images/concerto.jpeg" alt="">
+                        </div>
+                        <div class="dx">
+                            <div class="info">
+                                <span>Titolo</span>
+                                <br>
+                                <span>Data</span> <span>15/18/50</span>
+                            </div>
+                            <div class="prezzo">
+                                <span>
+                                    <i class="fas fa-minus" onclick="riduci_cart(this)"></i>
+                                    <span id="numero_biglietti_cart">1</span>
+                                    <i class="fas fa-plus" onclick="aumenta_cart(this)"></i>
+                                </span>
+                                <span>€58,60</span><span style="display:none;">disp</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="dx">
-                    <div class="info">
-                        <span>Titolo</span>
-                        <br>
-                        <span>Data</span> <span>15/18/50</span>
-                    </div>
-                    <div class="prezzo">
-                        <span>
-                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
-                            <span id="numero_biglietti_cart">1</span>
-                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
-                        </span>
-                        <span>€58,60</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="cart-event">
-                <div class="img">
-                    <img src="../images/concerto.jpeg" alt="">
-                </div>
-                <div class="dx">
-                    <div class="info">
-                        <span>Titolo</span>
-                        <br>
-                        <span>Data</span> <span>15/18/50</span>
-                    </div>
-                    <div class="prezzo">
-                        <span>
-                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
-                            <span id="numero_biglietti_cart">1</span>
-                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
-                        </span>
-                        <span>€58,60</span>
-                    </div>
+                
+                <div class="center">
+                    <span>Totale: €</span><span id="total-price">100,45</span>
+                    <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
                 </div>
             </div>
-            </div>
-            <div class="center">
-                <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
             </div>
         </div>
-    </div>
 
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "livexperience";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Recupero l'Id col metodo post, dopo aver selezionato l'evento dalla ricerca o dallo slider
-    $id = $_GET['id'];
-
-    //Query da eseguire
-    $sql = "SELECT * FROM evento WHERE ID = '$id'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while ($row = $result->fetch_assoc()) {
-            $description = $row["Descrizione"];
-            $image_url = $row["Img"];
-            $price = $row["Prezzo"];
-            $title = $row["Nome"];
-            $place = $row["Luogo"];
-            $limitePosti = $row["Disp"];
-            $date = $row["Data"];
-            $category = $row["Categoria"];
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "livexperience";
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-    } else {
-        echo "0 results";
-    }
-    $conn->close();
-    ?>
+
+        // Recupero l'Id col metodo get, dopo aver selezionato l'evento dalla ricerca o dallo slider
+        $id = $_GET['id'];
+
+        //Query da eseguire
+        $sql = "SELECT * FROM evento WHERE ID = '$id'";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while ($row = $result->fetch_assoc()) {
+                $description = $row["Descrizione"];
+                $image_url = $row["Img"];
+                $price = $row["Prezzo"];
+                $title = $row["Nome"];
+                $place = $row["Luogo"];
+                $limitePosti = $row["Disp"];
+                $date = $row["Data"];
+                $category = $row["Categoria"];
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
 
 
-    <!-- ============= PROVA BLUR ============= -->
-    <div class="bg_blur">
-        <img src="<?php echo $image_url ?>" />
-    </div>
-    <div class="overlay">
-
-    </div>
-
-
-
-    <!-- ============= BODY EVENT ============= -->
-    <div class="main_event">
-        <div class="main_sx">
+        <!-- ============= PROVA BLUR ============= -->
+        <div class="bg_blur">
             <img src="<?php echo $image_url ?>" />
         </div>
-        <div class="main_dx">
-            <h1> <?php echo $title ?> </h1>
-            <span><?php echo $place ?></span>
-            <span><?php echo $date ?></span>
-            <br>
-            <span id="prezzo">€<?php echo number_format($price, 2) ?></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star checked"></span>
-            <span class="fa fa-star"></span>
-            <br>
-            <div class=center>
-                <i class="fas fa-minus" onclick="riduci(<?php echo $price ?>)"></i>
-                <span id="numero_biglietti">1</span>
-                <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+        <div class="overlay">
+
+        </div>
+
+
+
+        <!-- ============= BODY EVENT ============= -->
+        <div class="main_event">
+            <div class="main_sx">
+                <img id="cart-img" src="<?php echo $image_url ?>" />
             </div>
-            <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
+            <div class="main_dx">
+                <h1 id="cart-title"> <?php echo $title ?> </h1>
+                <span id="cart-place"><?php echo $place ?></span>
+                <span id="cart-date"><?php echo $date ?></span>
+                <br>
+                <span id="cart-price">€<?php echo number_format($price, 2) ?></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <br>
+                <div class=center>
+                    <i class="fas fa-minus" onclick="riduci(<?php echo $price ?>)"></i>
+                    <span id="numero_biglietti">1</span>
+                    <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
+                </div>
+                <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
+                <div class="center">
+                    <button onclick="addToCart(<?php echo $id ?>, <?php echo $limitePosti ?>)"><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============= Descrizione ============= -->
+
+        <div class="description">
+            <h1>Descrizione</h1>
+            <p> <?php echo $description ?> </p>
+        </div>
+
+        <!-- ============= Eventi correlati ============= -->
+
+        <?php
+        // Query da eseguire
+        $sql = "SELECT * FROM evento WHERE Categoria = '$category' AND ID <> '$id'";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $eventi[] = $row;
+        }
+        shuffle($eventi);
+        ?>
+
+        <div class="ev_correlati">
+            <h1>Potrebbero interessarti anche questi eventi</h1>
             <div class="center">
-                <button onclick="add_to_cart(<?php echo $id ?>)"><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============= Descrizione ============= -->
-
-    <div class="description">
-        <h1>Descrizione</h1>
-        <p> <?php echo $description ?> </p>
-    </div>
-
-    <!-- ============= Eventi correlati ============= -->
-
-    <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "livexperience";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    // Query da eseguire
-    $sql = "SELECT * FROM evento WHERE Categoria = '$category' AND ID <> '$id'";
-    $result = $conn->query($sql);
-    while ($row = $result->fetch_assoc()) {
-        $eventi[] = $row;
-    }
-    shuffle($eventi);
-    ?>
-
-    <div class="ev_correlati">
-        <h1>Potrebbero interessarti anche questi eventi</h1>
-        <div class="center">
-            <?php $row = $eventi["0"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
+                <?php $row = $eventi["0"];
+                $id = $row["ID"]; ?>
+                <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
+                    <div class="blur_img">
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <span class="info">
+                            <?php echo $row["Luogo"] ?>
+                            <br />
+                            <?php echo $row["Data"] ?>
+                            <br />
+                            €<?php $prezzo = $row["Prezzo"];
+                                echo number_format($prezzo, 2) ?>
+                        </span>
+                    </div>
+                    <span class="title" id="titolo"><?php echo $row["Nome"] ?> </span>
                 </div>
-                <span class="title" id="titolo"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["1"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
+                <?php $row = $eventi["1"];
+                $id = $row["ID"]; ?>
+                <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
+                    <div class="blur_img">
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <span class="info">
+                            <?php echo $row["Luogo"] ?>
+                            <br />
+                            <?php echo $row["Data"] ?>
+                            <br />
+                            €<?php $prezzo = $row["Prezzo"];
+                                echo number_format($prezzo, 2) ?>
+                        </span>
+                    </div>
+                    <span class="title"><?php echo $row["Nome"] ?> </span>
                 </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["2"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
+                <?php $row = $eventi["2"];
+                $id = $row["ID"]; ?>
+                <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
+                    <div class="blur_img">
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <span class="info">
+                            <?php echo $row["Luogo"] ?>
+                            <br />
+                            <?php echo $row["Data"] ?>
+                            <br />
+                            €<?php $prezzo = $row["Prezzo"];
+                                echo number_format($prezzo, 2) ?>
+                        </span>
+                    </div>
+                    <span class="title"><?php echo $row["Nome"] ?> </span>
                 </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-            <?php $row = $eventi["3"];
-            $id = $row["ID"]; ?>
-            <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
-                <div class="blur_img">
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <img src="<?php echo $row["Img"] ?>" />
-                    <span class="info">
-                        <?php echo $row["Luogo"] ?>
-                        <br />
-                        <?php echo $row["Data"] ?>
-                        <br />
-                        €<?php $prezzo = $row["Prezzo"];
-                            echo number_format($prezzo, 2) ?>
-                    </span>
+                <?php $row = $eventi["3"];
+                $id = $row["ID"]; ?>
+                <div class="evento" onclick="apriEvento(<?php echo $id ?>)">
+                    <div class="blur_img">
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <img src="<?php echo $row["Img"] ?>" />
+                        <span class="info">
+                            <?php echo $row["Luogo"] ?>
+                            <br />
+                            <?php echo $row["Data"] ?>
+                            <br />
+                            €<?php $prezzo = $row["Prezzo"];
+                                echo number_format($prezzo, 2) ?>
+                        </span>
+                    </div>
+                    <span class="title"><?php echo $row["Nome"] ?> </span>
                 </div>
-                <span class="title"><?php echo $row["Nome"] ?> </span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ============= FOOTER ============= -->
-    <footer>
-        <div class="container">
-            <!-- about us -->
-            <div class="sec aboutus">
-                <h8>About Us</h8>
-                <p>LiveXperience è specializzato nella vendita di biglietti <br>
-                    per eventi di musica, cultura e sport, <br>
-                    rivolto a qualsiasi tipo di utente che vuole vivere le emozioni <br>
-                    di partecipare a un evento pubblico acquistando il proprio biglietto <br>
-                    in modo facile e sicuro.</p>
-            </div>
-            <!-- link utili -->
-            <div class="sec link">
-                <h8>Link Utili</h8>
-                <ul>
-                    <li><a href="https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018">Privacy</a></li>
-                    <li><a href="#">Informative Cookie</a></li>
-                </ul>
-            </div>
-            <!-- contatti -->
-            <div class="sec contatti">
-                <h8>Contatti</h8>
-                <ul class="info">
-                    <li>
-                        <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
-                        <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
-                    </li>
-                    <li>
-                        <span><i class="fas fa-phone" aria-hidden="true"></i></span>
-                        <p><a href="tel:080612224">080 612 224</a><br>
-                            <a href="tel:332622778">+39 332 622 778</a>
-                        </p>
-                    </li>
-                    <li>
-                        <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
-                        <p> PIVA: 12345678910</p>
-                    </li>
-                </ul>
             </div>
         </div>
 
-    </footer>
-    <!-- ========= COPYRIGHT ========= -->
-    <div class="copyright">
-        <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
-    </div>
+        <!-- ============= FOOTER ============= -->
+        <footer>
+            <div class="container">
+                <!-- about us -->
+                <div class="sec aboutus">
+                    <h8>About Us</h8>
+                    <p>LiveXperience è specializzato nella vendita di biglietti <br>
+                        per eventi di musica, cultura e sport, <br>
+                        rivolto a qualsiasi tipo di utente che vuole vivere le emozioni <br>
+                        di partecipare a un evento pubblico acquistando il proprio biglietto <br>
+                        in modo facile e sicuro.</p>
+                </div>
+                <!-- link utili -->
+                <div class="sec link">
+                    <h8>Link Utili</h8>
+                    <ul>
+                        <li><a href="https://www.garanteprivacy.it/documents/10160/0/Regolamento+UE+2016+679.+Arricchito+con+riferimenti+ai+Considerando+Aggiornato+alle+rettifiche+pubblicate+sulla+Gazzetta+Ufficiale++dell%27Unione+europea+127+del+23+maggio+2018">Privacy</a></li>
+                        <li><a href="#">Informative Cookie</a></li>
+                    </ul>
+                </div>
+                <!-- contatti -->
+                <div class="sec contatti">
+                    <h8>Contatti</h8>
+                    <ul class="info">
+                        <li>
+                            <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
+                            <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-phone" aria-hidden="true"></i></span>
+                            <p><a href="tel:080612224">080 612 224</a><br>
+                                <a href="tel:332622778">+39 332 622 778</a>
+                            </p>
+                        </li>
+                        <li>
+                            <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>
+                            <p> PIVA: 12345678910</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </footer>
+        <!-- ========= COPYRIGHT ========= -->
+        <div class="copyright">
+            <p>Copyright © 2021 | Tutti i diritti sono riservati.</p>
+        </div>
 
 
-</body>
+    </body>
 
 </html>

@@ -83,8 +83,8 @@
     <!-- ============= GRAZIE ============= -->
     <div class="bg-image"></div>
     <div class="grmain">
-        <h13>>L'acquisto è andato a buon fine</h13>
-        <h13>Torna a visitare il sito.</h13>
+        <h13>Grazie per esserti registrato.</h13>
+        <h13>Ti abbiamo mandato una email di conferma sulla tua casella di posta elettronica.</h13>
         <img class="sendemail" src="images/sendemail.svg">
     </div>
 

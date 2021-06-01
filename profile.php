@@ -1,9 +1,18 @@
 <?php
 session_start();
-$info = $_SESSION["infoUtente"];
-
-if(!isset($_SESSION['infoUtente'])){
-    header("location:login.php");  //Se non si è loggati, se cerco di andare in profile, vengo reinderizzato in login
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
+    error_reporting(0);
+    $valAdmin = 0;
+    header("location:login.php"); // Se non sono loggato mi porta alla pagina del login
+} else {
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
+}
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
 }
 ?>
 
@@ -13,7 +22,7 @@ if(!isset($_SESSION['infoUtente'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profilo | liveXperience</title>
     <!-- ============= RESET STYLE ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
@@ -41,7 +50,7 @@ if(!isset($_SESSION['infoUtente'])){
     <script src="sweetalert2.all.min.js"></script>
     <script src="crypto.js"></script>
 </head>
-<body>
+<body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
     <!-- ============= HEADER ============= -->
     <header>
         <div class="logo">
@@ -132,7 +141,7 @@ if(!isset($_SESSION['infoUtente'])){
                 <?php $oldpass = $info["Password"];?>
                 <p>***********<button onclick="changePasswordAlert('<?php echo $oldpass ?>')"><i class="fas fa-edit" style="color: rgb(202, 0, 0);"></i></button></p>
             </div>
-            
+
         </div>
         <div id="profile-dx_orders" class="profile-dx_orders">
             <table>
