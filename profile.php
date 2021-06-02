@@ -101,13 +101,42 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
-        <div id="menu" class="nav">
-            <h13>Carrello</h13>
-            <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i></a>
-            <input type="submit" class="btn" value="Acquista">
+            <div id="menu" class="nav">
+                <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="cart-space-bet">
+                <div id="cart-events">
+                    <div class="cart-event">
+                        <div class="img">
+                            <img src="../images/concerto.jpeg" alt="">
+                        </div>
+                        <div class="dx">
+                            <div class="info">
+                                <span>Titolo</span>
+                                <br>
+                                <span>Data</span> <span>15/18/50</span>
+                            </div>
+                            <div class="prezzo">
+                                <span>
+                                    <i class="fas fa-minus" onclick="riduci_cart(this)"></i>
+                                    <span id="numero_biglietti_cart">1</span>
+                                    <i class="fas fa-plus" onclick="aumenta_cart(this)"></i>
+                                </span>
+                                <span>€58,60</span><span style="display:none;">disp</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="center">
+                    <span>Totale: €</span><span id="total-price">100,45</span>
+                    <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
+                </div>
+            </div>
+            </div>
         </div>
-    </div>
 
     <!-- ============= BODY ============= -->
     <div class="profile-body">

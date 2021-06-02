@@ -1,12 +1,18 @@
 <?php
-// Verifichiamo se è effettuato il login
 session_start();
-if (!isset($_SESSION['infoUtente'])) {
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
+    $valAdmin = 0;
 } else {
-    $info = $_SESSION["infoUtente"];
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
 }
-
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
+}
 ?>
 
 <!DOCTYPE html>
