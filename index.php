@@ -110,8 +110,6 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 </a>
             </ul>
         </div>
-
-
     </div>
     <!-- ============= HEADER ============= -->
     <header>
