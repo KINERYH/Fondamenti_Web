@@ -222,7 +222,7 @@ function closeLeftMenu(){  //chiusura carrello
     setTimeout(
         function(){
             document.getElementById('overlay-cart').remove();
-        },500);
+        },700);
 }
 
 
@@ -334,16 +334,16 @@ console.log(session);
     }
 
 // dobbiamo prendere titolo, data, prezzo, immagine e quantità selezionata dall'utente
-function addToCart(id,disp){
+function addToCart(id,disp,unit_price){
    
     //prendo i dati dell'evento su cui ho cliccato aggiungi al carrello
     var n_biglietti = document.getElementById("numero_biglietti").textContent;
     var title = document.getElementById("cart-title").textContent;
-    var price = document.getElementById("cart-price").textContent;
+    //var price = document.getElementById("cart-price").textContent;
     var date = document.getElementById("cart-date").textContent;
     var img = document.getElementById("cart-img").src;
     
-    var product = [id,title,price,date,img,n_biglietti,disp];
+    var product = [id,title,unit_price,date,img,n_biglietti,disp];
 
     //controllo se esiste il cookie del carrello
     products = getCookie("shopping-cart");
@@ -376,8 +376,8 @@ function addToCart(id,disp){
     removeEvents();
     //Aggiorno i prodotti nel carrello (togliendo quelli che stavano prima)
     //(i child nodes incrementano di 2 in 2 a partire da 1)
-    console.log(getCookie("shopping-cart"));
     updateCart();
+    //apro il carrello
     openSlideMenu();
 }
 
@@ -390,25 +390,37 @@ function removeEvents(){
 }
 
 function updateCart(){
-    var total_price;
+    var events = getCookie("shopping-cart");
+    var total_price=0;
     var event = document.getElementsByClassName("cart-event")[0];
     //var figlio = event.cloneNode(true);
-    var events = getCookie("shopping-cart");
+    
     var lastChild;
+    // per ogni elemento nei cookie shipping cart appendo nel carrello un evento
     for(var i = 0; i < events.length; i++){
         document.getElementById("cart-events").appendChild(event.cloneNode(true));
         lastChild = document.getElementById("cart-events").lastChild;
+        // sostituisco all'evento segnaposto il titolo
         lastChild.childNodes[3].childNodes[1].childNodes[1].innerHTML=events[i][1];
+        // sostituisco all'evento segnaposto la data
         lastChild.childNodes[3].childNodes[1].childNodes[7].innerHTML=events[i][3];
-        lastChild.childNodes[3].childNodes[3].childNodes[3].innerHTML=events[i][2];
+        // sostituisco all'evento segnaposto 
+        lastChild.childNodes[3].childNodes[3].childNodes[3].innerHTML="€"+(parseFloat(events[i][2])*parseFloat(events[i][5])).toFixed(2);
+        // sostituisco all'evento segnaposto la disponibilità (invisibile)
         lastChild.childNodes[3].childNodes[3].childNodes[4].innerHTML=events[i][6];
+        // sostituisco all'evento segnaposto il prezzo unitario (invisibile)
+        lastChild.childNodes[3].childNodes[3].childNodes[5].innerHTML=events[i][2];
+        // sostituisco all'evento segnaposto l'id (invisibile)
+        lastChild.childNodes[3].childNodes[3].childNodes[6].innerHTML=events[i][0];
+        // sostituisco all'evento segnaposto l'imamgine
         lastChild.childNodes[1].childNodes[1].src = events[i][4];
+        // sostituisco all'evento segnaposto il numero di biglietti
         lastChild.childNodes[3].childNodes[3].childNodes[1].childNodes[3].innerHTML = events[i][5];
         lastChild.style.display ="flex";
         //moltiplico prezzo unitario per biglietti e faccio il totale
-        total_price =+ parseFloat(events[i][2].replace('€', ''))*parseFloat(events[i][5]);
+        total_price += parseFloat(events[i][2])*parseFloat(events[i][5]);
     }  
-    document.getElementById("total-price").innerHTML = total_price;  
+    document.getElementById("total-price").innerHTML = total_price.toFixed(2);  
 }
 
 function onLoad(session, valAdmin){
@@ -419,26 +431,87 @@ function onLoad(session, valAdmin){
 
 // aumenta e ridduci n° biglietti nel carello e relativo prezzo
 function aumenta_cart(plus){
-    console.log(plus);
-    var n_bigl = plus.parentNode.childNodes[3].textContent;
-    var disp = plus.parentNode.parentNode.childNodes[4].textContent;
+    // recupero il numero di biglietti inseriti nel carrello
+    var n_bigl = parseInt(plus.parentNode.childNodes[3].textContent);
+    // recupero il numero di biglietti disponibili in totale
+    var disp = parseInt(plus.parentNode.parentNode.childNodes[4].textContent);
+    // recupero il prezzo unitario dell'evento
+    var unit_price = parseFloat(plus.parentNode.parentNode.childNodes[5].textContent);
+    // recupero l'id dell'evento per modificare i cookie
+    var id = plus.parentNode.parentNode.childNodes[6].textContent;
+
     var new_price;
-    console.log(disp);
     if (n_bigl<disp){
+        // inceremento di 1 il numero di biglietti che vengono mostrati tra i pulsanti
         plus.parentNode.childNodes[3].innerHTML = parseInt(n_bigl)+1;
-        new_price = parseFloat(plus.parentNode.parentNode.childNodes[3].textContent.replace('€', ''))*plus.parentNode.childNodes[3].textContent;
-        console.log(new_price);
-        plus.parentNode.parentNode.childNodes[3].innerHTML =  "€"+ new_price;
-    
+        // calcolo il nuovo prezzo dato dal nuovo numero di biglietti*prezzo unitario
+        new_price = unit_price*parseFloat(plus.parentNode.childNodes[3].textContent);
+        // mostro il nuovo prezzo appena calcolato
+        plus.parentNode.parentNode.childNodes[3].innerHTML =  "€"+ new_price.toFixed(2);
+        
+        // modifico i cookie per mantenere aggiorante le informazioni del carrello
+        let events = getCookie("shopping-cart");
+        // scorro il vettore con gli eventi nel carrello
+        for (let i=0;i<events.length; i++){
+            // se trovo l'evento con id uguale a quello dell'evento che sto cliccando
+            if (events[i][0]==id){
+                // assegno il nuovo numero di biglietti
+                events[i][5]=plus.parentNode.childNodes[3].textContent;
+            }
+        }
+        // setto i cookie con i nuovi dati
+        setCookie("shopping-cart", events, "4");
+
+        removeEvents();
+        updateCart();
     }
 }
 
 function riduci_cart(meno){
-    var n_bigl = meno.parentNode.childNodes[3].textContent;
-    var disp = meno.parentNode.parentNode.childNodes[4].textContent;
-
+    // recupero l'id dell'evento per modificare i cookie
+    var id = meno.parentNode.parentNode.childNodes[6].textContent;
+    // recupero il numero di biglietti inseriti nel carrello
+    var n_bigl = parseInt(meno.parentNode.childNodes[3].textContent);
+    // recupero il prezzo unitario dell'evento
+    var unit_price = parseFloat(meno.parentNode.parentNode.childNodes[5].textContent);
+    var new_price;
     if (n_bigl>1){
-        //meno.parentNode.childNodes[3].innerHTML =  
+        // inceremento di 1 il numero di biglietti che vengono mostrati tra i pulsanti
+        meno.parentNode.childNodes[3].innerHTML = parseInt(n_bigl)-1;
+        // calcolo il nuovo prezzo dato dal nuovo numero di biglietti*prezzo unitario
+        new_price = unit_price*parseFloat(meno.parentNode.childNodes[3].textContent);
+        // mostro il nuovo prezzo appena calcolato
+        meno.parentNode.parentNode.childNodes[3].innerHTML =  "€"+ new_price.toFixed(2);
+
+        // modifico i cookie per mantenere aggiorante le informazioni del carrello
+        let events = getCookie("shopping-cart");
+        // scorro il vettore con gli eventi nel carrello
+        for (let i=0;i<events.length; i++){
+            // se trovo l'evento con id uguale a quello dell'evento che sto cliccando
+            if (events[i][0]==id){
+                // assegno il nuovo numero di biglietti
+                events[i][5]=meno.parentNode.childNodes[3].textContent;
+            }
+        }
+        // setto i cookie con i nuovi dati
+        setCookie("shopping-cart", events, "4");
+        removeEvents();
+        updateCart();
+    }else{// se il numero di biglietti era 1 e ho cliccato meno 
+        // modifico i cookie per mantenere aggiorante le informazioni del carrello
+        let events = getCookie("shopping-cart");
+        // scorro il vettore con gli eventi nel carrello
+        for (let i=0;i<events.length; i++){
+            // se trovo l'evento con id uguale a quello dell'evento che sto cliccando
+            if (events[i][0]==id){
+                // rimuovo dai cookie l'evento
+                events.splice(i,1); //rimuovo 1 evento in posizione i, gli altri scalano
+            }
+        }
+        // setto i cookie con i nuovi dati
+        setCookie("shopping-cart", events, "4");
+        removeEvents();
+        updateCart();
     }
 }
 

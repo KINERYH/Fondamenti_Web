@@ -1,11 +1,20 @@
-<?php 
+<?php
 session_start();
-if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
-}else{
+    $valAdmin = 0;
+} else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
+}
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -51,10 +60,10 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown_content">
-                    <a href="#">Concerti</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Teatro</a>
-                    <a href="#">Mostre e Musei</a>
+                    <a href="search.php?Categoria=Musica">Concerti</a>
+                    <a href="search.php?Categoria=Sport">Sport</a>
+                    <a href="search.php?Categoria=Teatro">Teatro</a>
+                    <a href="search.php?Categoria=Musei">Mostre e Musei</a>
                 </div>
             </div>
             <form action="#">
@@ -79,19 +88,47 @@ if(!isset($_SESSION['infoUtente'])){ //Non riporta l'errore
     </header>
 
 
-    <body onload="nascondoBtn( <?php echo (isset($_SESSION['infoUtente']))?>)">
+    <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
 
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
-        <div id="menu" class="nav">
-            <h13>Carrello</h13>
-            <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i></a>
-            <button type="submit" class="btn"><i class="fas fa-lock"></i> Acquista</button>
-            
+            <div id="menu" class="nav">
+                <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="cart-space-bet">
+                <div id="cart-events">
+                    <div class="cart-event">
+                        <div class="img">
+                            <img src="../images/concerto.jpeg" alt="">
+                        </div>
+                        <div class="dx">
+                            <div class="info">
+                                <span>Titolo</span>
+                                <br>
+                                <span>Data</span> <span>15/18/50</span>
+                            </div>
+                            <div class="prezzo">
+                                <span>
+                                    <i class="fas fa-minus" onclick="riduci_cart(this)"></i>
+                                    <span id="numero_biglietti_cart">1</span>
+                                    <i class="fas fa-plus" onclick="aumenta_cart(this)"></i>
+                                </span>
+                                <span>€58,60</span><span style="display:none;">disp</span><span style="display:none;">unit_price</span><span style="display:none;">id</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="center">
+                    <span>Totale: €</span><span id="total-price">100,45</span>
+                    <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
+                </div>
+            </div>
+            </div>
         </div>
-    </div>
 
     <!-- ============= RISULTATI DI RICERCA ============= -->
     <?php

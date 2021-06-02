@@ -1,13 +1,20 @@
 <?php
-// Verifichiamo se è effettuato il login
 session_start();
-if (!isset($_SESSION['infoUtente'])) {
+// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
+if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
+    $valAdmin = 0;
 } else {
-    $info = $_SESSION["infoUtente"];
+    $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
+    $valAdmin = $info["isAdmin"];
 }
-
+if (empty(isset($_SESSION['infoUtente'])) ){
+    $session = "0";
+}else{
+    $session = isset($_SESSION['infoUtente']);
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -56,10 +63,10 @@ if (!isset($_SESSION['infoUtente'])) {
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown_content">
-                    <a href="#">Concerti</a>
-                    <a href="#">Sport</a>
-                    <a href="#">Teatro</a>
-                    <a href="#">Mostre e Musei</a>
+                    <a href="search.php?Categoria=Musica">Concerti</a>
+                    <a href="search.php?Categoria=Sport">Sport</a>
+                    <a href="search.php?Categoria=Teatro">Teatro</a>
+                    <a href="search.php?Categoria=Musei">Mostre e Musei</a>
                 </div>
             </div>
             <form action="#">
@@ -88,7 +95,7 @@ if (!isset($_SESSION['infoUtente'])) {
 
     </header>
 
-    <body onload="onLoad( <?php echo (isset($_SESSION['infoUtente'])) ?>)">
+    <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
 
         <!-- ============= SLIDE SIDE CART ============= -->
 
@@ -116,7 +123,7 @@ if (!isset($_SESSION['infoUtente'])) {
                                     <span id="numero_biglietti_cart">1</span>
                                     <i class="fas fa-plus" onclick="aumenta_cart(this)"></i>
                                 </span>
-                                <span>€58,60</span><span style="display:none;">disp</span>
+                                <span>€58,60</span><span style="display:none;">disp</span><span style="display:none;">unit_price</span><span style="display:none;">id</span>
                             </div>
                         </div>
                     </div>
@@ -201,7 +208,7 @@ if (!isset($_SESSION['infoUtente'])) {
                 </div>
                 <span id="avvisoPosti">Solo <?php echo $limitePosti ?> posti disponibili</span>
                 <div class="center">
-                    <button onclick="addToCart(<?php echo $id ?>, <?php echo $limitePosti ?>)"><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
+                    <button onclick="addToCart(<?php echo $id ?>, <?php echo $limitePosti ?>, <?php echo $price ?>)"><i class="fas fa-shopping-cart" style="color:white;"></i> Aggiungi al carrello </button>
                 </div>
             </div>
         </div>

@@ -129,10 +129,10 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown_content">
-                    <a href="php/search.php?Categoria=Musica">Concerti</a>
-                    <a href="php/search.php?Categoria=Sport">Sport</a>
-                    <a href="php/search.php?Categoria=Teatro">Teatro</a>
-                    <a href="php/search.php?Categoria=Musei">Mostre e Musei</a>
+                    <a href="php/search.php?Categoria=Musica"><i class="fas fa-microphone-alt"></i> &nbsp;Concerti</a>
+                    <a href="php/search.php?Categoria=Sport"><i class="fas fa-futbol"></i> &nbsp;Sport</a>
+                    <a href="php/search.php?Categoria=Teatro"><i class="fas fa-theater-masks"></i> &nbsp;Teatro</a>
+                    <a href="php/search.php?Categoria=Musei"><i class="fas fa-atom"></i> &nbspMostre e Musei</a>
                 </div>
             </div>
             <form action="php/search.php" method="GET">
@@ -192,38 +192,42 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <!-- ============= SLIDE SIDE CART ============= -->
 
     <div id="slcontent">
-        <div id="menu" class="nav">
-            <h13>Carrello</h13>
-            <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i>
-            </a>
-            <div id="cart-events">
-            <div class="cart-event">
-                <div class="img">
-                    <img src="../images/concerto.jpeg" alt="">
+            <div id="menu" class="nav">
+                <h13>Carrello</h13>
+                <a href="#" class="close" onclick="closeSlideMenu()">
+                    <i class="fas fa-times"></i>
+                </a>
+                <div class="cart-space-bet">
+                <div id="cart-events">
+                    <div class="cart-event">
+                        <div class="img">
+                            <img src="../images/concerto.jpeg" alt="">
+                        </div>
+                        <div class="dx">
+                            <div class="info">
+                                <span>Titolo</span>
+                                <br>
+                                <span>Data</span> <span>15/18/50</span>
+                            </div>
+                            <div class="prezzo">
+                                <span>
+                                    <i class="fas fa-minus" onclick="riduci_cart(this)"></i>
+                                    <span id="numero_biglietti_cart">1</span>
+                                    <i class="fas fa-plus" onclick="aumenta_cart(this)"></i>
+                                </span>
+                                <span>€58,60</span><span style="display:none;">disp</span><span style="display:none;">unit_price</span><span style="display:none;">id</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="dx">
-                    <div class="info">
-                        <span>Titolo</span>
-                        <br>
-                        <span>Data</span> <span>15/18/50</span>
-                    </div>
-                    <div class="prezzo">
-                        <span>
-                            <i class="fas fa-minus" onclick="riduci_cart(<?php echo $price ?>)"></i>
-                            <span id="numero_biglietti_cart">1</span>
-                            <i class="fas fa-plus" onclick="aumenta(<?php echo $price ?>, <?php echo $limitePosti ?>)"></i>
-                        </span>
-                        <span>€58,60</span>
-                    </div>
+                
+                <div class="center">
+                    <span>Totale: €</span><span id="total-price">100,45</span>
+                    <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
                 </div>
             </div>
-            </div>
-            <div class="center">
-                <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
             </div>
         </div>
-    </div>
 
 
     <!-- ============= MAIN ============= -->

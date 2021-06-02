@@ -517,6 +517,11 @@ footer p{
     height: 100%;
     padding: .8em;
 }
+.nav .cart-event .info span:nth-of-type(n+2){
+    color: rgba(0,0,0,.7);
+    font-size: .85em;
+    
+}
 .nav .cart-event span{
     display: inline-block;
     padding: .2em;
@@ -525,6 +530,11 @@ footer p{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* rendo il testo non selezionabile dall'utente per risolvere bug con multiclick*/
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .nav .cart-event .dx span i{
     border-radius: .2em;
