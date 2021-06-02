@@ -36,7 +36,7 @@ if (isset($_COOKIE["unknown"])) {
     header("Location: profile.php");
 }
 
-if(isset($_GET['delete'])) {
+if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
 } else {
     $delete = '0';
@@ -51,7 +51,9 @@ if ($delete == 1) {
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
-    
-    header("Location: profile.php");
+
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
 }
 $conn->close();

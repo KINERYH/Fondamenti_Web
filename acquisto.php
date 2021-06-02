@@ -26,15 +26,22 @@ if ($conn->connect_error) {
 }
 
 $carrello_JSON = $_COOKIE["shopping-cart"];
-// ottengo l'array dal json
+$carrello = json_decode($carrello_JSON);
 //itero l'array e aggiungo l'acquisto di ogni evento al db
-for($i = 0; $i < $lunghezzaArray; $i++){
+for($i = 0; $i < count($carrello); $i++){
+$idEvento = $carrello[$i][0];
 $data = date("Y-m-d");
 $mail = $info["Mail"];
-//$idEvento
-$sql = "INSERT INTO acquisto (Data, idEvento, mailUtente) VALUES ($data, $idEvento, $mail)";
+$sql = "INSERT INTO acquisto (Data, idEvento, mailUtente) VALUES ('$data', '$idEvento', '$mail')";
+if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+    echo "$sql";
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
 }
 
+//TODO: far uscire dal profilo quando lo si cancella e togliere gli echo sopra (righe 37,38,40)
 ?>
 
 <!DOCTYPE html>
@@ -114,9 +121,8 @@ $sql = "INSERT INTO acquisto (Data, idEvento, mailUtente) VALUES ($data, $idEven
     <!-- ============= GRAZIE ============= -->
     <div class="bg-image"></div>
     <div class="grmain">
-        <h13>Grazie per esserti registrato.</h13>
-        <h13>Ti abbiamo mandato una email di conferma sulla tua casella di posta elettronica.</h13>
-        <img class="sendemail" src="images/sendemail.svg">
+        <h13>L'acquisto è andato a buon fine.</h13>
+        <h13>Torna a trovarci.</h13>
     </div>
 
 
