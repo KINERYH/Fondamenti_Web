@@ -12,12 +12,12 @@ if ($conn->connect_error) {
 }
 
 
-if (isset($_COOKIE["unknown"])) {
+if (isset($_COOKIE["changePass"])) {
 
     // cambio pw nel db    
     $info = $_SESSION["infoUtente"];
     $Mail = $info["Mail"];
-    $decodedPass = json_decode($_COOKIE["unknown"]);
+    $decodedPass = json_decode($_COOKIE["changePass"]);
     $new_password = md5($decodedPass);
     $sql = "UPDATE utente SET Password = '$new_password' WHERE utente.Mail = '$Mail'";
 
@@ -30,10 +30,10 @@ if (isset($_COOKIE["unknown"])) {
     // Dovrei aggiornare i dati della sessione con la password modificata poi
 
     // cancello il cookie
-    setcookie("unknown", "boh", time() - 3600, "/");
+    setcookie("changePass", "boh", time() - 3600, "/");
 
     // reindirizzo al profilo
-    header("Location: profile.php");
+    header("Location: profile.php?change=1");
 }
 
 if (isset($_GET['delete'])) {

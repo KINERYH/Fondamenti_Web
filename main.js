@@ -79,7 +79,7 @@ function changePasswordAlert(old_password) {
         // Faccio apparire solo il messaggio --> modificare la password nel db quando lo colleghiamo
     }).then((result) => {
         if (result.isConfirmed) {
-            setCookie("unknown", nuova_pw, 1);
+            setCookie("changePass", nuova_pw, 1);
             Swal.fire({
                 title: 'Password Modificata Correttamente',
                 icon: 'success',
@@ -227,38 +227,35 @@ function closeLeftMenu() {  //chiusura carrello
 
 // ======== Modifica prezzo e numero biglietti in base ai click su + o - ======== //
 
-function riduci(prezzo) {
+function riduci(prezzo,element) {
     var n = document.getElementById("numero_biglietti").textContent;
     n = parseInt(n);
     if (n > 1) {
         n = n - 1;
         document.getElementById("numero_biglietti").innerHTML = n;
         var prezzo = "€" + (n * prezzo).toFixed(2);
-        document.getElementById("prezzo").innerHTML = prezzo;
-        var plus = document.getElementsByClassName("fa-plus");
-        plus[0].style.color = "black";
+        document.getElementById("cart-price").innerHTML = prezzo;
+        element.parentNode.childNodes[5].style.color = "black";
         document.getElementById("avvisoPosti").style.fontSize = "0";
     }
     if (n == 1) {
-        var meno = document.getElementsByClassName("fa-minus");
-        meno[0].style.color = "red";
+        element.style.color = "red";
     }
 
 }
-function aumenta(prezzo, limitePosti) {
+function aumenta(prezzo, limitePosti,element) {
     var n = document.getElementById("numero_biglietti").textContent;
     n = parseInt(n);
     if (n < limitePosti) {
         n = n + 1;
         document.getElementById("numero_biglietti").innerHTML = n;
         var prezzo = "€" + (n * prezzo).toFixed(2);
-        document.getElementById("prezzo").innerHTML = prezzo;
-        var meno = document.getElementsByClassName("fa-minus");
-        meno[0].style.color = "black";
+        document.getElementById("cart-price").innerHTML = prezzo;
+        element.parentNode.childNodes[1].style.color = "black";
+        console.log(element)
     }
     if (n == limitePosti) {
-        var piu = document.getElementsByClassName("fa-plus");
-        piu[0].style.color = "red";
+        element.style.color = "red";
         document.getElementById("avvisoPosti").style.fontSize = ".9em";
     }
 
@@ -410,7 +407,7 @@ function updateCart(){
         lastChild.childNodes[3].childNodes[3].childNodes[5].innerHTML=events[i][2];
         // sostituisco all'evento segnaposto l'id (invisibile)
         lastChild.childNodes[3].childNodes[3].childNodes[6].innerHTML=events[i][0];
-        // sostituisco all'evento segnaposto l'imamgine
+        // sostituisco all'evento segnaposto l'immagine
         lastChild.childNodes[1].childNodes[1].src = events[i][4];
         // sostituisco all'evento segnaposto il numero di biglietti
         lastChild.childNodes[3].childNodes[3].childNodes[1].childNodes[3].innerHTML = events[i][5];
@@ -516,6 +513,11 @@ function riduci_cart(meno){
 function acquista() {
     cart = getCookie("shopping-cart");
     if (cart != null) {
-        window.location = "acquisto.php"
+        var path = window.location.pathname;
+        if(path.includes("/php/")){
+            window.location = "../acquisto.php"
+        } else {
+            window.location = "acquisto.php"
+        }
     }
 }

@@ -2,17 +2,16 @@
 
 #body-signup .container{
     width: 100vw;
-    /* metto il contenuto in 2 colonne */
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 7rem;
-    padding: 5% 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap:wrap ;
 }
-
 .signup-form{
     display: flex;
     align-items: center;
     text-align: center;
+    padding-top: 10em;
 }
 
 .signup-form a{
@@ -74,4 +73,13 @@ input[type="radio"]:checked + label:before{
     width: 16px;
     border: 10px solid white;
     background-color: #38d39f;
+}
+@media (max-width: 768px) {
+  #body-signup .container .img{
+      display: none !important;
+  }
+  #body-signup .container{
+    padding: 3% 3%;
+    flex-direction: column;
+    }
 }

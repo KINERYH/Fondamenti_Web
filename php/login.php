@@ -33,7 +33,7 @@ if(isset($_POST ['login'])){
                 $_SESSION['infoUtente'] = $row;
                 
                 /* REINDIRIZZA*/
-                header("Location: ../profile.php");
+                header("Location: ../index.php");
                 exit();
                 
             }

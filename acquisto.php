@@ -3,9 +3,11 @@ session_start();
 if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
     $valAdmin = 0;
+    $isLogged = false;
 } else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
     $valAdmin = $info["isAdmin"];
+    $isLogged = true;
 }
 if (empty(isset($_SESSION['infoUtente']))) {
     $session = "0";
@@ -25,23 +27,20 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$carrello_JSON = $_COOKIE["shopping-cart"];
-$carrello = json_decode($carrello_JSON);
-//itero l'array e aggiungo l'acquisto di ogni evento al db
-for($i = 0; $i < count($carrello); $i++){
-$idEvento = $carrello[$i][0];
-$data = date("Y-m-d");
-$mail = $info["Mail"];
-$sql = "INSERT INTO acquisto (Data, idEvento, mailUtente) VALUES ('$data', '$idEvento', '$mail')";
-if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    echo "$sql";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
+if ($isLogged) {
+    $carrello_JSON = $_COOKIE["shopping-cart"];
+    $carrello = json_decode($carrello_JSON);
+    //itero l'array e aggiungo l'acquisto di ogni evento al db
+    for ($i = 0; $i < count($carrello); $i++) {
+        $idEvento = $carrello[$i][0];
+        $numBiglietti = $carrello[$i][5];
+        $data = date("Y-m-d");
+        $mail = $info["Mail"];
+        $sql = "INSERT INTO acquisto (Data, idEvento, mailUtente, nBiglietti) VALUES ('$data', '$idEvento', '$mail', '$numBiglietti')";
+    }
+} else {
+    header("location: login.php");
 }
-
-//TODO: far uscire dal profilo quando lo si cancella e togliere gli echo sopra (righe 37,38,40)
 ?>
 
 <!DOCTYPE html>

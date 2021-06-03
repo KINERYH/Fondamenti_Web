@@ -214,10 +214,12 @@ body {
     .main_event{
         justify-content:center;
         flex-wrap: wrap;
+        align-items:center;
+        height: 90vh;
     }
-    .main_event img{
+    .main_event .main_sx img{
         width: 80vw;
-        height: 50vh;
+        height: 35vh;
     }
     .description{
         padding: 2em 3em;

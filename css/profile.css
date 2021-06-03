@@ -5,10 +5,36 @@
     display: flex;
     align-items: center;    
 }
+
+/* ============= HEADER sovrascrivere ============= */
+
+.profile li:nth-of-type(2) button{
+    padding: 1em;
+    border: 1px solid #4ad295;
+    background:transparent;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
+}
+.profile li:nth-of-type(2) button:hover{
+    background-color: #A5F1CE;
+}
+@media (max-width: 768px) {
+    .profile li:nth-of-type(2) button{
+        display: none;
+    }
+}
+.profile li:nth-of-type(3) button{
+    padding: 1em .8em;
+    background-color: #06B063;
+    color: white;
+    transition: background 1s cubic-bezier(.215, .61, .355, 1);
+}
+.profile li:nth-of-type(3) button:hover{
+    background-color: #059e59;
+}
 /* ============= SEZIONE SINISTRA ============= */
 .profile-sx{
     padding: 2em;
-    padding-left: 10em;
+    padding-left: 8em;
     width: 40%;
 }
 .profile-sx h1{
@@ -31,6 +57,11 @@
 .active{
     transform: translateX(12em);
     transition: all .5s cubic-bezier(.215, .61, .355, 1);
+}
+@media (max-width: 1100px) {
+  .active{
+    transform: translateX(8.5em);  
+  }
 }
 
 /* ============= SEZIONE DESTRA ============= */
@@ -89,8 +120,11 @@
 
 /* ============= orders ============= */
 .profile-dx_orders{
-    width: 60%;
+    width: 70%;
     display:none;
+    align-items: center;
+    justify-content: center;
+    padding: 3em;
 }
 table{
     border-collapse: collapse;
@@ -108,6 +142,7 @@ table th{
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: .1rem;
+    vertical-align:middle;
 }
 table td{
     padding: 1em;
@@ -116,4 +151,38 @@ table tbody tr:hover{
     background-color: rgb(255, 220, 255);
     cursor: pointer;
 }
+@media (max-width: 1100px) {
+    #profile-sx{
+        padding-left: 3em;
+    }
+    table {
+        font-size: .9em;
+    }
+}
+@media (max-width: 768px) {
+    .profile-body{
+        flex-direction: column;
+        height: 100%;
+        padding-bottom: 2em;
+    }
+    #profile-dx_img{
+      display:none;
+    }
+    #profile-sx{
+      padding-left: 2em;
+      width: 100%;
+    }
+    .card-info{
+        padding:1em;
+    }
+    #bigl-none{
+        display: none;
+    }
+    table th{
+        padding: .5em;
+    }
+    table td{
+        padding: .5em;
+    }
 
+}

@@ -1,6 +1,6 @@
 #body-addevent .container{
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     /* metto il contenuto in 2 colonne */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -62,5 +62,32 @@ select::-ms-expand{
 .select:hover:after{
     color: #38d39f;
 }
+/* File */
+
+.image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image label{
+    border: 1px solid #4ad295;
+    display: inline-block;
+    padding: 1em;
+    cursor: pointer;
+    border-radius: .5em;
+    background: transparent;
+    transition: all .5s cubic-bezier(.215, .61, .355, 1);
+}
+.image label:hover{
+    background: #7febc7;
+    transform: translateY(-.5em);
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
 
 

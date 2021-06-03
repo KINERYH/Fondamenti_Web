@@ -54,15 +54,21 @@ header{
 }
 
 .profile li:nth-of-type(1) button{
-    padding: 1em;
+    padding: .8em;
     background-color: #FFD700;
     color: white;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
+    width: 120px;
+    font-size: .7em;
 }
 .profile li:nth-of-type(1) button:hover{
     background-color: orange;
 }
-
+@media (max-width: 768px) {
+    .profile li:nth-of-type(1) button{
+        display: none;  
+    }
+}
 
 .profile li:nth-of-type(4) button{
     padding: 1em;
@@ -73,8 +79,13 @@ header{
 .profile li:nth-of-type(4) button:hover{
     background-color: #A5F1CE;
 }
+@media (max-width: 768px) {
+    .profile li:nth-of-type(4) button{
+        display: none;
+    }
+}
 .profile li:nth-of-type(5) button{
-    padding: 1em;
+    padding: 1em .8em;
     background-color: #06B063;
     color: white;
     transition: background 1s cubic-bezier(.215, .61, .355, 1);
@@ -91,9 +102,15 @@ header{
 
 #ciaoIndex{
 border: #49e69f solid 3px;
-padding: 0.7em 0.7em;
+padding: 0.6em 0.6em;
 position: relative;
 right: 1em;
+border-radius: .1em;
+}
+@media (max-width: 768px) {
+  #ciaoIndex{
+      display:none;
+  }
 }
 
 #ciao{
@@ -119,9 +136,8 @@ header ul a{
 header ul li{
     transition: .3s;
 }
-header ul li:nth-of-type(1):hover,
-header ul li:nth-of-type(2):hover{
-    transform: scale(1.05);
+header ul li:hover{
+    transform: translateY(-.2em);
 }
 #SignUp{
     color:#e73c7e;

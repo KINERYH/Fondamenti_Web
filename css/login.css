@@ -28,7 +28,14 @@
 .img img{
     width: 500px;
 }
-
+@media (max-width: 768px) {
+  #body-login .img{
+    display: none;
+  }
+  #body-login .container{
+    padding: 3% 3%;
+    }
+}
 .login-form{
     display: flex;
     align-items: center;

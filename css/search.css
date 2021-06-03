@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content:space-between;
-    background: linear-gradient(135deg, #4AD294 5%, #A5F1CE); ;
+    background: linear-gradient(135deg, #5ee9aa 5%, #A5F1CE); ;
     box-shadow: 5px 5px 10px rgba(0,0,0,.3);
     border-radius: .2em;
 } 

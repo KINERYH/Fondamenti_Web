@@ -17,8 +17,16 @@ $date = $_POST["data"];
 $price = $_POST["prezzo"];
 $place = $_POST["luogo"];
 $limitePosti = $_POST["disponibilita"];
-$image_url = $_POST["img"];
 $categoria = $_POST["format"];
+
+//Prendo l'immagine
+$image = $_FILES["imgUpload"];
+
+$imageName = $image["name"];
+$imageTmpName = $image["tmp_name"];
+$imageSize = $image["size"];
+$imageError = $image["error"];
+$imageType = $image["type"];
 
 
 $sql = "INSERT INTO evento (Nome, Descrizione, Data, Prezzo, Luogo, Disp, Img, Categoria) VALUES ('$title', '$description', '$date', '$price', '$place', '$limitePosti', '0', '$categoria')";
