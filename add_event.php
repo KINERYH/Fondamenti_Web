@@ -105,7 +105,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 			<img src="images/add_event.svg">
 		</div>
 		<div class="addevent-form">
-			<form action="php/add_event.php" method="POST">
+			<form action="php/add_event.php" method="POST" enctype="multipart/form-data">
 				<h2 class="title">Inserisci evento</h2>
 
                 <div class="input-div nome">
