@@ -221,7 +221,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 
                 <div class="center">
                     <span>Totale: €</span><span id="total-price">100,45</span>
-                    <button type="submit" class="btn"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
+                    <button type="submit" class="btn" onclick="acquista()"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
                 </div>
             </div>
             </div>
