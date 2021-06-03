@@ -1,6 +1,5 @@
 <?php
 session_start();
-// $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
 if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
     $valAdmin = 0;
@@ -13,6 +12,18 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     $session = "0";
 }else{
     $session = isset($_SESSION['infoUtente']);
+}
+
+// Se il login non è andato a buon fine avrò un messaggio di errore
+// error_code 1 -> mail non presente nel db
+// error_code 2 -> password errata
+if(isset($_GET["error_code"])){
+    $error_code = $_GET["error_code"];
+    if($error_code == 1){
+        //errore sulla mail
+    } else if ($error_code == 2){
+        //errore sulla password
+    }
 }
 ?>
 
@@ -36,6 +47,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <!-- ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
+    <!-- ============ Javascript =================-->
+    <script src="main.js"></script>
 </head>
 
 

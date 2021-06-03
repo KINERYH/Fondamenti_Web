@@ -24,23 +24,18 @@ if(isset($_POST ['login'])){
     
 
     if ($result->num_rows > 0) { 
-        
-
         // output data of each row
         while ($row = $result->fetch_assoc()) {
             if ($row["Password"] == $password) {
-
                 $_SESSION['infoUtente'] = $row;
-                
                 /* REINDIRIZZA*/
                 header("Location: ../index.php");
                 exit();
-                
             }
-            
+            header("Location: ../login.php?error_code=2");
         }
     } else {
-        echo "0 results";
+        header("Location: ../login.php?error_code=1");
     }
     
     $conn->close();
