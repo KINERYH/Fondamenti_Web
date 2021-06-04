@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "livexperience";
+$dbname = "my_livexperience";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
@@ -40,7 +40,6 @@ if(in_array($imageActualExt, $allowedExt)){
     if ($imageSize < 100000000){
       // Creo un nome univoco per l'immagine
       $imageNewName = uniqid('', true). ".". $imageActualExt;
-      echo $imageNewName;
       $imageDestination ='../images/eventImages/' .  $imageNewName;
       $imgLink = "https://livexperience.altervista.org/images/eventImages/" . $imageNewName;
       move_uploaded_file($imageTmpName, $imageDestination);
@@ -56,7 +55,6 @@ if(in_array($imageActualExt, $allowedExt)){
 
 
 $sql = "INSERT INTO evento (Nome, Descrizione, Data, Prezzo, Luogo, Disp, Img, Categoria) VALUES ('$title', '$description', '$date', '$price', '$place', '$limitePosti', '$imgLink', '$categoria')";
-
 header("Location: ../add_event.php");
 
 if ($conn->query($sql) === TRUE) {

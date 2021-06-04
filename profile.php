@@ -24,7 +24,7 @@ if (isset($_GET["change"])) {
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "livexperience";
+$dbname = "my_livexperience";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
