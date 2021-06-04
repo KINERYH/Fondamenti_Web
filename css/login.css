@@ -28,6 +28,13 @@
 .img img{
     width: 500px;
 }
+
+.input-div .error_code{
+    color: red;
+    position: absolute;
+    left: 15%;
+    bottom: -.1em;
+}
 @media (max-width: 768px) {
   #body-login .img{
     display: none;

@@ -183,7 +183,7 @@ if(isset($_GET["error_code"])){
                             <input type="email" required class="input" name="email">
                             <?php if($error_code == 1){
                                    //errore sulla mail
-                                   echo "la mail inserita non è corretta";
+                                   echo "<span class=\"error_code\">la mail inserita non è corretta</span>";
                             }?>
                         </div>
                     </div>
@@ -196,7 +196,7 @@ if(isset($_GET["error_code"])){
                             <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" class="input">
                             <?php if ($error_code == 2){
                                 //errore sulla password
-                                echo "la password inserita non è corretta";
+                                echo "<span class=\"error_code\">la password inserita non è corretta</span>";
                             }?>
                         </div>
                     </div>
