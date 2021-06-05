@@ -235,7 +235,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         $eventi .= "<div class=\"event\">
             <div class=\"event-sx\">
                 <div class=\"img\">
-                <a href=\"event.php?id=" . $row["ID"] . "\"><img src=" . $row["Img"] . "/></a>
+                <a href=\"event.php?id=" . $row["ID"] . "\"><img src=" . $row["Img"] . "></a>
                 </div>
                 <div class=\"info\">
                     <h2>" . $row["Nome"] . "</h2>
