@@ -343,13 +343,10 @@ function addToCart(id,disp,unit_price){
     //controllo se esiste il cookie del carrello
     products = getCookie("shopping-cart");
     if (products == null) { // se il carrello è vuoto
-        console.log("sono nel ramo del null");
-        console.log(getCookie("shopping-cart"));
         products = [];
         products.push(product);
     } else {  // se il carrello non è vuoto   
         // controllo se l'evento che sto inserendo è gia presente nel carrello
-        console.log("sono nel ramo del non null");
         var flag = 0;
         for (let i = 0; i < products.length; i++) {
             if (products[i][0] == id) { // l'evento è gia presente

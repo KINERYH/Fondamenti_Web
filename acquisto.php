@@ -34,9 +34,23 @@ if ($isLogged) {
     for ($i = 0; $i < count($carrello); $i++) {
         $idEvento = $carrello[$i][0];
         $numBiglietti = $carrello[$i][5];
-        $data = date("Y-m-d");
         $mail = $info["Mail"];
-        $sql = "INSERT INTO acquisto (Data, idEvento, mailUtente, nBiglietti) VALUES ('$data', '$idEvento', '$mail', '$numBiglietti')";
+        $sql = "INSERT INTO acquisto (idEvento, mailUtente, nBiglietti) VALUES ('$idEvento', '$mail', '$numBiglietti')";
+        if ($conn->query($sql) === TRUE) {
+            // Elimino il cookie del carrello dopo aver fatto l'acquisto
+            setcookie("shopping-cart", "", time() - 3600, "/");
+            //Riduco il numero di biglietti acquistati da quelli disponibili dell'evento
+            $disp = $carrello[$i][6];
+            $newDisp = $disp - $numBiglietti;
+            $riducoBiglietti = "UPDATE evento SET Disp = $newDisp WHERE evento.ID = $idEvento";
+            if($conn->query($riducoBiglietti) === TRUE){
+                //echo "New record created successfully";
+            } else {
+                echo "Error: " . $riducoBiglietti . "<br>" . $conn->error;
+            }
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 } else {
     header("location: login.php");
