@@ -48,8 +48,8 @@
 .event .info a{
     padding: 0;
 }
-.event .info h1{
-    font-size: 5em;
+.event .info h2{
+    font-size: 1.8em;
 }
 .event .info span{
     display: inline-block;

@@ -75,17 +75,17 @@ footer{
 
 @media (max-width: 768px) {
     .blur_img{
-        height: 25vh;
+        height: 20vh;
         width: 50vw;
     }
     
     .evento .blur_img img:nth-of-type(1){
         background-size: cover;
-        height: 25vh;
+        height: 20vh;
         width: 50vw;
     }
     .evento .blur_img img:nth-of-type(2){
-        height: 25vh;
+        height: 20vh;
         width: 50vw;
     }
     
