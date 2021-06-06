@@ -41,6 +41,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <!-- ============ Javascript =================-->
     <script src="main.js"></script>
 
+
 </head>
 
 <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">

@@ -190,8 +190,8 @@ function arrowActive(arrowId) {
 
 // Imposto larghezza del menu del carrello al click del bottone
 function openSlideMenu() {
-    document.getElementById('menu').style.width = '400px';
-    document.getElementById('slcontent').style.marginRight = '400px';
+    document.getElementById('menu').style.width = '360px';
+    document.getElementById('slcontent').style.marginRight = '360px';
     var overlay = document.createElement('div');
     overlay.id = 'overlay-cart';
     document.body.appendChild(overlay);

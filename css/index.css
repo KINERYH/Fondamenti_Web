@@ -659,13 +659,19 @@ footer p{
     .main .main_dx{
         float: none;
         width:100%;
-        height: 85vh;
+        height: 80vh;
         align-items: flex-end;
         padding: 0;
     }
+    .main{
+        margin-top: -2em;
+    }
+    .main_dx .title{
+        font-size: 3.1em !important;
+    }
 
     .slider .sub_title {
-        margin-top: 2em !important;
+        margin-top: 1em !important;
         margin-bottom: -1em !important;
     }
     header ul {
