@@ -47,8 +47,7 @@ if(isset($_GET["error_code"])){
     <!-- ICON -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
-    <!-- ============ Javascript =================-->
-    <script src="main.js"></script>
+    
 </head>
 
 
@@ -205,9 +204,9 @@ if(isset($_GET["error_code"])){
                  </form>
             </div>
         </div>
-        <!-- funzione javascript -->
-        <script type="text/javascript" src="main.js"></script>
-    </div>
+        <!-- ============ Javascript =================-->
+    <script src="main.js"></script>
+        </div>
 
 
 

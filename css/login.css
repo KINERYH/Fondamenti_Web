@@ -40,8 +40,13 @@
     display: none;
   }
   #body-login .container{
-    padding: 3% 3%;
+    padding: 3% 3%; 
+    grid-gap: 0rem;
     }
+    #body-login .title{
+        font-size: 3em;
+    }
+
 }
 .login-form{
     display: flex;

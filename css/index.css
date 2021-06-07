@@ -329,6 +329,12 @@ footer .container h8{
     font-weight: 500;
     margin-bottom: 15px;
 }
+@media (max-width: 768px) {
+    footer .container .sec{
+        width: 100% !important;
+    }
+}
+
 /*linea rossa*/
 footer .container h8:before{
     content: '';

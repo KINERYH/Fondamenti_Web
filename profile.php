@@ -281,11 +281,12 @@ if ($isChanged == 1) {
                     $result = $conn->query($sql);
                     $acquisti = "";
                     while ($row = $result->fetch_assoc()) {
-                        // non abbiamo messo nel db quanti biglietti sono acquistati e quali posti sono stati selezionati
+                        $timestampAcquisto = $row["DataAcquisto"];
+                        $dataAcquisto = substr($dataAcquisto, 0, 10);
                         $acquisti .= "<tr><td>" . $row["Nome"] . "</td>
                         <td>€" . number_format($row["Prezzo"], 2) . "</td>
                         <td>" . $row["Data"] . "</td>
-                        <td>" . $row["DataAcquisto"] . "</td>
+                        <td>" . $dataAcquisto . "</td>
                         <td>" . $row["nBiglietti"] . "</td></tr>";
                     }
                     ?>
