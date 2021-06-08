@@ -9,7 +9,7 @@ function focusFunc() {
     parent.classList.add('focus');
 }
 
-// Elimino effetto al click di un diverso elemento
+// Elimino l'effetto al click di un diverso elemento
 function blurFunc() {
     let parent = this.parentNode.parentNode;
     if (this.value == "") {
@@ -192,14 +192,17 @@ function arrowActive(arrowId) {
 function openSlideMenu() {
     document.getElementById('menu').style.width = '360px';
     document.getElementById('slcontent').style.marginRight = '360px';
+    // aggiungo l'overlay per oscurare il resto del sito
     var overlay = document.createElement('div');
     overlay.id = 'overlay-cart';
     document.body.appendChild(overlay);
 }
-function closeSlideMenu() {  //chiusura carrello
+//chiusura carrello al click del bottone
+function closeSlideMenu() { 
     document.getElementById('menu').style.width = '0';
     document.getElementById('slcontent').style.marginRight = '0';
     document.getElementById('overlay-cart').style.background = 'transparent';
+    // rimuovo l'overlay che oscura il resto del sito
     setTimeout(
         function () {
             document.getElementById('overlay-cart').remove();
@@ -210,6 +213,7 @@ function closeSlideMenu() {  //chiusura carrello
 
 function openLeftMenu() {  //apertura carrello
     document.getElementById('left_menu').style.width = '350px';
+    // aggiungo l'overlay per oscurare il resto del sito
     var overlay = document.createElement('div');
     overlay.id = 'overlay-cart';
     document.body.appendChild(overlay);
@@ -217,6 +221,7 @@ function openLeftMenu() {  //apertura carrello
 function closeLeftMenu() {  //chiusura carrello
     document.getElementById('left_menu').style.width = '0';
     document.getElementById('overlay-cart').style.background = 'transparent';
+    // rimuovo l'overlay che oscura il resto del sito
     setTimeout(
         function () {
             document.getElementById('overlay-cart').remove();
@@ -225,7 +230,7 @@ function closeLeftMenu() {  //chiusura carrello
 
 
 
-// ======== Modifica prezzo e numero biglietti in base ai click su + o - ======== //
+// ============ Modifica prezzo e numero biglietti in base ai click su + o - ============ //
 
 function riduci(prezzo,element) {
     var n = document.getElementById("numero_biglietti").textContent;

@@ -45,7 +45,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 </head>
 
 <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
-    <!-- ========= LEFT MENU ========== -->
+    <!-- ============= LEFT MENU ============== -->
     <div id="left_menu">
         <!-- logo e chiusura -->
         <div class="space_between">
@@ -58,7 +58,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 <i class="fas fa-times" onclick="closeLeftMenu()"></i>
             </div>
         </div>
-        <!-- menu -->
+        <!-- ======== menu ======== -->
         <div class="space_around">
             <ul>
                 <a href="php/search.php?Categoria=Musica">
@@ -234,7 +234,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <div class="main_dx">
             <div id="main_content">
                 <h1 class="title"> LiveXperience </h1>
-                <p class="sub_title"> Prenota i tuoi concerti con facilità tramite la piattaforma migliore al mondo</p>
+                <p class="sub_title"> Prenota i tuoi eventi con facilità e sicurezza su liveXperience</p>
             </div>
         </div>
     </div>
@@ -251,7 +251,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     shuffle($eventi_musica);
 
     // Query da eseguire CAMBIARE CATEGORIAAAAAA
-    $sql = "SELECT * FROM evento WHERE Categoria = 'Musica'";
+    $sql = "SELECT * FROM evento WHERE Categoria = 'Sport'";
     $sport = $conn->query($sql);
     while ($row = $sport->fetch_assoc()) {
         $eventi_sport[] = $row;
