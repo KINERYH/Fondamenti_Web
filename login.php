@@ -1,11 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
-    error_reporting(0);
+session_start(); //Inizializzo la sessione
+if (!isset($_SESSION['infoUtente'])) { 
+    error_reporting(0);   //Non riporta l'errore
     $valAdmin = 0;
 } else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
-    $valAdmin = $info["isAdmin"];
+    $valAdmin = $info["isAdmin"];  //Prendo il valore di "isAdmin" dal database (0 / 1)
     header("location:index.php"); //Se si è loggati, se cerco di andare in login, vengo reinderizzato nella home
 }
 if (empty(isset($_SESSION['infoUtente'])) ){
@@ -50,13 +50,13 @@ if(isset($_GET["error_code"])){
     
 </head>
 
-
-<body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
+<!-- Quando la pagina si ricarica, controllo se l'utente è un ADMIN -->
+<body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">  
 
     <!-- ============= HEADER ============= -->
     <header>
         <div class="hamburger">
-            <i class="fas fa-bars" onclick="openLeftMenu()"></i>
+            <i class="fas fa-bars" onclick="openLeftMenu()"></i>  <!-- Icona per aprire il menu a sinistra (Solo mobile) -->
         </div>
         <!-- logo -->
         <div class="logo">
@@ -67,7 +67,7 @@ if(isset($_GET["error_code"])){
         <!-- barra di ricerca -->
         <div class="search-container">
             <div class="dropdown">
-                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
+                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>  <!-- Bottone Categorie -->
                 <div class="dropdown_content">
                     <a href="php/search.php?Categoria=Musica"><i class="fas fa-microphone-alt"></i> &nbsp;Concerti</a>
                     <a href="php/search.php?Categoria=Sport"><i class="fas fa-futbol"></i> &nbsp;Sport</a>
@@ -85,12 +85,12 @@ if(isset($_GET["error_code"])){
         <ul class="profile">
 
             <div id="ciaoIndex">
-                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>
+                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>  <!-- Stampa del nome+cognome dell'utente loggato -->
             </div>
-            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>
-            <li><a href="login.php" id="login"> Log in </a></li>
-            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
-            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li> <!-- Bottone aggiungi evento -->
+            <li><a href="login.php" id="login"> Log in </a></li> <!-- Bottone Login -->
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li> <!-- Bottone Signup -->
+            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li> <!-- Bottone Profilo -->
         </ul>
     </header>
 
@@ -104,11 +104,13 @@ if(isset($_GET["error_code"])){
                 </a>
             </div>
             <div id="close_left_menu">
-                <i class="fas fa-times" onclick="closeLeftMenu()"></i>
+                <i class="fas fa-times" onclick="closeLeftMenu()"></i> <!-- "X" di chiusura -->
             </div>
         </div>
-        <!-- menu -->
+        <!-- MENU -->
         <div class="space_around">
+
+            <!-- Categorie -->
             <ul>
                 <a href="php/search.php?Categoria=Musica">
                     <li>
@@ -130,6 +132,8 @@ if(isset($_GET["error_code"])){
                         <i class="fas fa-atom"></i> &nbsp;Mostre e Musei
                     </li>
                 </a>
+
+                <!-- Barra di ricerca -->
                 <li>
                     <form action="php/search.php" method="GET">
                         <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
@@ -137,6 +141,7 @@ if(isset($_GET["error_code"])){
                     </form>
                 </li>
             </ul>
+            <!-- Link per andare rispettivamente in "login", "signup", "profilo" ed uno per fare il logout-->
             <ul>
                 <a href="login.php">
                     <li>
@@ -163,15 +168,21 @@ if(isset($_GET["error_code"])){
     </div>
 
     <div id="body-login">
+    <!-- Immagine dell'onda sullo sfondo  -->
         <img class="onda" src="images/wave.png">
         <div class="container">
+        <!-- Immagine sulla colonna sinistra -->
             <div class="img">
                 <img src="images/bg.svg">
             </div>
+            <!-- Colonna destra del form -->
             <div class="login-form">
                 <form action="php/login.php" method="POST">
+                <!-- Immagine Avatar -->
                     <img class="avatar" src="images/avatar.svg">
+                    <!-- Titolo del form -->
                     <h2 class="title">Benvenuto!</h2>
+                    <!-- Icona user + placeholder email -->
                     <div class="input-div email">
                         <!-- i = icone -->
                         <div class="i">
@@ -179,27 +190,33 @@ if(isset($_GET["error_code"])){
                         </div>
                         <div class="div">
                             <h5>Email</h5>
-                            <input type="email" required class="input" name="email">
+                            <input type="email" required class="input" name="email">  <!-- Uso required per ricordare all'utente che non può lasciare il campo vuoto -->
                             <?php if($error_code == 1){
                                    //errore sulla mail
-                                   echo "<span class=\"error_code\">la mail inserita non è corretta</span>";
+                                   echo "<span class=\"error_code\">la mail inserita non è corretta</span>"; //Mostro un messaggio di errore all'utente
                             }?>
                         </div>
                     </div>
+                    <!-- Icona lucchetto + placeholder password -->
                     <div class="input-div password">
                         <div class="i">
                             <i class="fas fa-lock"></i>
                         </div>
                         <div class="div">
                             <h5>Password</h5>
+                            <!-- Con "pattern" indico che la password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero, 
+                            con minlength e maxlength indico che deve essere di minimo 6 e massimo 16 caratteri, 
+                            uso required per ricordare all'utente che non può lasciare il campo vuoto -->
                             <input type="password" name="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" title="La password deve contenere almeno 1 lettera maiuscola, 1 minuscola e 1 numero" required minlength="6" maxlength="16" class="input">
                             <?php if ($error_code == 2){
                                 //errore sulla password
-                                echo "<span class=\"error_code\">la password inserita non è corretta</span>";
+                                echo "<span class=\"error_code\">la password inserita non è corretta</span>";  //Mostro un messaggio di errore all'utente
                             }?>
                         </div>
                     </div>
+                    <!-- Bottone LOGIN -->
                     <input type="submit" class="btn" value="Login" name="login">
+                    <!-- Link per essere indirizzati in "signup" in caso non si è registrati -->
                     <a href="signup.php">Non hai un account? Clicca qui per crearne uno!</a>
                  </form>
             </div>
@@ -213,6 +230,7 @@ if(isset($_GET["error_code"])){
 <!-- ============= FOOTER ============= -->
 <footer>
     <div class="container">
+    <!-- 1° colonna -->
         <div class="sec aboutus">
             <h8>About Us</h8>
             <p>LiveXperience è specializzato nella vendita di biglietti <br>
@@ -221,6 +239,8 @@ if(isset($_GET["error_code"])){
                 di partecipare a un evento pubblico acquistando il proprio biglietto <br>
                 in modo facile e sicuro.</p>
         </div>
+
+        <!-- 2° colonna -->
         <div class="sec link">
             <h8>Link Utili</h8>
             <ul>
@@ -228,17 +248,22 @@ if(isset($_GET["error_code"])){
                 <li><a href="#">Informative Cookie</a></li>
             </ul>
         </div>
+
+        <!-- 3° colonna -->
         <div class="sec contatti">
             <h8>Contatti</h8>
             <ul class="info">
+            <!-- ARIA (Accessible Rich Internet Applications) è utilizzato per rendere più facilmente accessibile
+            l'elemento a persone disabili. L'icona ad esempio non verrà letta nel caso in cui si utilizza 
+            uno "screen reader", così da far leggere solo l'informazione (email, telefono, P.IVA) -->
                 <li>
                     <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
-                    <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                    <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p> <!-- Al click dell'email si chiede all'utente se si vuole mandare un'email-->
                 </li> 
                 <li>
                     <span><i class="fas fa-phone" aria-hidden="true"></i></span>
-                    <p><a href="tel:080612224">080 612 224</a><br>
-                     <a href="tel:332622778">+39 332 622 778</a></p>
+                    <p><a href="tel:080612224">080 612 224</a><br>  <!-- Al click del numero di telefono si chiede all'utente se si vuole telefonare a questo numero-->
+                     <a href="tel:332622778">+39 332 622 778</a></p>  <!-- Al click del numero di telefono si chiede all'utente se si vuole telefonare a questo numero-->
                 </li>
                 <li>
                     <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>

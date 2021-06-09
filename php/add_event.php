@@ -53,9 +53,9 @@ if(in_array($imageActualExt, $allowedExt)){
   echo "Non puoi caricare file con questa estensione";
 }
 
-
+//Inserisco i dati inseriti dall'utente nel database
 $sql = "INSERT INTO evento (Nome, Descrizione, Data, Prezzo, Luogo, Disp, Img, Categoria) VALUES ('$title', '$description', '$date', '$price', '$place', '$limitePosti', '$imgLink', '$categoria')";
-header("Location: ../add_event.php");
+header("Location: ../add_event.php");  //Dopo aver aggiunto l'evento, ricarico la pagina
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
