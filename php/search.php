@@ -1,16 +1,20 @@
 <?php
-session_start();
+session_start(); //inizializzo la sessione
 // $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
-if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
+if (!isset($_SESSION['infoUtente'])) { // controllo se esiste già una sessione con i relativi dati dell'utente
+    //Non riporta l'errore nel caso non esista la sesione
     error_reporting(0);
+    //setto isAdmin a zero per indicare che non devo mostrare il bottone aggiungi evento
     $valAdmin = 0;
-} else {
+} else { //la sessione esiste
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
-    $valAdmin = $info["isAdmin"];
+    $valAdmin = $info["isAdmin"]; //Prendo il valore di isAdmin [1=Admin, 0= no admin]
 }
+// se la sessione è vuota
 if (empty(isset($_SESSION['infoUtente'])) ){
+    // imposto session a zero
     $session = "0";
-}else{
+}else{ // se la sessione non è vuota
     $session = isset($_SESSION['infoUtente']);
 }
 ?>
@@ -48,9 +52,9 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 
 <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
     
-    <!-- ========= LEFT MENU ========== -->
+    <!-- =================== LEFT MENU ==================== -->
     <div id="left_menu">
-        <!-- logo e chiusura -->
+        <!-- logo e chiusura left menu -->
         <div class="space_between">
             <div class="logo">
                 <a href="../index.php">
@@ -64,26 +68,31 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <!-- menu -->
         <div class="space_around">
             <ul>
+                <!-- Musica -->
                 <a href="search.php?Categoria=Musica">
                     <li>
                         <i class="fas fa-microphone-alt"></i> &nbsp;Concerti
                     </li>
                 </a>
+                <!-- Sport -->
                 <a href="search.php?Categoria=Sport">
                     <li>
                         <i class="fas fa-futbol"></i> &nbsp;Sport
                     </li>
                 </a>
+                <!-- Teatro -->
                 <a href="search.php?Categoria=Teatro">
                     <li>
                         <i class="fas fa-theater-masks"></i> &nbsp;Teatro
                     </li>
                 </a>
+                <!-- Musei -->
                 <a href="search.php?Categoria=Musei">
                     <li>
                         <i class="fas fa-atom"></i> &nbsp;Mostre e Musei
                     </li>
                 </a>
+                <!-- barra di ricerca -->
                 <li>
                     <form action="./search.php" method="GET">
                         <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
@@ -92,21 +101,25 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 </li>
             </ul>
             <ul>
+                <!-- Login -->
                 <a href="../login.php">
                     <li>
                         <i class="fas fa-sign-in-alt"></i> &nbsp;Log in
                     </li>
                 </a>
+                <!-- Signup -->
                 <a href="../signup.php">
                     <li>
                         <i class="fas fa-user-plus"></i>&nbsp;Sign Up
                     </li>
                 </a>
+                <!-- Profilo -->
                 <a href="../profile.php">
                     <li>
                         <i class="fas fa-user"></i> &nbsp;Profilo
                     </li>
                 </a>
+                <!-- Logout -->
                 <a href="logout.php">
                     <li>
                         <i class="fas fa-sign-out-alt"></i> &nbsp;Log out
@@ -117,6 +130,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     </div>
     <!-- ============= HEADER ============= -->
     <header>
+        <!-- bottone per aprire il menu [SOLO MOBILE] -->
         <div class="hamburger">
             <i class="fas fa-bars" onclick="openLeftMenu()"></i>
         </div>
@@ -126,8 +140,9 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 liveXperience
             </a>
         </div>
-        <!-- barra di ricerca -->
+        <!-- Ricerca -->
         <div class="search-container">
+            <!-- menu a tendina con categorie -->
             <div class="dropdown">
                 <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
                 <div class="dropdown_content">
@@ -137,6 +152,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     <a href="search.php?Categoria=Musei"><i class="fas fa-atom"></i> &nbspMostre e Musei</a>
                 </div>
             </div>
+            <!-- barra di ricerca -->
             <form action="search.php" method="GET">
                 <input type="text" placeholder="Cerca il tuo evento" name="search_bar">
                 <button type="submit"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwNSA1MTIuMDA1IiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDA1IDUxMi4wMDU7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNNTA1Ljc0OSw0NzUuNTg3bC0xNDUuNi0xNDUuNmMyOC4yMDMtMzQuODM3LDQ1LjE4NC03OS4xMDQsNDUuMTg0LTEyNy4zMTdjMC0xMTEuNzQ0LTkwLjkyMy0yMDIuNjY3LTIwMi42NjctMjAyLjY2Nw0KCQkJUzAsOTAuOTI1LDAsMjAyLjY2OXM5MC45MjMsMjAyLjY2NywyMDIuNjY3LDIwMi42NjdjNDguMjEzLDAsOTIuNDgtMTYuOTgxLDEyNy4zMTctNDUuMTg0bDE0NS42LDE0NS42DQoJCQljNC4xNiw0LjE2LDkuNjIxLDYuMjUxLDE1LjA4Myw2LjI1MXMxMC45MjMtMi4wOTEsMTUuMDgzLTYuMjUxQzUxNC4wOTEsNDk3LjQxMSw1MTQuMDkxLDQ4My45MjgsNTA1Ljc0OSw0NzUuNTg3eg0KCQkJIE0yMDIuNjY3LDM2Mi42NjljLTg4LjIzNSwwLTE2MC03MS43NjUtMTYwLTE2MHM3MS43NjUtMTYwLDE2MC0xNjBzMTYwLDcxLjc2NSwxNjAsMTYwUzI5MC45MDEsMzYyLjY2OSwyMDIuNjY3LDM2Mi42Njl6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPC9zdmc+DQo=" height="13px" width="13px" /></button>
@@ -144,12 +160,17 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         </div>
         <!-- utility per il profilo + carrello-->
         <ul class="profile">
+            <!-- se sei loggato esce Ciao + "nome cognome" -->
             <div id="ciaoIndex"><p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p></div>
+            <!-- aggiungi evento solo se sei amministratore -->
             <li><a href="../add_event.php" id="add_event"><button><i class="fas fa-plus-circle"> AGGIUNGI EVENTO</i></button></a></li>
+            <!-- Log in -->
             <li><a href="../login.php" id="login"> Log in </a></li>
+            <!-- Signu up -->
             <li><a href="../signup.php" id="SignUp"> Sign Up </a></li>
+            <!-- Profilo -->
             <li><a href="../profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
-            <!-- carrello -->
+            <!-- bottone per aprire carrello -->
             <li>
                 <div class="slide" id="carrello">
                     <button onclick="openSlideMenu()"><i class="fas fa-shopping-cart"></i></button>
@@ -161,15 +182,18 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 
     <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
 
-    <!-- ============= SLIDE SIDE CART ============= -->
+    <!-- ================= SLIDE SIDE CART ================= -->
 
     <div id="slcontent">
             <div id="menu" class="nav">
+            <!-- titolo -->
                 <h13>Carrello</h13>
+                <!-- pulsante chiusura -->
                 <a href="#" class="close" onclick="closeSlideMenu()">
                     <i class="fas fa-times"></i>
                 </a>
                 <div class="cart-space-bet">
+                <!-- ====== EVENTI NEL CARRELLO -->
                 <div id="cart-events">
                     <div class="cart-event">
                         <div class="img">
@@ -192,7 +216,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                         </div>
                     </div>
                 </div>
-                
+                <!-- TOTALE CARRELLO -->
                 <div class="center">
                     <span>Totale: €</span><span id="total-price">0</span>
                     <button type="submit" class="btn" onclick="acquista()"><i class="fas fa-lock"></i>&nbsp;&nbsp;Acquista</button>
@@ -202,6 +226,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         </div>
 
     <!-- ============= RISULTATI DI RICERCA ============= -->
+
+    <!-- connessione al db -->
     <?php
     $servername = "localhost";
     $username = "root";
@@ -215,29 +241,40 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     }
     // Verifico se l'utente ha effettuato una ricerca o ha cliccato su una categoria 
     $isCategoria;
+    // se l'utente sta cercando per CATEGORIA
     if (!(is_null(@$_GET['Categoria']))) {
         $categoria = $_GET['Categoria'];
+        // query per filtrare tutti gli eventi per categoria
         $sql = " SELECT * FROM evento WHERE Categoria = '$categoria' ";
+        // risultati in una variabile
         $result = $conn->query($sql);
+        // segno che l'utente ha cercato per Categoria
         $isCategoria = true;
     }
-    
+    // se l'utente sta cercando tramite BARRA DI RICERCA
     if (!(is_null(@$_GET['search_bar']))) {
         $search = $_GET['search_bar'];
+        // query per filtrare secondo nome o luogo, quello che ha inserito nella barra di ricerca
         $sql = "SELECT * FROM evento WHERE Nome LIKE '%$search%' OR Luogo LIKE '%$search%' ";
+        // risultati in una variabile
         $result = $conn->query($sql);
+        // segno che l'utente ha cercato utilizzando la barra di ricerca, quindi nome o luogo
         $isCategoria = false;
     }
     
     // Per ogni risultato della query aggiungo in coda a $eventi una serie di div che compongono la singola riga visualizzata nella ricerca
     $eventi = "";
+    // Ciclo il vettore degli eventi risultato della query
+    // concatenando tag HTML e variabili PHP per creare una variabile da stampare poi in HTMl
     while ($row = $result->fetch_assoc()) {
         $subDesc = substr($row["Descrizione"], 0, 150);
         $eventi .= "<div class=\"event\">
             <div class=\"event-sx\">
+                <!-- immagine -->
                 <div class=\"img\">
                 <a href=\"event.php?id=" . $row["ID"] . "\"><img src=" . $row["Img"] . "></a>
                 </div>
+                <!-- info -->
                 <div class=\"info\">
                     <h2>" . $row["Nome"] . "</h2>
                     <span>" . $row["Luogo"] . "</span>
@@ -245,6 +282,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     <p>" . $subDesc . "... <a href=\"event.php?id=" . $row["ID"] . "\">scopri di più</a></p>
                 </div>
             </div>
+                <!-- Prezzo e biglietti rimasti + bottone per andare all'evento -->
                 <div class=\"acquista\">
                     <span>€ " . number_format($row["Prezzo"], 2) . "</span>
                     <span>" . $row["Disp"] . " biglietti rimasti</span>
@@ -258,11 +296,13 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <h3>La tua ricerca per <strong><?php 
             if ($isCategoria){
                 echo $categoria;
-            } else {echo $search;}
-             
+            } else {echo $search;}             
         ?> </strong>
         ha prodotto i seguenti risultati: </h3>
-        <?php echo $eventi ?>
+        <?php 
+            // stampo la variabile creata in PHP in precedenza
+            echo $eventi 
+        ?>
     </div>
 
     <!-- ============= FOOTER ============= -->

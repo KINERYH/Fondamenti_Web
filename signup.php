@@ -1,12 +1,12 @@
 <?php
-session_start();
+session_start(); //Inizializzo la sessione
 // $check = (!isset($_SESSION['infoUtente']) || empty($_SESSION['infoUtente']));
 if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     error_reporting(0);
     $valAdmin = 0;
 } else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
-    $valAdmin = $info["isAdmin"];
+    $valAdmin = $info["isAdmin"];  //Prendo il valore di "isAdmin" dal database (0 / 1)
 }
 if (empty(isset($_SESSION['infoUtente'])) ){
     $session = "0";
@@ -38,13 +38,13 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     
 </head>
 
-
+<!-- Quando la pagina si ricarica, controllo se l'utente è un ADMIN -->
 <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
 
     <!-- ============= HEADER ============= -->
     <header>
         <div class="hamburger">
-            <i class="fas fa-bars" onclick="openLeftMenu()"></i>
+            <i class="fas fa-bars" onclick="openLeftMenu()"></i>  <!-- Icona per aprire il menu a sinistra (Solo mobile) -->
         </div>
         <!-- logo -->
         <div class="logo">
@@ -55,7 +55,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <!-- barra di ricerca -->
         <div class="search-container">
             <div class="dropdown">
-                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
+                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>  <!-- Bottone Categorie -->
                 <div class="dropdown_content">
                     <a href="php/search.php?Categoria=Musica"><i class="fas fa-microphone-alt"></i> &nbsp;Concerti</a>
                     <a href="php/search.php?Categoria=Sport"><i class="fas fa-futbol"></i> &nbsp;Sport</a>
@@ -73,12 +73,12 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <ul class="profile">
 
             <div id="ciaoIndex">
-                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>
+                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>  <!-- Stampa del nome+cognome dell'utente loggato -->
             </div>
-            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>
-            <li><a href="login.php" id="login"> Log in </a></li>
-            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
-            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>  <!-- Bottone aggiungi evento -->
+            <li><a href="login.php" id="login"> Log in </a></li>  <!-- Bottone Login -->
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>  <!-- Bottone Signup -->
+            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>  <!-- Bottone Profilo -->
         </ul>
     </header>
     <!-- ========= LEFT MENU ========== -->
@@ -91,11 +91,13 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                 </a>
             </div>
             <div id="close_left_menu">
-                <i class="fas fa-times" onclick="closeLeftMenu()"></i>
+                <i class="fas fa-times" onclick="closeLeftMenu()"></i> <!-- "X" di chiusura -->
             </div>
         </div>
-        <!-- menu -->
+        <!-- MENU -->
         <div class="space_around">
+
+            <!-- Categorie -->
             <ul>
                 <a href="php/search.php?Categoria=Musica">
                     <li>
@@ -117,6 +119,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                         <i class="fas fa-atom"></i> &nbsp;Mostre e Musei
                     </li>
                 </a>
+
+                <!-- Barra di ricerca -->
                 <li>
                     <form action="php/search.php" method="GET">
                         <input name="search_bar" type="text" placeholder="Cerca il tuo evento" name="search">
@@ -124,6 +128,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     </form>
                 </li>
             </ul>
+            <!-- Bottone per andare rispettivamente in "login", "signup", "profilo" ed uno per fare il logout-->
             <ul>
                 <a href="login.php">
                     <li>
@@ -151,15 +156,22 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 
 
 <div id="body-signup">
+<!-- Immagine dell'onda sullo sfondo  -->
     <img class="onda" src="images/wave.png">
 	<div class="container">
+    <!-- Immagine sulla colonna sinistra -->
     <div class="img">
 			<img src="images/imReg2.svg">
 		</div>
+        <!-- Colonna destra del form -->
 		<div class="signup-form">
 			<form action="php/signup.php" method="POST">
+            <!-- Immagine Avatar -->
 				<img class="avatar" src="images/avatar.svg">
+                 <!-- Titolo del form -->
 				<h2 class="title">Registrati!</h2>
+
+                 <!-- Icona user + placeholder nome -->
                 <div class="input-div nome">
                     <!-- i = icone -->
                    <div class="i">
@@ -171,6 +183,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                    </div>
                 </div>
 
+                <!-- Icona user + placeholder cognome -->
                 <div class="input-div cognome">
                     <!-- i = icone -->
                    <div class="i">
@@ -181,7 +194,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                            <input type="text" name="cognome"pattern="[A-Z][a-z]*" title="Il tuo nome deve avere la lettera iniziale maiuscola!" required  class="input">
                    </div>
                 </div>
-           		
+
+           		<!-- Icona email + placeholder email -->
                 <div class="input-div email">
                        <!-- i = icone -->
            		   <div class="i">
@@ -192,7 +206,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
            		   		<input type="email" name="email" required class="input">
            		   </div>
            		</div>
-           		
+
+           		<!-- Icona lucchetto + placeholder password -->
                    <div class="input-div password">
            		   <div class="i"> 
            		    	<i class="fas fa-lock"></i>
@@ -203,6 +218,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             	   </div>
             	</div>
              
+             <!-- Icona lucchetto + placeholder ripeti password -->
                 <div class="input-div ripeti-password">
            		   <div class="i"> 
            		    	<i class="fas fa-lock"></i>
@@ -213,6 +229,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             	   </div>
             	</div>
                 
+                <!-- Icona torta di compleanno + input calendario -->
                 <div class="input-div data-nascita">
            		   <div class="i"> 
            		    	<i class="fas fa-birthday-cake"></i>
@@ -222,22 +239,24 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             	   </div>
             	</div>
                 
+                <!-- Bottoni di opzione del genere (M,D,ND) -->
                 <div class="genere">
                     
                     <h6>Seleziona il tuo genere</h6>
 
                     <input type="radio" value="M" id="uomo" name="gen"
-                     checked="checked">
+                     checked="checked"> <!-- Di default è checkata la scelta "Uomo" -->
                     <label for="uomo">Uomo</label><br>
                     
-                    <input type="radio" value="F" id="donna" name="gen">
+                    <input type="radio" value="F" id="donna" name="gen"> <!-- Scelta "Donna" -->
                     <label for="donna">Donna</label><br>
                     
-                    <input type="radio" value="ND" id="neutro" name="gen">
+                    <input type="radio" value="ND" id="neutro" name="gen">  <!-- Scelta "Preferisco non rispondere" -->
                     <label for="neutro">Preferisco non rispondere</label><br>
             	</div>
-                
-                <input type="submit" class="btn" value="SignUp">
+                <!-- Bottone SIGNUP -->
+                <input type="submit" class="btn" value="SignUp"> 
+                <!-- Link per essere indirizzati in "login" in caso si è già registrati -->
             	<a href="login.php">Hai già un account? Fai il login!</a>
             </form>
         </div>
@@ -249,6 +268,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 <!-- ============= FOOTER ============= -->
      <footer>
          <div class="container">
+         <!-- 1° colonna -->
              <div class="sec aboutus">
                  <h8>About Us</h8>
                  <p>LiveXperience è specializzato nella vendita di biglietti <br>
@@ -257,6 +277,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     di partecipare a un evento pubblico acquistando il proprio biglietto <br>
                     in modo facile e sicuro.</p>
              </div>
+
+             <!-- 2° colonna -->
              <div class="sec link">
                  <h8>Link Utili</h8>
                  <ul>
@@ -264,17 +286,22 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                      <li><a href="#">Informative Cookie</a></li>
                  </ul>
              </div>
+
+             <!-- 3° colonna -->
              <div class="sec contatti">
                  <h8>Contatti</h8>
                  <ul class="info">
+                 <!-- ARIA (Accessible Rich Internet Applications) è utilizzato per rendere più facilmente accessibile
+                  l'elemento a persone disabili. L'icona ad esempio non verrà letta nel caso in cui si utilizza 
+                  uno "screen reader", così da far leggere solo l'informazione (email, telefono, P.IVA) -->
                      <li>
                          <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
-                         <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
+                         <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p> <!-- Al click dell'email si chiede all'utente se si vuole mandare un'email-->
                      </li> 
                      <li>
                          <span><i class="fas fa-phone" aria-hidden="true"></i></span>
-                         <p><a href="tel:080612224">080 612 224</a><br>
-                          <a href="tel:332622778">+39 332 622 778</a></p>
+                         <p><a href="tel:080612224">080 612 224</a><br> <!-- Al click del numero di telefono si chiede all'utente se si vuole telefonare a questo numero-->
+                          <a href="tel:332622778">+39 332 622 778</a></p> <!-- Al click del numero di telefono si chiede all'utente se si vuole telefonare a questo numero-->
                      </li>
                      <li>
                          <span><i class="fas fa-balance-scale" aria-hidden="true"></i></span>

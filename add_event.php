@@ -6,7 +6,7 @@ if (!isset($_SESSION['infoUtente'])) { //Non riporta l'errore
     $valAdmin = 0;
 } else {
     $info = $_SESSION["infoUtente"]; //Mi da le informazioni dell'utente loggato
-    $valAdmin = $info["isAdmin"];
+    $valAdmin = $info["isAdmin"];  //Prendo il valore di "isAdmin" dal database (0 / 1)
 }
 if (empty(isset($_SESSION['infoUtente'])) ){
     $session = "0";
@@ -41,13 +41,13 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <script src="hhtps://kit.fontawesome.com/a81368914c.js"></script>
 </head>
 
-
+<!-- Quando la pagina si ricarica, controllo se l'utente è un ADMIN -->
 <body onload="onLoad(<?php echo $session ?>, <?php echo $valAdmin ?>)">
 
     <!-- ============= HEADER ============= -->
     <header>
         <div class="hamburger">
-            <i class="fas fa-bars" onclick="openLeftMenu()"></i>
+            <i class="fas fa-bars" onclick="openLeftMenu()"></i>  <!-- Icona per aprire il menu a sinistra (Solo mobile) -->
         </div>
         <!-- logo -->
         <div class="logo">
@@ -58,7 +58,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <!-- barra di ricerca -->
         <div class="search-container">
             <div class="dropdown">
-                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>
+                <button class="dropBtn">Categorie <i class="fa fa-caret-down"></i></button>  <!-- Bottone Categorie -->
                 <div class="dropdown_content">
                     <a href="php/search.php?Categoria=Musica"><i class="fas fa-microphone-alt"></i> &nbsp;Concerti</a>
                     <a href="php/search.php?Categoria=Sport"><i class="fas fa-futbol"></i> &nbsp;Sport</a>
@@ -76,12 +76,12 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <ul class="profile">
 
             <div id="ciaoIndex">
-                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>
+                <p id="ciao"><?php echo "Ciao " . $info["Nome"] . " " . $info["Cognome"] . "!" ?></p>  <!-- Stampa del nome+cognome dell'utente loggato -->
             </div>
-            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>
-            <li><a href="login.php" id="login"> Log in </a></li>
-            <li><a href="signup.php" id="SignUp"> Sign Up </a></li>
-            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li>
+            <li><a href="add_event.php" id="add_event"><button><i class="fas fa-plus"> AGGIUNGI EVENTO</i></button></a></li>  <!-- Bottone aggiungi evento -->
+            <li><a href="login.php" id="login"> Log in </a></li>  <!-- Bottone Login -->
+            <li><a href="signup.php" id="SignUp"> Sign Up </a></li> <!-- Bottone Signup -->
+            <li><a href="profile.php" id="profile"><button><i class="fas fa-user"></i></button></a></li> <!-- Bottone Profilo --
         </ul>
     </header>
 
@@ -91,23 +91,29 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     <div id="slcontent">
         <div id="menu" class="nav">
             <h13>Carrello</h13>
-            <a href="#" class="close" onclick="closeSlideMenu()">
-                <i class="fas fa-times"></i></a>
-            <input type="submit" class="btn" value="Acquista">
+            <a href="#" class="close" onclick="closeSlideMenu()">  
+                <i class="fas fa-times"></i></a>   <!-- "X" di chiusura del carrello-->
+            <input type="submit" class="btn" value="Acquista">  <!-- Bottone ACQUISTA -->
         </div>
     </div>
 
 
 <div id="body-addevent">
+<!-- Immagine dell'onda sullo sfondo  -->
     <img class="onda" src="images/wave.png">
 	<div class="container">
+     <!-- Immagine sulla colonna sinistra -->
 		<div class="img">
 			<img src="images/add_event.svg">
 		</div>
+        <!-- Colonna destra del form -->
 		<div class="addevent-form">
-			<form action="php/add_event.php" method="POST" enctype="multipart/form-data">
+                                    <!-- Utilizzo di enctype="multipart/form-data" perchè il form include <input type="file"> -->
+			<form action="php/add_event.php" method="POST" enctype="multipart/form-data"> 
+                <!-- Titolo del form -->
 				<h2 class="title">Inserisci evento</h2>
 
+                <!-- Icona matita + placeholder nome  -->
                 <div class="input-div nome">
                     <!-- i = icone -->
                    <div class="i">
@@ -119,6 +125,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                    </div>
                 </div>
 
+                <!-- Icona "lista" + placeholder descrizione (utilizzo di textarea per avre più righe) -->
                 <div class="input-div descrizione" style="height:100px">
                     <!-- i = icone -->
                    <div class="i">
@@ -130,6 +137,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                    </div>
                 </div>
            		
+                   <!-- Icona calendario + input calendario -->
                 <div class="input-div data">
                        <!-- i = icone -->
            		   <div class="i">
@@ -140,6 +148,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
            		   </div>
            		</div>
            		
+                   <!-- Icona euro + placeholder prezzo -->
                    <div class="input-div prezzo">
            		   <div class="i"> 
            		    	<i class="fas fa-euro-sign"></i>
@@ -149,7 +158,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
            		    	<input type="number" name="prezzo" max="9999" required class="input">
             	   </div>
             	</div>
-             
+                
+                <!-- Icona luogoMaps + placeholder luogo -->
                 <div class="input-div luogo">
            		   <div class="i"> 
            		    	<i class="fas fa-map-marked-alt"></i>
@@ -160,6 +170,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             	   </div>
             	</div>
                 
+                <!-- Icona ticket + placeholder disponibilità -->
                 <div class="input-div disponibilita">
            		   <div class="i"> 
            		    	<i class="fas fa-ticket-alt"></i>
@@ -170,7 +181,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
             	   </div>
             	</div>
                 
-                    
+                <!-- Menu a tendina per la scelta del tipo di eventi -->
                 <div class="select">
                     <select name="format" id="format" required>
                         <option selected disabled>Scegli una categoria</option>
@@ -181,13 +192,15 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     </select>
                 </div>
 
+                <!-- Icona immagine + bottone per upload immagine -->
                 <div class="input-div image">
                     <label>
+                    <!-- Bottone per caricare l'immagine dell'evento -->
                         <input type="file" name="imgUpload" accept="image/*">
                         <i class="fas fa-cloud-upload-alt"></i> Carica un'immagine
                     </label>
                 </div>
-
+                    <!-- Bottone INSERISCI -->
                     <input type="submit" class="btn" value="Inserisci">
             </div>
         </div>
@@ -204,6 +217,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 <!-- ============= FOOTER ============= -->
      <footer>
          <div class="container">
+         <!-- 1° colonna -->
              <div class="sec aboutus">
                  <h8>About Us</h8>
                  <p>LiveXperience è specializzato nella vendita di biglietti <br>
@@ -212,6 +226,8 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     di partecipare a un evento pubblico acquistando il proprio biglietto <br>
                     in modo facile e sicuro.</p>
              </div>
+
+              <!-- 2° colonna -->
              <div class="sec link">
                  <h8>Link Utili</h8>
                  <ul>
@@ -219,9 +235,14 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                      <li><a href="#">Informative Cookie</a></li>
                  </ul>
              </div>
+
+             <!-- 3° colonna -->
              <div class="sec contatti">
                  <h8>Contatti</h8>
                  <ul class="info">
+                 <!-- ARIA (Accessible Rich Internet Applications) è utilizzato per rendere più facilmente accessibile
+            l'elemento a persone disabili. L'icona ad esempio non verrà letta nel caso in cui si utilizza 
+            uno "screen reader", così da far leggere solo l'informazione (email, telefono, P.IVA) -->
                      <li>
                          <span><i class="fas fa-envelope" aria-hidden="true"></i></span>
                          <p><a href="mailto:livexperience123@gmail.com">livexperience123@gmail.com</a></p>
