@@ -213,6 +213,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    // Verifico se l'utente ha effettuato una ricerca o ha cliccato su una categoria 
     $isCategoria;
     if (!(is_null(@$_GET['Categoria']))) {
         $categoria = $_GET['Categoria'];
@@ -228,7 +229,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         $isCategoria = false;
     }
     
-
+    // Per ogni risultato della query aggiungo in coda a $eventi una serie di div che compongono la singola riga visualizzata nella ricerca
     $eventi = "";
     while ($row = $result->fetch_assoc()) {
         $subDesc = substr($row["Descrizione"], 0, 150);

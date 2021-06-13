@@ -18,7 +18,7 @@ if(isset($_POST ['login'])){
     $email = $_POST["email"];
     $password = md5($_POST["password"]);
 
-    //Query da eseguire
+    //Query per recuperare le info dell'utente
     $sql = "SELECT * FROM utente WHERE Mail = '$email'";
     $result = $conn->query($sql);
     

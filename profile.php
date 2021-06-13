@@ -32,6 +32,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Aggiorno le informazioni dell'utente se ho modificato la password
 if ($isChanged == 1) {
     $email = $info["Mail"];
     $sql = "SELECT * FROM utente WHERE Mail = '$email'";

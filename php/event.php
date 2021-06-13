@@ -289,12 +289,14 @@ if (empty(isset($_SESSION['infoUtente'])) ){
         <!-- ============= Eventi correlati ============= -->
 
         <?php
-        // Query da eseguire
+        // Seleziono randomicamente 4 eventi correlati della stessa categoria, escludendo quello che è gia mostrato nella pagina, 
+        // da visualizzare sotto la descrizione
         $sql = "SELECT * FROM evento WHERE Categoria = '$category' AND ID <> '$id'";
         $result = $conn->query($sql);
         while ($row = $result->fetch_assoc()) {
             $eventi[] = $row;
         }
+        // Ho preso tutti gli eventi della stessa categoria, li mescolo e poi prendo i primi 4
         shuffle($eventi);
         ?>
 

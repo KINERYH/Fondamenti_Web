@@ -32,10 +32,11 @@ if (isset($_COOKIE["changePass"])) {
     // cancello il cookie
     setcookie("changePass", "boh", time() - 3600, "/");
 
-    // reindirizzo al profilo
+    // reindirizzo al profilo indicando che ho modificato la password
     header("Location: profile.php?change=1");
 }
 
+// Verifico se ho eliminato il profilo, cosi da cancellare la sua entry dal db e da effettuare il logout automaticamente
 if (isset($_GET['delete'])) {
     $delete = $_GET['delete'];
 } else {

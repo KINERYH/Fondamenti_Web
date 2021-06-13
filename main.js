@@ -130,6 +130,7 @@ function deleteAccountAlert(oldpassword) {
                         title: 'Account Eliminato Correttamente',
                         icon: 'success',
                     }).then(function () {
+                        // Reindirizzo alla pagina refresh, indicando che ho eliminato il profilo
                         window.location = "refresh.php?delete=1";
                     });
                 }

@@ -22,7 +22,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Aggiungi un evento | liveXperience</title>
     <!-- ============= RESET STYLE ============= -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
         integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
@@ -63,7 +63,7 @@ if (empty(isset($_SESSION['infoUtente'])) ){
                     <a href="php/search.php?Categoria=Musica"><i class="fas fa-microphone-alt"></i> &nbsp;Concerti</a>
                     <a href="php/search.php?Categoria=Sport"><i class="fas fa-futbol"></i> &nbsp;Sport</a>
                     <a href="php/search.php?Categoria=Teatro"><i class="fas fa-theater-masks"></i> &nbsp;Teatro</a>
-                    <a href="php/search.php?Categoria=Musei"><i class="fas fa-atom"></i> &nbspMostre e Musei</a>
+                    <a href="php/search.php?Categoria=Musei"><i class="fas fa-atom"></i> &nbsp;Mostre e Musei</a>
                 </div>
             </div>
             <form action="php/search.php" method="GET">
